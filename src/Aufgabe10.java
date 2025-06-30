@@ -8,9 +8,9 @@ public class Aufgabe10 {
     }
     static int Maximum(int[] array) {
 
-        int arraylength = array.length;
+        int array_length = array.length;
         int temp = array[0];
-        for (int i = 0; i < arraylength; i++) {
+        for (int i = 0; i < array_length; i++) {
             if (temp < array[i]) {
                 temp = array[i];
             }
@@ -19,9 +19,9 @@ public class Aufgabe10 {
     }
     static int Minimum(int[] array) {
 
-        int arraylength = array.length;
+        int array_length = array.length;
         int temp = array[0];
-        for (int i = 0; i < arraylength; i++) {
+        for (int i = 0; i < array_length; i++) {
             if (temp > array[i]) {
                 temp = array[i];
             }
