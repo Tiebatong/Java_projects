@@ -161,7 +161,7 @@ public class Calculator implements ActionListener{
             textField.setText("");
 
         }
-        if(e.getSource() == delButton) {
+        if(e.getSource() == delButton) {  //löscht nur das jeweils letzte zeichen
             String string = textField.getText();
             textField.setText("");
             for(int i = 0; i < string.length() - 1; i++) {
