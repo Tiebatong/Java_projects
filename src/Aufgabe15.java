@@ -15,7 +15,7 @@ public class Aufgabe15 {
         for (int i = 0; i < primzahlen.length; i++) {
 
             if(temp % primzahlen[i] == 0) {
-                temp = temp / primzahlen[0];
+                temp = temp / primzahlen[i];
                 faktoren[index++] = primzahlen[i];
                 i = -1;
             }
@@ -25,8 +25,9 @@ public class Aufgabe15 {
 
 
         }
+        System.out.print(eingabe + " =");
         for(int i = 0; i < index; i++) {
-            System.out.println(faktoren[i]);
+            System.out.print(" " + faktoren[i]);
         }
     }
 
