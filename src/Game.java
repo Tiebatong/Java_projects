@@ -1,47 +1,55 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class Game implements ActionListener {
 
-    JButton[9] buttons;
+    JButton[] buttons;
+    boolean Spieler_Zug = true;
+    boolean[] Feld_besetzt = {false, false, false, false, false, false, false, false, false};
+    char[] Spielfeld = {};
 
-    JButton button1;
-    JButton button2;
-    JButton button3;
-    JButton button4;
-    JButton button5;
-    JButton button6;
-    JButton button7;
-    JButton button8;
-    JButton button9;
+
+
+
+
 
     public Game() {
 
         JFrame frame = new JFrame();
 
-        buttons[] =
+        buttons = new JButton[9];
 
-        button1 = new JButton(" ");
-        button2 = new JButton(" ");
-        button3 = new JButton(" ");
-        button4 = new JButton(" ");
 
-        button1.setFocusable(false);
-        button1.setBounds(100, 100, 50, 50);
-        button1.addActionListener(this);
 
-        button2.setFocusable(false);
-        button2.setBounds(160, 100, 50, 50);
-        button2.addActionListener(this);
+        for(int i = 0; i < 9; i++) {
+            buttons[i] = new JButton(" ");
+            buttons[i].setFocusable(false);
+            buttons[i].addActionListener(this);
+            buttons[i].setBackground(Color.lightGray);
+            frame.add(buttons[i]);
 
-        frame.add(button1);
-        frame.add(button2);
+        }
+        buttons[0].setBounds(100, 100, 50, 50);
+        buttons[1].setBounds(160, 100, 50, 50);
+        buttons[2].setBounds(220, 100, 50, 50);
+        buttons[3].setBounds(100, 160, 50, 50);
+        buttons[4].setBounds(160, 160, 50, 50);
+        buttons[5].setBounds(220, 160, 50, 50);
+        buttons[6].setBounds(100, 220, 50, 50);
+        buttons[7].setBounds(160, 220, 50, 50);
+        buttons[8].setBounds(220, 220, 50, 50);
+
+
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(380, 400);
         frame.setLayout(null);
         frame.setVisible(true);
+        frame.getContentPane().setBackground(Color.darkGray);
+        frame.setResizable(false);
 
     }
 
@@ -50,12 +58,43 @@ public class Game implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button1) {
-            button1.setText("X");
+
+        int Computer_Zug = 0;
+        Random rand = new Random();
+        boolean valider_Zug = true;
+        while(valider_Zug) {
+            Computer_Zug = rand.nextInt(9);
+            for(int i = 0; i < 9; i++) {
+                if(!Feld_besetzt[Computer_Zug]) {
+                    valider_Zug = false;
+                }
+
+            }
+
         }
-        if (e.getSource() == button2) {
-            button2.setText("O");
+
+
+
+        for(int x = 0; x < 9; x++) {
+            if(Spieler_Zug) {
+                for(int i = 0; i < 9; i++) {
+                    if(e.getSource() == buttons[i]) {
+                        buttons[i].setText("X");
+                        Spieler_Zug = false;
+                        Feld_besetzt[i] = true;
+                        break;
+                    }
+                }
+            } else {
+
+                buttons[Computer_Zug].setText("O");
+                Spieler_Zug = true;
+                Feld_besetzt[Computer_Zug] = true;
+            }
         }
+
+
+
     }
 
 }
