@@ -110,6 +110,9 @@ public class Game implements ActionListener {
 
                     if(Check_gewonnen(Spielfeld, 1) == 1) {
                         text.setText("GEWONNEN");
+                        for(int x = 0; x < 9; x++) {
+                            buttons[x].setEnabled(false);
+                        }
 
                     }  else if (Zuege_Count == 9 && Check_gewonnen(Spielfeld, 1) == 3) {
                         text.setText("Unentschieden");
@@ -123,7 +126,7 @@ public class Game implements ActionListener {
 
         }
 
-        if(!Spieler_Zug) {
+        if(!Spieler_Zug && Zuege_Count != 9) {
             int Computer_Zug;
             Random rand = new Random();
 
@@ -139,24 +142,15 @@ public class Game implements ActionListener {
 
             if (Check_gewonnen(Spielfeld, 2) == 2) {
                 text.setText("VERLOREN");
+                for(int x = 0; x < 9; x++) {
+                    buttons[x].setEnabled(false);
+                }
             } else if (Zuege_Count == 9 && Check_gewonnen(Spielfeld, 2) == 3) {
                 text.setText("Unentschieden");
 
             }
 
-
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 
