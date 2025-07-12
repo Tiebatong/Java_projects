@@ -11,8 +11,6 @@ public class Game implements ActionListener {
     boolean Spieler_Zug = true;
     boolean[] Feld_besetzt = {false, false, false, false, false, false, false, false, false};
     char[] Spielfeld = {'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'};
-    boolean Computer_gewonnen = false;
-    boolean Spieler_gewonnen = false;
     int Zuege_Count = 0;
 
 
@@ -126,7 +124,7 @@ public class Game implements ActionListener {
         }
 
         if(!Spieler_Zug) {
-            int Computer_Zug = 0;
+            int Computer_Zug;
             Random rand = new Random();
 
             do {
