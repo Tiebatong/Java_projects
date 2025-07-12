@@ -1,19 +1,29 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MyFrame extends JFrame {
+public class MyFrame extends JFrame implements ActionListener {
+
+    JButton button;
 
     MyFrame() {
-        JFrame frame = new JFrame(); // creates new frame
 
+        button = new JButton();
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // closes the window when clicking X button
-        this.setResizable(false); // prevents frame from being resized
-        this.setSize(420,420); // sets width and height
-        this.setVisible(true); // makes frame visible
+        button.setBounds(250, 250, 100, 50);
+        button.addActionListener(this);
 
-        ImageIcon image = new ImageIcon("logo.png"); // creates an image Icon
-        this.setIconImage(image.getImage()); //sets Icon of the frame
-        this.getContentPane().setBackground(new Color(175,50,90)); // change color of background
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(null);
+        this.setSize(500, 500);
+        this.setVisible(true);
+        this.add(button);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == button) {
+            System.out.println("Button pressed");
+        }
     }
 }
