@@ -9,6 +9,7 @@ public class Game implements ActionListener {
     JButton[] buttons;
     JButton button_neustart;
     JTextField text;
+    JTextField Spieler_gewonnen;
     boolean Spieler_Zug = true;
     boolean[] Feld_besetzt = {false, false, false, false, false, false, false, false, false};
     char[] Spielfeld = {'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'};
@@ -21,6 +22,15 @@ public class Game implements ActionListener {
     public Game() {
 
         JFrame frame = new JFrame();
+
+        Spieler_gewonnen = new JTextField();
+        Spieler_gewonnen.setText("Du  " + Spieler_win_counter + "  :  " + Computer_win_counter + " Computer");
+        Spieler_gewonnen.setBounds(100, 20, 170, 50);
+        Spieler_gewonnen.setBackground(Color.LIGHT_GRAY);
+        Spieler_gewonnen.setForeground(Color.DARK_GRAY);
+        Spieler_gewonnen.setEditable(false);
+        Spieler_gewonnen.setHorizontalAlignment(SwingConstants.CENTER);
+        Spieler_gewonnen.setFont(new Font("Arial", Font.BOLD,15));
 
         buttons = new JButton[9];
 
@@ -68,8 +78,11 @@ public class Game implements ActionListener {
         frame.setSize(380, 400);
         frame.setLayout(null);
         frame.getContentPane().setBackground(Color.darkGray);
-        frame.add(text);
+
+        //frame.add(text);
         frame.add(button_neustart);
+        frame.add(Spieler_gewonnen);
+
         frame.setResizable(false);
         frame.setVisible(true);
 
@@ -86,17 +99,17 @@ public class Game implements ActionListener {
             return Spieler;
         } else if (Spielfeld[3] == z && Spielfeld[4] == z && Spielfeld[5] == z) {
             return  Spieler;
-        }  else if (Spielfeld[6] == z && Spielfeld[7] == z && Spielfeld[8] == z) {
+        } else if (Spielfeld[6] == z && Spielfeld[7] == z && Spielfeld[8] == z) {
             return  Spieler;
-        }  else if (Spielfeld[0] == z && Spielfeld[3] == z && Spielfeld[6] == z) {
+        } else if (Spielfeld[0] == z && Spielfeld[3] == z && Spielfeld[6] == z) {
             return  Spieler;
-        }  else if (Spielfeld[1] == z && Spielfeld[4] == z && Spielfeld[7] == z) {
+        } else if (Spielfeld[1] == z && Spielfeld[4] == z && Spielfeld[7] == z) {
             return  Spieler;
-        }  else if (Spielfeld[2] == z && Spielfeld[5] == z && Spielfeld[8] == z) {
+        } else if (Spielfeld[2] == z && Spielfeld[5] == z && Spielfeld[8] == z) {
             return  Spieler;
-        }  else if (Spielfeld[0] == z && Spielfeld[4] == z && Spielfeld[8] == z) {
+        } else if (Spielfeld[0] == z && Spielfeld[4] == z && Spielfeld[8] == z) {
             return  Spieler;
-        }  else if (Spielfeld[2] == z && Spielfeld[4] == z && Spielfeld[6] == z) {
+        } else if (Spielfeld[2] == z && Spielfeld[4] == z && Spielfeld[6] == z) {
             return  Spieler;
         } else {
             return 3;
@@ -110,8 +123,9 @@ public class Game implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+
+
         if(e.getSource() == button_neustart) {
-            System.out.println("Neustart");
             Spieler_Zug = true;
             Zuege_Count = 0;
             text.setText(" ");
@@ -153,7 +167,7 @@ public class Game implements ActionListener {
 
         }
 
-        if(!Spieler_Zug && Zuege_Count != 9) {
+        if(!Spieler_Zug && Zuege_Count != 9 && Check_gewonnen(Spielfeld, 2) != 1) {
             int Computer_Zug;
             Random rand = new Random();
 
@@ -181,6 +195,7 @@ public class Game implements ActionListener {
             }
 
         }
+        Spieler_gewonnen.setText("Du  " + Spieler_win_counter + "  :  " + Computer_win_counter + " Computer");
 
     }
 
