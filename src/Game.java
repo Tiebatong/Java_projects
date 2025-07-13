@@ -7,6 +7,7 @@ import java.util.Random;
 public class Game implements ActionListener {
 
     JButton[] buttons;
+    JButton close_button;
     JButton button_neustart;
     JTextField text;
     JTextField Spieler_gewonnen;
@@ -17,14 +18,23 @@ public class Game implements ActionListener {
     int Spieler_win_counter = 0;
     int Computer_win_counter = 0;
 
+    JFrame frame = new JFrame();
 
 
     public Game() {
 
-        JFrame frame = new JFrame();
+
+
+        close_button = new JButton();
+        close_button.setBounds(280, 300, 80, 50);
+        close_button.setText("Exit");
+        close_button.addActionListener(this);
+        close_button.setBackground(Color.LIGHT_GRAY);
+        close_button.setFont(new Font("Arial", Font.BOLD,15));
+        close_button.setFocusable(false);
 
         Spieler_gewonnen = new JTextField();
-        Spieler_gewonnen.setText("Du  " + Spieler_win_counter + "  :  " + Computer_win_counter + " Computer");
+        Spieler_gewonnen.setText("Du : " + Spieler_win_counter + "  |  " + Computer_win_counter + " : Computer");
         Spieler_gewonnen.setBounds(100, 20, 170, 50);
         Spieler_gewonnen.setBackground(Color.LIGHT_GRAY);
         Spieler_gewonnen.setForeground(Color.DARK_GRAY);
@@ -33,6 +43,7 @@ public class Game implements ActionListener {
         Spieler_gewonnen.setFont(new Font("Arial", Font.BOLD,15));
 
         buttons = new JButton[9];
+
 
         button_neustart = new JButton();
         button_neustart.setText("Neue Runde");
@@ -82,6 +93,7 @@ public class Game implements ActionListener {
         //frame.add(text);
         frame.add(button_neustart);
         frame.add(Spieler_gewonnen);
+        frame.add(close_button);
 
         frame.setResizable(false);
         frame.setVisible(true);
@@ -123,6 +135,9 @@ public class Game implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        if(e.getSource() == close_button) {
+            frame.dispose();
+        }
 
 
         if(e.getSource() == button_neustart) {
@@ -137,12 +152,13 @@ public class Game implements ActionListener {
             }
         }
 
+
         if(Spieler_Zug) {
             for(int i = 0; i < 9; i++) {
                 if(e.getSource() == buttons[i] && !Feld_besetzt[i]) {
                     buttons[i].setText("X");
                     buttons[i].setFont(new Font("Arial", Font.BOLD,22));
-                    buttons[i].setForeground(Color.GREEN);
+                    buttons[i].setForeground(Color.BLUE);
                     Spielfeld[i] = 'X';
                     Spieler_Zug = false;
                     Feld_besetzt[i] = true;
@@ -160,9 +176,8 @@ public class Game implements ActionListener {
 
                     }
 
-                    break;
-
                 }
+
             }
 
         }
@@ -174,6 +189,7 @@ public class Game implements ActionListener {
             do {
                 Computer_Zug = rand.nextInt(9);
             } while (Feld_besetzt[Computer_Zug]);
+
 
             buttons[Computer_Zug].setText("O");
             Spielfeld[Computer_Zug] = 'O';
@@ -195,7 +211,8 @@ public class Game implements ActionListener {
             }
 
         }
-        Spieler_gewonnen.setText("Du  " + Spieler_win_counter + "  :  " + Computer_win_counter + " Computer");
+
+        Spieler_gewonnen.setText("Du : " + Spieler_win_counter + "  |  " + Computer_win_counter + " : Computer");
 
     }
 
