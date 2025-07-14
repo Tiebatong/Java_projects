@@ -14,6 +14,7 @@ public class Taschenrechner implements ActionListener {
     JButton equal_button;
     JButton clear_button;
     JButton delete_button;
+    JButton negativbutton;
     JTextField textField;
 
     float result = 0;
@@ -60,6 +61,11 @@ public class Taschenrechner implements ActionListener {
         delete_button.addActionListener(this);
         delete_button.setFocusable(false);
 
+        negativbutton = new JButton();
+        negativbutton.setText("(-)");
+        negativbutton.addActionListener(this);
+        negativbutton.setFocusable(false);
+
 
         textField = new JTextField();
         textField.setEditable(false);
@@ -98,11 +104,13 @@ public class Taschenrechner implements ActionListener {
         equal_button.setBounds(240, 310, breite, hoehe);
         clear_button.setBounds(100, 380, 130, hoehe);
         delete_button.setBounds(240, 380, 130, hoehe);
+        negativbutton.setBounds(100, 310, breite, hoehe);
 
 
-        frame.setSize(500, 600);
+        frame.setSize(500, 500);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setTitle("Taschenrechner");
         frame.add(textField);
         frame.add(add_button);
         frame.add(minus_button);
@@ -111,6 +119,7 @@ public class Taschenrechner implements ActionListener {
         frame.add(equal_button);
         frame.add(clear_button);
         frame.add(delete_button);
+        frame.add(negativbutton);
         frame.setVisible(true);
 
     }
@@ -156,6 +165,11 @@ public class Taschenrechner implements ActionListener {
             num1 = Float.parseFloat(textField.getText());
             textField.setText("");
             operator = '*';
+        }
+        if(e.getSource() == negativbutton) {
+            float temp = Float.parseFloat(textField.getText());
+            temp *= -1;
+            textField.setText(String.valueOf(temp));
         }
 
         if(e.getSource() == equal_button) {
