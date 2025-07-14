@@ -13,6 +13,7 @@ public class Taschenrechner implements ActionListener {
     JButton mult_button;
     JButton equal_button;
     JButton clear_button;
+    JButton delete_button;
     JTextField textField;
 
     float result = 0;
@@ -54,9 +55,15 @@ public class Taschenrechner implements ActionListener {
         clear_button.addActionListener(this);
         clear_button.setFocusable(false);
 
+        delete_button = new JButton();
+        delete_button.setText("delete");
+        delete_button.addActionListener(this);
+        delete_button.setFocusable(false);
+
+
         textField = new JTextField();
         textField.setEditable(false);
-        textField.setBounds(100, 30, 200, 50);
+        textField.setBounds(100, 30, 270, 50);
 
          frame = new JFrame();
 
@@ -89,7 +96,8 @@ public class Taschenrechner implements ActionListener {
         divide_button.setBounds(310, 240, breite, hoehe);
         mult_button.setBounds(310, 310, breite, hoehe);
         equal_button.setBounds(240, 310, breite, hoehe);
-        clear_button.setBounds(100, 380, breite, hoehe);
+        clear_button.setBounds(100, 380, 130, hoehe);
+        delete_button.setBounds(240, 380, 130, hoehe);
 
 
         frame.setSize(500, 600);
@@ -102,6 +110,7 @@ public class Taschenrechner implements ActionListener {
         frame.add(mult_button);
         frame.add(equal_button);
         frame.add(clear_button);
+        frame.add(delete_button);
         frame.setVisible(true);
 
     }
@@ -122,6 +131,13 @@ public class Taschenrechner implements ActionListener {
         }
         if(e.getSource() == clear_button) {
             textField.setText("");
+        }
+        if(e.getSource() == delete_button) {
+            String zwischen = textField.getText();
+            textField.setText("");
+            for(int x = 0; x < (zwischen.length() -  1); x++) {
+                textField.setText(textField.getText() + zwischen.charAt(x));
+            }
         }
 
         if(e.getSource() == add_button) {
@@ -160,6 +176,5 @@ public class Taschenrechner implements ActionListener {
             }
             textField.setText("" + result);
         }
-
     }
 }
