@@ -74,8 +74,6 @@ public class Taschenrechner implements ActionListener {
          frame = new JFrame();
 
         for(int i = 0; i < 10; i++) {
-
-
             number_buttons[i] = new JButton();
             number_buttons[i].setFocusable(false);
             number_buttons[i].addActionListener(this);
@@ -105,8 +103,7 @@ public class Taschenrechner implements ActionListener {
         clear_button.setBounds(100, 380, 130, hoehe);
         delete_button.setBounds(240, 380, 130, hoehe);
         negativbutton.setBounds(100, 310, breite, hoehe);
-
-
+        
         frame.setSize(500, 500);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
