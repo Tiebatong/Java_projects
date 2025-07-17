@@ -5,9 +5,10 @@ import java.awt.event.ActionListener;
 
 public class Wordl implements ActionListener {
 
-    String Loesungswort = "LAMPE";
+    char[] Loesungswort = {'L', 'A', 'M', 'P', 'E'};
     JFrame frame;
     JTextField[] Text_buttons;
+    JTextField textField;
     JButton[] Letter_buttons;
     JButton Delete_button;
     JButton Enter_button;
@@ -22,11 +23,12 @@ public class Wordl implements ActionListener {
         Letter_buttons = new JButton[26];
         Delete_button = new JButton();
         Enter_button = new JButton();
+        textField = new JTextField();
 
         int index = 0;
         int Lindex = 0;
         int Xindex = 500;
-        int Yindex = 100;
+        int Yindex = 150;
         int Breite = 70;
         int Hoehe = 70;
 
@@ -85,8 +87,9 @@ public class Wordl implements ActionListener {
         Enter_button.addActionListener(this);
         frame.add(Enter_button);
 
-
-
+        textField.setEditable(false);
+        textField.setBounds(500, 20, 390, 100);
+        frame.add(textField);
 
         frame.setTitle("Wordl");
         frame.setBounds(600, 200, 1500, 1000);
@@ -98,6 +101,9 @@ public class Wordl implements ActionListener {
     }
     public static void main(String[] args) {new Wordl(); }
 
+    int letter_count = 0;
+    int Runde = 0;
+    int buchstaben_richtig = 0;
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -115,7 +121,44 @@ public class Wordl implements ActionListener {
             buttons_pressed--;
         }
         if(e.getSource() == Enter_button) {
+            for(int i = 0; i < 5; i++) {
+                char tmp = Text_buttons[i + letter_count].getText().charAt(0);
+                if(tmp== Loesungswort[i]) {
+                    Text_buttons[i + letter_count].setBackground(Color.GREEN);
+                    buchstaben_richtig++;
+                } else if (tmp != Loesungswort[0] && tmp != Loesungswort[1] && tmp != Loesungswort[2] && tmp != Loesungswort[3] && tmp != Loesungswort[4]) {
+                    Text_buttons[i + letter_count].setBackground(Color.RED);
+                } else {
+                    Text_buttons[i + letter_count].setBackground(Color.YELLOW);
+                }
+            }
+            Runde++;
+            System.out.println(Runde);
+            if(buchstaben_richtig == 5 && Runde <= 6) {
+                System.out.println("gewonnen");
+                textField.setText("GEWONNEN");
+                textField.setFont(new Font("Arial", Font.BOLD,50));
+                textField.setHorizontalAlignment(SwingConstants.CENTER);
+                Enter_button.setEnabled(false);
+                Delete_button.setEnabled(false);
+                for(int n = 0; n < 26; n++) {
+                    Letter_buttons[n].setEnabled(false);
+                }
+            } else if ( buchstaben_richtig != 5 && Runde == 6){
+                textField.setText("VERLOREN");
+                textField.setFont(new Font("Arial", Font.BOLD,50));
+                textField.setHorizontalAlignment(SwingConstants.CENTER);
+                Enter_button.setEnabled(false);
+                Delete_button.setEnabled(false);
+                for(int n = 0; n < 26; n++) {
+                    Letter_buttons[n].setEnabled(false);
+                }
+            }
+            buchstaben_richtig = 0;
 
+
+
+            letter_count = letter_count + 5;
         }
     }
 }
