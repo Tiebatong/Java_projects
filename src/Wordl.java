@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Wordl implements ActionListener {
 
+    String Loesungswort = "LAMPE";
     JFrame frame;
     JTextField[] Text_buttons;
     JButton[] Letter_buttons;
@@ -34,7 +35,6 @@ public class Wordl implements ActionListener {
         for(int i = 1; i < 7; i++) {
             for (int j = 0; j < 5; j++) {
                 Text_buttons[index] = new JTextField();
-                Text_buttons[index].setText("" + index);
                 Text_buttons[index].setBounds(Xindex + 80 * j, Yindex , Breite, Hoehe);
                 Text_buttons[index].setEditable(false);
                 //Text_buttons[index].setBackground(Color.DARK_GRAY);
@@ -73,6 +73,18 @@ public class Wordl implements ActionListener {
             Lindex++;
         }
 
+        Delete_button.setText("delete");
+        Delete_button.setBounds(420, 760, 80, 50);
+        Delete_button.setFocusable(false);
+        Delete_button.addActionListener(this);
+        frame.add(Delete_button);
+
+        Enter_button.setText("enter");
+        Enter_button.setBounds(890, 760, 80, 50);
+        Enter_button.setFocusable(false);
+        Enter_button.addActionListener(this);
+        frame.add(Enter_button);
+
 
 
 
@@ -93,9 +105,17 @@ public class Wordl implements ActionListener {
         for(int i = 0; i < 26; i++) {
             if(e.getSource() == Letter_buttons[i]) {
                 Text_buttons[buttons_pressed].setText("" + Letter_array[i]);
+                Text_buttons[buttons_pressed].setFont(new Font("Arial", Font.BOLD,30));
+                Text_buttons[buttons_pressed].setHorizontalAlignment(SwingConstants.CENTER);
                 buttons_pressed++;
             }
         }
+        if(e.getSource() == Delete_button) {
+            Text_buttons[buttons_pressed - 1].setText("");
+            buttons_pressed--;
+        }
+        if(e.getSource() == Enter_button) {
 
+        }
     }
 }
