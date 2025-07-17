@@ -39,7 +39,7 @@ public class Wordl implements ActionListener {
                 Text_buttons[index] = new JTextField();
                 Text_buttons[index].setBounds(Xindex + 80 * j, Yindex , Breite, Hoehe);
                 Text_buttons[index].setEditable(false);
-                //Text_buttons[index].setBackground(Color.DARK_GRAY);
+                Text_buttons[index].setBackground(Color.LIGHT_GRAY);
                 frame.add(Text_buttons[index]);
                 index++;
             }
@@ -51,6 +51,7 @@ public class Wordl implements ActionListener {
             Letter_buttons[Lindex].setBounds(420 + (55 * i),  650 , 50, 50);
             Letter_buttons[Lindex].setFocusable(false);
             Letter_buttons[Lindex].addActionListener(this);
+            Letter_buttons[Lindex].setBackground(Color.LIGHT_GRAY);
             frame.add(Letter_buttons[Lindex]);
             Lindex++;
         }
@@ -61,6 +62,7 @@ public class Wordl implements ActionListener {
             Letter_buttons[Lindex].setBounds(450 + (55 * i),  705 , 50, 50);
             Letter_buttons[Lindex].setFocusable(false);
             Letter_buttons[Lindex].addActionListener(this);
+            Letter_buttons[Lindex].setBackground(Color.LIGHT_GRAY);
             frame.add(Letter_buttons[Lindex]);
             Lindex++;
         }
@@ -71,6 +73,7 @@ public class Wordl implements ActionListener {
             Letter_buttons[Lindex].setBounds(505 + (55 * i),  760 , 50, 50);
             Letter_buttons[Lindex].setFocusable(false);
             Letter_buttons[Lindex].addActionListener(this);
+            Letter_buttons[Lindex].setBackground(Color.LIGHT_GRAY);
             frame.add(Letter_buttons[Lindex]);
             Lindex++;
         }
@@ -79,23 +82,26 @@ public class Wordl implements ActionListener {
         Delete_button.setBounds(420, 760, 80, 50);
         Delete_button.setFocusable(false);
         Delete_button.addActionListener(this);
+        Delete_button.setBackground(Color.LIGHT_GRAY);
         frame.add(Delete_button);
 
         Enter_button.setText("enter");
         Enter_button.setBounds(890, 760, 80, 50);
         Enter_button.setFocusable(false);
         Enter_button.addActionListener(this);
+        Enter_button.setBackground(Color.LIGHT_GRAY);
         frame.add(Enter_button);
 
         textField.setEditable(false);
         textField.setBounds(500, 20, 390, 100);
+        textField.setBackground(Color.LIGHT_GRAY);
         frame.add(textField);
 
         frame.setTitle("Wordl");
         frame.setBounds(600, 200, 1500, 1000);
         frame.setLayout(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setBackground(Color.DARK_GRAY);
+        frame.getContentPane().setBackground(Color.DARK_GRAY);
         frame.setVisible(true);
 
     }
@@ -155,9 +161,6 @@ public class Wordl implements ActionListener {
                 }
             }
             buchstaben_richtig = 0;
-
-
-
             letter_count = letter_count + 5;
         }
     }
