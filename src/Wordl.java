@@ -52,6 +52,7 @@ public class Wordl implements ActionListener {
             Letter_buttons[Lindex].setFocusable(false);
             Letter_buttons[Lindex].addActionListener(this);
             Letter_buttons[Lindex].setBackground(Color.LIGHT_GRAY);
+            Letter_buttons[Lindex].setFont(new Font("Arial", Font.BOLD,16));
             frame.add(Letter_buttons[Lindex]);
             Lindex++;
         }
@@ -63,6 +64,7 @@ public class Wordl implements ActionListener {
             Letter_buttons[Lindex].setFocusable(false);
             Letter_buttons[Lindex].addActionListener(this);
             Letter_buttons[Lindex].setBackground(Color.LIGHT_GRAY);
+            Letter_buttons[Lindex].setFont(new Font("Arial", Font.BOLD,16));
             frame.add(Letter_buttons[Lindex]);
             Lindex++;
         }
@@ -74,6 +76,7 @@ public class Wordl implements ActionListener {
             Letter_buttons[Lindex].setFocusable(false);
             Letter_buttons[Lindex].addActionListener(this);
             Letter_buttons[Lindex].setBackground(Color.LIGHT_GRAY);
+            Letter_buttons[Lindex].setFont(new Font("Arial", Font.BOLD,16));
             frame.add(Letter_buttons[Lindex]);
             Lindex++;
         }
