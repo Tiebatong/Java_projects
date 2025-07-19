@@ -132,7 +132,6 @@ public class Taschenrechner implements ActionListener {
         for(int i = 0; i < 10; i++) {
             if(e.getSource() == number_buttons[i]) {
                 textField.setText(textField.getText().concat(String.valueOf(i)));
-                System.out.println(i);
             }
         }
         if(e.getSource() == clear_button) {
