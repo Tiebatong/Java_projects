@@ -3,11 +3,14 @@ public class Aufgabe29 {
     static float[] sort(float[] array) {
         float temp = 0.0f;
         for(int i = 0; i < array.length - 1; i++) {
-            if (array[i] < array[i + 1]) {
-                array[i] = temp;
-                array[i] = array[i + 1];
-                array[i + 1] = temp;
+            for (int j = 0; j < array.length - 1; j++) {
+                if (array[i + 1] < array[i]) {
+                    temp = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = temp;
+                }
             }
+
         }
 
 
