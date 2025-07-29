@@ -132,13 +132,28 @@ public class Wordl implements ActionListener {
         if(e.getSource() == Enter_button) {
             for(int i = 0; i < 5; i++) {
                 char tmp = Text_buttons[i + letter_count].getText().charAt(0);
-                if(tmp== Loesungswort[i]) {
+                if(tmp == Loesungswort[i]) {
                     Text_buttons[i + letter_count].setBackground(Color.GREEN);
+                    for (int j = 0; j < Letter_array.length; j++) {
+                        if (tmp == Letter_array[j]) {
+                            Letter_buttons[j].setBackground(Color.GREEN);
+                        }
+                    }
                     buchstaben_richtig++;
                 } else if (tmp != Loesungswort[0] && tmp != Loesungswort[1] && tmp != Loesungswort[2] && tmp != Loesungswort[3] && tmp != Loesungswort[4]) {
                     Text_buttons[i + letter_count].setBackground(Color.RED);
+                    for (int j = 0; j < Letter_array.length; j++) {
+                        if (tmp == Letter_array[j]) {
+                            Letter_buttons[j].setBackground(Color.RED);
+                        }
+                    }
                 } else {
                     Text_buttons[i + letter_count].setBackground(Color.YELLOW);
+                    for (int j = 0; j < Letter_array.length; j++) {
+                        if (tmp == Letter_array[j]) {
+                            Letter_buttons[j].setBackground(Color.YELLOW);
+                        }
+                    }
                 }
             }
             Runde++;
@@ -154,8 +169,9 @@ public class Wordl implements ActionListener {
                     Letter_buttons[n].setEnabled(false);
                 }
             } else if ( buchstaben_richtig != 5 && Runde == 6){
-                textField.setText("VERLOREN");
-                textField.setFont(new Font("Arial", Font.BOLD,50));
+                String String_Loesungswort = new String(Loesungswort);
+                textField.setText("Das Wort war: " + String_Loesungswort);
+                textField.setFont(new Font("Arial", Font.BOLD,32));
                 textField.setHorizontalAlignment(SwingConstants.CENTER);
                 Enter_button.setEnabled(false);
                 Delete_button.setEnabled(false);
