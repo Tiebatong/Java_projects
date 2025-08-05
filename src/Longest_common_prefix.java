@@ -12,14 +12,11 @@ public class Longest_common_prefix {
 
 
         for (int i = 0; i < strs.length; i++) {
-            boolean weiter = true;
-            while (weiter) {
-                if (!strs[i].startsWith(output)) {
-                    output = output.substring(0, output.length() -1);
-                } else {
-                    weiter = false;
-                }
+
+            while (!strs[i].startsWith(output)) {
+                output = output.substring(0, output.length() -1);
             }
+
 
         }
 
