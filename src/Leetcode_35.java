@@ -1,5 +1,6 @@
 public class Leetcode_35 {
     public static void main(String[] args) {
+
         int[] nums = {2, 3, 5, 6};
         int target = 7;
         boolean found = false;
