@@ -1,9 +1,10 @@
 public class Leetcode_69 {
     public static void main(String[] args) {
-        int x = 17;
+        // babylonische Methode der Annäherung an Quardatwurzel
+        int x = 67;
         float aproximation;
         int tmp;
-        int base;
+        int base = 0;
         int[] squares = {1, 4, 9, 16, 25, 36, 49, 64, 81, 100};
         int[] diff = new int[squares.length];
 
@@ -14,18 +15,20 @@ public class Leetcode_69 {
             }
             diff[i] = tmp;
         }
-        int index_closest = diff[0];
+        int closest = diff[0];
+        int index_closest = 0;
         for (int j = 0; j < squares.length; j++) {
-            if (diff[j] < index_closest) {
-                index_closest = diff[j];
-                base = j;
+            if (diff[j] < closest) {
+                closest = diff[j];
+                index_closest = j;
             }
         }
-        float numinator = x - squares[index_closest];
-        float denominator = base * 2;
 
-        aproximation = squares[index_closest] + numinator / denominator;
+        float numinator = x - squares[index_closest];
+        float denominator = (index_closest + 1) * 2;
+        aproximation = (index_closest + 1) + (numinator / denominator);
         System.out.println(aproximation);
+
 
     }
 }
