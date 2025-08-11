@@ -1,17 +1,8 @@
-public class Leetcode_69_babylonische_Methode {
+public class random {
     public static void main(String[] args) {
-        /*
-         babylonische Methode für Annäherung an Quadratwurzel
-         https://www.youtube.com/watch?v=MXveVqBxFow&t=51s
-         */
 
-        int x = 8;
-        float approximation;
-        int base = binary_search(x);
 
-        approximation =  base + (x - base * base) / (base * 2);
-        System.out.println(approximation);
-
+        System.out.println(binary_search(17));
     }
     private static int binary_search(int x) {
         if (x < 2) {
@@ -31,3 +22,4 @@ public class Leetcode_69_babylonische_Methode {
         return right;
     }
 }
+
