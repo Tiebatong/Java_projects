@@ -5,7 +5,7 @@ public class Leetcode_69_babylonische_Methode {
          https://www.youtube.com/watch?v=MXveVqBxFow&t=51s
          */
 
-        int x = 8;
+        int x = 3;
         float aproximation;
         int tmp;
         int base = 0;
