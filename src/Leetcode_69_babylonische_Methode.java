@@ -1,7 +1,11 @@
 public class Leetcode_69_babylonische_Methode {
     public static void main(String[] args) {
-        // babylonische Methode der Annäherung an Quardatwurzel
-        int x = 67;
+        /*
+         babylonische Methode für Annäherung an Quadratwurzel
+         https://www.youtube.com/watch?v=MXveVqBxFow&t=51s
+         */
+
+        int x = 8;
         float aproximation;
         int tmp;
         int base = 0;
