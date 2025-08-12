@@ -6,14 +6,13 @@ public class Leetcode_69_babylonische_Methode {
          */
 
         int x = 8;
-        float approximation;
         int base = binary_search(x);
-
-        approximation =  base + (x - base * base) / (base * 2);
+        int approximation = base + (x - base * base) / (base * 2);
         System.out.println(approximation);
 
     }
     private static int binary_search(int x) {
+        
         if (x < 2) {
             return x;
         }
