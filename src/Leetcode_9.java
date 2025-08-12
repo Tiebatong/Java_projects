@@ -1,4 +1,4 @@
-public class Palindrome_Number {
+public class Leetcode_9 {
 
     public static void main(String[] args) {
 

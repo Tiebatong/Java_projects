@@ -1,4 +1,4 @@
-public class Longest_common_prefix {
+public class Leetcode_14 {
     public static void main(String[] args) {
 
         String[] strs = {"flower","flow","flight"};

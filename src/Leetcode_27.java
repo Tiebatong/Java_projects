@@ -1,4 +1,4 @@
-public class Remove_element {
+public class Leetcode_27 {
 
     public static void main(String[] args) {
         int[] nums = {3, 2, 2, 3, 6, 8, 3, 6, 9, 3 ,3};
