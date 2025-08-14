@@ -3,8 +3,7 @@ import java.util.ArrayList;
 public class Leetcode_2264 {
     public static void main(String[] args) {
 
-        String num = "1221000";
-
+        String num = "12221000333";
         ArrayList<String> list = new ArrayList<>();
         String substring = num.substring(0, 3);
         int i = 0;
@@ -12,12 +11,19 @@ public class Leetcode_2264 {
             substring = num.substring(i, i + 3);
             if (substring.charAt(0) == substring.charAt(1) && substring.charAt(1) == substring.charAt(2)) {
 
-                list.add(substring);
+                if (list.isEmpty()) {
+                    list.add(substring);
+                } else if (Integer.valueOf(list.getFirst()) < Integer.valueOf(substring)) {
+                    list.remove(0);
+                    list.add(substring);
+                }
+
             }
             i++;
         } while (i < num.length() - 2);
-        String solution = "";
-        if (list.isEmpty()) {
+
+        /*
+                if (list.isEmpty()) {
             System.out.println("");;
         } else {
             solution = list.getFirst();
@@ -27,7 +33,10 @@ public class Leetcode_2264 {
                 }
             }
         }
+         */
+        //String solution = "";
 
-        System.out.println(solution);
+
+        System.out.println(list);
     }
 }
