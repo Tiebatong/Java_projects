@@ -5,9 +5,9 @@ public class Leetcode_69_babylonische_Methode {
          https://www.youtube.com/watch?v=MXveVqBxFow&t=51s
          */
 
-        int x = 8;
+        int x = 356345;
         int base = binary_search(x);
-        int approximation = base + (x - base * base) / (base * 2);
+        float approximation = base + (x - base * base) / (base * 2);
         System.out.println(approximation);
 
     }
