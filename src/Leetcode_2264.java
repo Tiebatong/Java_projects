@@ -11,7 +11,7 @@ public class Leetcode_2264 {
         do {
             substring = num.substring(i, i + 3);
             if (substring.charAt(0) == substring.charAt(1) && substring.charAt(1) == substring.charAt(2)) {
-                //System.out.println(substring);
+
                 list.add(substring);
             }
             i++;
