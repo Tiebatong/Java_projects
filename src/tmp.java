@@ -1,25 +1,25 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 public class tmp {
     public static void main(String[] args) {
 
-        int[] ints = {1, 2, 4, 5, 7, 9, 11};
-        System.out.println(binary_search(ints, 11));
-    }
-    private static int binary_search(int[] numbers, int target) {
-        int low = 0;
-        int high = numbers.length - 1;
+        Map<String, Integer> mountains = new HashMap<>();
+        mountains.put("Lothse", 8516);
+        mountains.put("Kantsch", 8586);
+        mountains.put("K2", 8610);
+        mountains.put("Mount Everest", 8848);
 
-        while (low <= high) {
-            int middle = (low + high) / 2;
-            int middle_number = numbers[middle];
+        mountains.remove("K2");
 
-            if (target == middle_number) {
-                return middle;
-            } else if (target < middle_number) {
-                high = middle - 1;
-            } else {
-                low = middle + 1;
-            }
+        mountains.containsKey("Lothse");
+
+        Set<String> keyset = mountains.keySet();
+        for (String s : keyset) {
+            System.out.println("Der " + s + "ist " + mountains.get(s) + " Meter hoch");
         }
-        return -1;
+
+
     }
 }
