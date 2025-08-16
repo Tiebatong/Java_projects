@@ -1,6 +1,6 @@
 public class Leetcode_1323 {
     public static void main(String[] args) {
-        int num = 999;
+        int num = 96699;
         int zwischen = num;
         int tmp;
         int i = 0;
