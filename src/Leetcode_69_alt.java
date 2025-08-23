@@ -1,4 +1,4 @@
-public class Leetcode_69_babylonische_Methode {
+public class Leetcode_69_alt {
     public static void main(String[] args) {
         /*
          babylonische Methode für Annäherung an Quadratwurzel
