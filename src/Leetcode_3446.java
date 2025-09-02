@@ -47,7 +47,7 @@ public class Leetcode_3446 {
         boolean sorted = false;
         while (!sorted) {
             for (int i = 0; i < array.length; i++) {
-                if (array[i])
+
             }
         }
 

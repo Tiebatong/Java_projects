@@ -1,4 +1,4 @@
-public class haystack {
+public class Leetcode_28 {
     public static void main(String[] args) {
         String haystack = "abc";
         String needle = "c";
