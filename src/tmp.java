@@ -1,16 +1,11 @@
-import java.util.LinkedList;
-
 public class tmp {
     public static void main(String[] args) {
 
-    int a =  239;
-    int digit;
-    while (a >= 0) {
-        digit = a % 10;
-        System.out.println(digit);
-        a /= 10;
-    }
 
+        int[] Zahlen = {3, 5, 8, 19, 7, 4, 234, 78};
+        for (int i = 0; i < Zahlen.length; i++) {
+            System.out.println(Zahlen[i]);
+        }
 
     }
 }

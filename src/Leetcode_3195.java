@@ -4,7 +4,7 @@ public class Leetcode_3195 {
                 {0,1,0},
                 {0,0,1}
         };
-
+        System.out.println();
 
         int left = 0;
         int right = 0;
@@ -26,7 +26,6 @@ public class Leetcode_3195 {
             }
         }
         bool = true;
-
 
         for (int i = grid.length - 1; i >= 0; i--) {
             if (!bool){
