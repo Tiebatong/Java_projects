@@ -100,6 +100,13 @@ public class CPU_translator implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
 
+        if (e.getSource() == reset) {
+            value = 0;
+            for (int i = 0; i < 8; i++) {
+                Bits[i].setText("0");
+            }
+        }
+
         for (int i = 0; i < 8; i++) {
             if (e.getSource() == Bits[i] && Bits[i].getText() == "0") {
                 Bits[i].setText("1");
@@ -124,11 +131,6 @@ public class CPU_translator implements ActionListener {
             textField_mode.setText(modes[3]);
         }
 
-        if (e.getSource() == reset) {
-            value = 0;
-            for (int i = 0; i < 8; i++) {
-                Bits[i].setText("0");
-            }
-        }
+
     }
 }
