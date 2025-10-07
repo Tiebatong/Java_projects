@@ -7,6 +7,7 @@ public class CPU_translator implements ActionListener {
 
     JFrame frame;
     JButton[] Bits = new JButton[9];
+    JButton reset;
     JTextField textField;
     JTextField textField_mode;
     String[] modes = new String[4];
@@ -26,9 +27,8 @@ public class CPU_translator implements ActionListener {
 
 
         int Byte = 8;
+
         for(int i = 0; i <= Byte; i++) {
-
-
 
             Bits[i] = new JButton();
             Bits[i].setBounds(x_cord, y_cord, width, height);
@@ -41,6 +41,12 @@ public class CPU_translator implements ActionListener {
             frame.add(Bits[i]);
 
         }
+        System.out.println(x_cord);
+
+        reset = new JButton("reset");
+        reset.setBounds(550, y_cord, 100, 50);
+        reset.setFocusable(false);
+        reset.addActionListener(this);
 
 
         modes[0] = "Bus_to_Reg_0";
@@ -50,13 +56,13 @@ public class CPU_translator implements ActionListener {
 
 
         textField = new JTextField();
-        textField.setBounds(250, 10, 200,50);
+        textField.setBounds(250, 200, 200,50);
         textField.setEditable(false);
         textField.setText("DEC: ");
 
 
         textField_mode = new JTextField();
-        textField_mode.setBounds(250, 200, 300, 50);
+        textField_mode.setBounds(250, 260, 200, 50);
         textField_mode.setEditable(false);
         textField_mode.setText(modes[0]);
 
@@ -67,6 +73,7 @@ public class CPU_translator implements ActionListener {
         frame.setLayout(null);
         frame.add(textField);
         frame.add(textField_mode);
+        frame.add(reset);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
@@ -115,6 +122,13 @@ public class CPU_translator implements ActionListener {
             textField_mode.setText(modes[2]);
         } else if (mode_value == -64) {
             textField_mode.setText(modes[3]);
+        }
+
+        if (e.getSource() == reset) {
+            value = 0;
+            for (int i = 0; i < 8; i++) {
+                Bits[i].setText("0");
+            }
         }
     }
 }
