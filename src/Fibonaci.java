@@ -10,6 +10,7 @@ public class Fibonaci {
             temp = fib2;
             fib2 = fib1 + fib2;
             fib1 = temp;
+            System.out.println(fib1);
         }
         System.out.println(fib1);
 
