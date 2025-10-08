@@ -11,6 +11,7 @@ public class CPU_translator implements ActionListener {
     JTextField textField;
     JTextField textField_mode;
     JTextField TF_operation;
+    JTextField TF_Hex;
     String[] modes = new String[4];
     String[] comp_modes = new String[6];
     int[] values = new int[8];
@@ -82,6 +83,11 @@ public class CPU_translator implements ActionListener {
         TF_operation.setText("write 0 to Reg_0");
 
 
+        TF_Hex = new JTextField();
+        TF_Hex.setBounds(250, 380, 200,50);
+        TF_Hex.setEditable(false);
+
+
         frame.setVisible(true);
         frame.setTitle("Translator");
         frame.setBounds(0,0,800,500);
@@ -89,6 +95,7 @@ public class CPU_translator implements ActionListener {
         frame.add(textField);
         frame.add(textField_mode);
         frame.add(TF_operation);
+        frame.add(TF_Hex);
         frame.add(reset);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,6 +140,7 @@ public class CPU_translator implements ActionListener {
             }
         }
         textField.setText("DEC: " + value);
+        TF_Hex.setText("HEX: " + hex(value));
 
 
         mode_value = values[0] * Integer.parseInt(Bits[0].getText()) + values[1] * Integer.parseInt(Bits[1].getText());
@@ -214,4 +222,62 @@ public class CPU_translator implements ActionListener {
 
 
     }
+
+    public static String hex(int x) {
+        char[] digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+
+        char[] hex = {' ', ' '}; // 2 digits only
+
+        StringBuilder sb = new StringBuilder();
+
+        if ( x < 0) {
+            int y = 128;
+            int[] bin_digits = new int[8];
+            for (int i = 0 ; i < 8; i++) { // create array with binary values: 128, 64, 32...
+                bin_digits[i] = y;
+                y /= 2;
+            }
+            x *= -1;
+            int counter = 7;
+            int[] binary_arr = new int[8];
+            while (x > 0) {
+                binary_arr[counter] = x % 2; // convert to binary
+                x /= 2;
+                counter--;
+            }
+            int twos_complement = 0;
+
+            // twos complement, flip all bits
+            for (int i = 0; i < 8; i++) {
+                if (binary_arr[i] == 1) {
+                    binary_arr[i] = 0;
+                } else {
+                    binary_arr[i] = 1;
+                }
+            }
+
+            for (int i = 0; i < 8; i++) {
+                twos_complement += digits[i]; // converts binary to decimal
+            }
+            x = twos_complement;
+
+
+        }
+
+        int j = 1;
+        while (x > 0) {
+            int tmp = x % 16; // convert to hex
+            hex[j] = digits[tmp];
+            x /= 16;
+            j--;
+        }
+        sb.append(hex[0]);
+        sb.append(hex[1]);
+
+        System.out.println(sb);
+        String hexa = sb.toString();
+
+        return hexa;
+    }
+
 }
