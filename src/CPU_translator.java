@@ -255,6 +255,20 @@ public class CPU_translator implements ActionListener {
                     binary_arr[i] = 1;
                 }
             }
+            boolean one_added = false;
+            //boolean leading_one = false;
+            int index = 7;
+            int step_counter = 0;
+            while (!one_added) {
+                if (binary_arr[index] == 0) {
+                    binary_arr[index] = 1;
+                    for (int i = 0; i < step_counter; i++) {
+                        binary_arr[i] = 0;
+                    }
+                } else {
+                    step_counter++;
+                }
+            }
 
             for (int i = 0; i < 8; i++) {
                 twos_complement += digits[i]; // converts binary to decimal
