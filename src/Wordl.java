@@ -159,7 +159,6 @@ public class Wordl implements ActionListener {
             Runde++;
             System.out.println(Runde);
             if(buchstaben_richtig == 5 && Runde <= 6) {
-                System.out.println("gewonnen");
                 textField.setText("GEWONNEN");
                 textField.setFont(new Font("Arial", Font.BOLD,50));
                 textField.setHorizontalAlignment(SwingConstants.CENTER);

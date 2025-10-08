@@ -66,26 +66,27 @@ public class CPU_translator implements ActionListener {
 
 
         textField = new JTextField();
-        textField.setBounds(250, 200, 200,50);
+        textField.setBounds(100, 200, 200,50);
         textField.setEditable(false);
         textField.setText("DEC: ");
 
+        TF_Hex = new JTextField();
+        TF_Hex.setBounds(320, 200, 200,50);
+        TF_Hex.setEditable(false);
+        TF_Hex.setText("HEX:");
+
 
         textField_mode = new JTextField();
-        textField_mode.setBounds(250, 260, 200, 50);
+        textField_mode.setBounds(100, 260, 200, 50);
         textField_mode.setEditable(false);
         textField_mode.setText(modes[0]);
 
 
         TF_operation = new JTextField();
-        TF_operation.setBounds(250, 320,200,50);
+        TF_operation.setBounds(320, 260,200,50);
         TF_operation.setEditable(false);
         TF_operation.setText("write 0 to Reg_0");
 
-
-        TF_Hex = new JTextField();
-        TF_Hex.setBounds(250, 380, 200,50);
-        TF_Hex.setEditable(false);
 
 
         frame.setVisible(true);
@@ -218,80 +219,20 @@ public class CPU_translator implements ActionListener {
         }
 
 
-
-
-
     }
 
     public static String hex(int x) {
-        char[] digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-        char[] hex = {' ', ' '}; // 2 digits only
-
-        StringBuilder sb = new StringBuilder();
-
-        if ( x < 0) {
-            int y = 128;
-            int[] bin_digits = new int[8];
-            for (int i = 0 ; i < 8; i++) { // create array with binary values: 128, 64, 32...
-                bin_digits[i] = y;
-                y /= 2;
-            }
-            x *= -1;
-            int counter = 7;
-            int[] binary_arr = new int[8];
-            while (x > 0) {
-                binary_arr[counter] = x % 2; // convert to binary
-                x /= 2;
-                counter--;
-            }
-            int twos_complement = 0;
-
-            // twos complement, flip all bits
-            for (int i = 0; i < 8; i++) {
-                if (binary_arr[i] == 1) {
-                    binary_arr[i] = 0;
-                } else {
-                    binary_arr[i] = 1;
-                }
-            }
-            boolean one_added = false;
-            //boolean leading_one = false;
-            int index = 7;
-            int step_counter = 0;
-            while (!one_added) {
-                if (binary_arr[index] == 0) {
-                    binary_arr[index] = 1;
-                    for (int i = 0; i < step_counter; i++) {
-                        binary_arr[i] = 0;
-                    }
-                } else {
-                    step_counter++;
-                }
-            }
-
-            for (int i = 0; i < 8; i++) {
-                twos_complement += digits[i]; // converts binary to decimal
-            }
-            x = twos_complement;
-
-
+        if (x < 0) {
+            x = x + 256;
         }
 
-        int j = 1;
-        while (x > 0) {
-            int tmp = x % 16; // convert to hex
-            hex[j] = digits[tmp];
-            x /= 16;
-            j--;
+        String hex = Integer.toHexString(x).toUpperCase();
+
+        if (hex.length() < 2) {
+            hex = "0" + hex;
         }
-        sb.append(hex[0]);
-        sb.append(hex[1]);
-
-        System.out.println(sb);
-        String hexa = sb.toString();
-
-        return hexa;
+        return hex;
     }
 
 }
