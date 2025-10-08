@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +41,7 @@ public class CPU_translator implements ActionListener {
             Bits[i].addActionListener(this);
             Bits[i].setText("0");
             Bits[i].setFocusable(false);
+            Bits[i].setFont(new Font("Arial", Font.BOLD,16));
 
             frame.add(Bits[i]);
 
@@ -49,6 +51,7 @@ public class CPU_translator implements ActionListener {
         reset = new JButton("reset");
         reset.setBounds(550, y_cord, 100, 50);
         reset.setFocusable(false);
+        reset.setFont(new Font("Arial", Font.BOLD,16));
         reset.addActionListener(this);
 
 
@@ -68,23 +71,27 @@ public class CPU_translator implements ActionListener {
         textField = new JTextField();
         textField.setBounds(100, 200, 200,50);
         textField.setEditable(false);
+        textField.setFont(new Font("Arial", Font.BOLD,16));
         textField.setText("DEC: ");
 
         TF_Hex = new JTextField();
         TF_Hex.setBounds(320, 200, 200,50);
         TF_Hex.setEditable(false);
+        TF_Hex.setFont(new Font("Arial", Font.BOLD,16));
         TF_Hex.setText("HEX:");
 
 
         textField_mode = new JTextField();
         textField_mode.setBounds(100, 260, 200, 50);
         textField_mode.setEditable(false);
+        textField_mode.setFont(new Font("Arial", Font.BOLD,16));
         textField_mode.setText(modes[0]);
 
 
         TF_operation = new JTextField();
-        TF_operation.setBounds(320, 260,200,50);
+        TF_operation.setBounds(320, 260,250,50);
         TF_operation.setEditable(false);
+        TF_operation.setFont(new Font("Arial", Font.BOLD,16));
         TF_operation.setText("write 0 to Reg_0");
 
 
