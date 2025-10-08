@@ -10,7 +10,9 @@ public class CPU_translator implements ActionListener {
     JButton reset;
     JTextField textField;
     JTextField textField_mode;
+    JTextField TF_operation;
     String[] modes = new String[4];
+    String[] comp_modes = new String[6];
     int[] values = new int[8];
     int value;
     int mode_value;
@@ -41,7 +43,7 @@ public class CPU_translator implements ActionListener {
             frame.add(Bits[i]);
 
         }
-        System.out.println(x_cord);
+
 
         reset = new JButton("reset");
         reset.setBounds(550, y_cord, 100, 50);
@@ -53,6 +55,13 @@ public class CPU_translator implements ActionListener {
         modes[1] = "Reg_to_Reg";
         modes[2] = "ALU";
         modes[3] = "Comparator";
+
+        comp_modes[0] = ">0";
+        comp_modes[1] = "<0";
+        comp_modes[2] = ">=0";
+        comp_modes[3] = "<=0";
+        comp_modes[4] = "==0";
+        comp_modes[5] = "!=0";
 
 
         textField = new JTextField();
@@ -67,12 +76,19 @@ public class CPU_translator implements ActionListener {
         textField_mode.setText(modes[0]);
 
 
+        TF_operation = new JTextField();
+        TF_operation.setBounds(250, 320,200,50);
+        TF_operation.setEditable(false);
+        TF_operation.setText("write 0 to Reg_0");
+
+
         frame.setVisible(true);
         frame.setTitle("Translator");
         frame.setBounds(0,0,800,500);
         frame.setLayout(null);
         frame.add(textField);
         frame.add(textField_mode);
+        frame.add(TF_operation);
         frame.add(reset);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,15 +137,80 @@ public class CPU_translator implements ActionListener {
 
         mode_value = values[0] * Integer.parseInt(Bits[0].getText()) + values[1] * Integer.parseInt(Bits[1].getText());
 
-        if (mode_value == 0) {
-            textField_mode.setText(modes[0]);
-        } else if (mode_value == 64) {
-            textField_mode.setText(modes[1]);
-        } else if (mode_value == -128) {
-            textField_mode.setText(modes[2]);
-        } else if (mode_value == -64) {
-            textField_mode.setText(modes[3]);
+        switch (mode_value) {
+
+            case 0: // BUS to REG_0
+                textField_mode.setText(modes[0]);
+                TF_operation.setText("write " + value + " to Reg_0");
+                break;
+            case 64: // REG_x to REG_x
+                textField_mode.setText(modes[1]);
+                int write_address = 0;
+                for (int i = 5; i < 8; i++) {
+                    if (Bits[i].getText() == "1") {
+                        write_address += values[i];
+                    }
+                }
+                int read_address = 0;
+                int j = 5;
+                for (int i = 2; i < 5; i++) {
+                    if (Bits[i].getText() == "1") {
+                        read_address += values[j];
+                    }
+                    j++;
+                }
+                TF_operation.setText("write Reg_" + write_address + " to Reg_" + read_address);
+                break;
+            case -128: // ALU
+                String sub_mode;
+                boolean add = false;
+                if (Bits[2].getText() == "1") {
+                    sub_mode = "SUB";
+                } else {
+                    sub_mode = "ADD";
+                    add = true;
+                }
+                textField_mode.setText(modes[2] + " " + sub_mode);
+                write_address = 0;
+
+                for (int i = 5; i < 8; i++) {
+                    if (Bits[i].getText() == "1") {
+                        write_address += values[i];
+                    }
+                }
+
+                if (add) {
+                    TF_operation.setText("save Reg_1 + Reg_2 to Reg_" + write_address);
+                } else {
+                    TF_operation.setText("save Reg_1 - Reg_2 to Reg_" + write_address);
+                }
+
+                break;
+            case -64: // COMPARATOR
+                textField_mode.setText(modes[3]);
+                read_address = 0;
+                j = 5;
+                for (int i = 2; i < 5; i++) {
+                    if (Bits[i].getText() == "1") {
+                        read_address += values[j];
+                    }
+                    j++;
+                }
+
+                String stop_timer = "";
+                if (Bits[7].getText() == "1") {
+                    stop_timer = " if true stop_timer";
+                }
+
+                TF_operation.setText("comp Reg_2 " + comp_modes[read_address] + stop_timer);
+
+
+
+                break;
         }
+
+
+
 
 
     }
