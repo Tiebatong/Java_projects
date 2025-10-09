@@ -28,11 +28,8 @@ public class CPU_translator implements ActionListener {
         int x_cord = 100;
         int y_cord = 100;
 
-
-
-        int Byte = 8;
-
-        for(int i = 0; i <= Byte; i++) {
+        // initialises Bit Buttons
+        for(int i = 0; i <= 8; i++) {
 
             Bits[i] = new JButton();
             Bits[i].setBounds(x_cord, y_cord, width, height);
@@ -48,6 +45,7 @@ public class CPU_translator implements ActionListener {
         }
 
 
+        // Reset Button
         reset = new JButton("reset");
         reset.setBounds(550, y_cord, 100, 50);
         reset.setFocusable(false);
@@ -60,36 +58,40 @@ public class CPU_translator implements ActionListener {
         modes[2] = "ALU";
         modes[3] = "Comparator";
 
-        comp_modes[0] = ">0";
-        comp_modes[1] = "<0";
-        comp_modes[2] = ">=0";
-        comp_modes[3] = "<=0";
-        comp_modes[4] = "==0";
-        comp_modes[5] = "!=0";
+        comp_modes[0] = "> 0";
+        comp_modes[1] = "< 0";
+        comp_modes[2] = ">= 0";
+        comp_modes[3] = "<= 0";
+        comp_modes[4] = "== 0";
+        comp_modes[5] = "!= 0";
 
 
+        // Decimal
         textField = new JTextField();
-        textField.setBounds(100, 200, 200,50);
+        textField.setBounds(420, 200, 100, 50);
         textField.setEditable(false);
         textField.setFont(new Font("Arial", Font.BOLD,16));
-        textField.setText("DEC: ");
+        textField.setText("DEC: 0");
 
+        // Hexadecimal
         TF_Hex = new JTextField();
-        TF_Hex.setBounds(320, 200, 200,50);
+        TF_Hex.setBounds(310, 200, 100,50);
         TF_Hex.setEditable(false);
         TF_Hex.setFont(new Font("Arial", Font.BOLD,16));
-        TF_Hex.setText("HEX:");
+        TF_Hex.setText("HEX:00");
 
 
+        // Mode / Submode
         textField_mode = new JTextField();
-        textField_mode.setBounds(100, 260, 200, 50);
+        textField_mode.setBounds(100, 200, 200,50);
         textField_mode.setEditable(false);
         textField_mode.setFont(new Font("Arial", Font.BOLD,16));
-        textField_mode.setText(modes[0]);
+        textField_mode.setText("Mode: " + modes[0]);
 
 
+        // Operation
         TF_operation = new JTextField();
-        TF_operation.setBounds(320, 260,250,50);
+        TF_operation.setBounds(100, 260, 420, 50);
         TF_operation.setEditable(false);
         TF_operation.setFont(new Font("Arial", Font.BOLD,16));
         TF_operation.setText("write 0 to Reg_0");
@@ -112,6 +114,7 @@ public class CPU_translator implements ActionListener {
         int start = 64;
         values[0] = -128;
 
+        // creates values from 128 to 1
         for (int i = 1; i < 8; i++) {
             values[i] = start;
             start /= 2;
@@ -131,6 +134,7 @@ public class CPU_translator implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
 
+        // Reset Button
         if (e.getSource() == reset) {
             value = 0;
             for (int i = 0; i < 8; i++) {
@@ -138,6 +142,7 @@ public class CPU_translator implements ActionListener {
             }
         }
 
+        // switching Bits
         for (int i = 0; i < 8; i++) {
             if (e.getSource() == Bits[i] && Bits[i].getText() == "0") {
                 Bits[i].setText("1");
@@ -147,27 +152,32 @@ public class CPU_translator implements ActionListener {
                 value = value - values[i];
             }
         }
+
         textField.setText("DEC: " + value);
-        TF_Hex.setText("HEX: " + hex(value));
+        TF_Hex.setText("HEX: " + hex(value)[0] + hex(value)[1]);
 
 
+        // Calculates Mode from first 2 most significant Bits
         mode_value = values[0] * Integer.parseInt(Bits[0].getText()) + values[1] * Integer.parseInt(Bits[1].getText());
+
+        int write_address;
+        int read_address;
 
         switch (mode_value) {
 
             case 0: // BUS to REG_0
-                textField_mode.setText(modes[0]);
+                textField_mode.setText("Mode: " + modes[0]);
                 TF_operation.setText("write " + value + " to Reg_0");
                 break;
             case 64: // REG_x to REG_x
-                textField_mode.setText(modes[1]);
-                int write_address = 0;
+                textField_mode.setText("Mode: " + modes[1]);
+                write_address = 0;
                 for (int i = 5; i < 8; i++) {
                     if (Bits[i].getText() == "1") {
                         write_address += values[i];
                     }
                 }
-                int read_address = 0;
+                read_address = 0;
                 int j = 5;
                 for (int i = 2; i < 5; i++) {
                     if (Bits[i].getText() == "1") {
@@ -186,7 +196,7 @@ public class CPU_translator implements ActionListener {
                     sub_mode = "ADD";
                     add = true;
                 }
-                textField_mode.setText(modes[2] + " " + sub_mode);
+                textField_mode.setText("Mode: " + modes[2] + " " + sub_mode);
                 write_address = 0;
 
                 for (int i = 5; i < 8; i++) {
@@ -203,12 +213,15 @@ public class CPU_translator implements ActionListener {
 
                 break;
             case -64: // COMPARATOR
-                textField_mode.setText(modes[3]);
+                textField_mode.setText("Mode: " + modes[3]);
                 read_address = 0;
                 j = 5;
                 for (int i = 2; i < 5; i++) {
                     if (Bits[i].getText() == "1") {
                         read_address += values[j];
+                        if (read_address > 5) {
+                            System.out.println("OutOfBounds"); // !!!!!!OUT_OF_BOUNDS!!!!!!
+                        }
                     }
                     j++;
                 }
@@ -228,17 +241,23 @@ public class CPU_translator implements ActionListener {
 
     }
 
-    public static String hex(int x) {
+    public static char[] hex(int x) {
 
+        char[] hex_digits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+        char[] hex = {' ', ' '};
         if (x < 0) {
-            x = x + 256;
+            x = 256 + x; // twos complement
         }
 
-        String hex = Integer.toHexString(x).toUpperCase();
 
-        if (hex.length() < 2) {
-            hex = "0" + hex;
+        int i = 1;
+        while (x > 0) {
+            hex[i] = hex_digits[x % 16];
+            x /= 16;
+            i--;
         }
+
+
         return hex;
     }
 
