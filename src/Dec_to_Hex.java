@@ -3,8 +3,6 @@ public class Dec_to_Hex {
 
         int x = -99;
 
-        char y = hex(x)[0];
-        System.out.println(y);
         System.out.println(hex(x));
 
     }
