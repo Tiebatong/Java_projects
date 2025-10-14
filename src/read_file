@@ -7,3 +7,4 @@ Move Reg4 to Reg3;
 Add to Reg4;
 Add to Reg0;
 Sub to Reg0;
+Sub to Reg7;

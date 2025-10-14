@@ -67,7 +67,7 @@ public class File_reader {
                             break;
 
                         case "Sub":
-                            dec_Instruction += -96; // -128 + 32 1010,0000
+                            dec_Instruction += -96; // -128 + 32 | 1010,0000
                             dec_Instruction += adress_decoder(Instruction_arr.get(2), false);
                             break; //
                     }
