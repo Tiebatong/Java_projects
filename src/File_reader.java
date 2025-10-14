@@ -69,7 +69,7 @@ public class File_reader {
                         case "Sub":
                             dec_Instruction += -96; // -128 + 32 1010,0000
                             dec_Instruction += adress_decoder(Instruction_arr.get(2), false);
-                            break;
+                            break; //
                     }
                     writer.write(hex(dec_Instruction));
 
