@@ -176,7 +176,7 @@ public class CPU_translator implements ActionListener {
                     if (Bits[i].getText() == "1") {
                         write_address += values[i];
                     }
-                }
+        }                                                       // READ UND WRITE ADDRESS VERTAUSCHT!!!!!!!!!!!!!!!!!
                 read_address = 0;
                 int j = 5;
                 for (int i = 2; i < 5; i++) {
