@@ -171,17 +171,17 @@ public class CPU_translator implements ActionListener {
                 break;
             case 64: // REG_x to REG_x
                 textField_mode.setText("Mode: " + modes[1]);
-                write_address = 0;
+                read_address = 0;
                 for (int i = 5; i < 8; i++) {
                     if (Bits[i].getText() == "1") {
-                        write_address += values[i];
+                        read_address += values[i];
                     }
-        }                                                       // READ UND WRITE ADDRESS VERTAUSCHT!!!!!!!!!!!!!!!!!
-                read_address = 0;
+        }
+                write_address = 0;
                 int j = 5;
                 for (int i = 2; i < 5; i++) {
                     if (Bits[i].getText() == "1") {
-                        read_address += values[j];
+                        write_address += values[j];
                     }
                     j++;
                 }

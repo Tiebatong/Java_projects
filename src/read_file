@@ -1,1 +1,9 @@
 Move Reg7 to Reg4;
+Move Reg3 to Reg5;
+Save 56;
+Move Reg2 to Reg0;
+Save 50;
+Move Reg4 to Reg3;
+Add to Reg4;
+Add to Reg0;
+Sub to Reg0;

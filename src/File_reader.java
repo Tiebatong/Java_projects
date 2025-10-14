@@ -61,6 +61,15 @@ public class File_reader {
                             dec_Instruction += 64;
                             break;
 
+                        case "Add":
+                            dec_Instruction += -128;
+                            dec_Instruction += adress_decoder(Instruction_arr.get(2), false);
+                            break;
+
+                        case "Sub":
+                            dec_Instruction += -96; // -128 + 32 1010,0000
+                            dec_Instruction += adress_decoder(Instruction_arr.get(2), false);
+                            break;
                     }
                     writer.write(hex(dec_Instruction));
 
@@ -105,12 +114,12 @@ public class File_reader {
         String tmp = adress_str.charAt(3) + "";
         int adress_dec = Integer.parseInt(tmp);
 
-        int j = 0;
+        int j = 2;
 
         while(adress_dec > 0) {
             bin_arr[j] = adress_dec % 2;
             adress_dec /= 2;
-            j++;
+            j--;
         }
         if (read) {
             for(int i = 0; i < 3; i++) {
