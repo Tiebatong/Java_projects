@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,6 +43,7 @@ public class File_reader {
             boolean line_end = false;
             while (!line_end) {
 
+                boolean Error_flag = false;
                 int dec_Instruction = 0;
 
                 if (line.charAt(i) == ' ' || line.charAt(i) == ';') { // String found
@@ -71,7 +71,8 @@ public class File_reader {
 
                         case "Save":
                             if(Integer.parseInt(Instruction_arr.get(1)) > 63) {
-                                //warning for too big save value
+                                //warning for too large save value
+                                Error_flag = true;
                                 System.out.print("\u001B[31mWarning at line \u001B[0m");
                                 System.out.print(Instruct_counter + 1);
                                 System.out.println("\u001B[31m: save value too big, needs to be <= 63\u001B[0m");
@@ -84,6 +85,23 @@ public class File_reader {
                             dec_Instruction += adress_decoder(Instruction_arr.get(1), true);
                             dec_Instruction += adress_decoder(Instruction_arr.get(3), false);
                             dec_Instruction += 64;
+
+                            // Warning for too large Reg Index
+                            for(int x = 0; x < 2; x++) {
+                                int Index = 1;
+                                if(x == 1) {
+                                    Index = 3;
+                                }
+                                String adress = Instruction_arr.get(Index).charAt(3) + "";
+                                int adr = Integer.parseInt(adress);
+                                if(adr > 7) {
+                                    Error_flag = true;
+                                    System.out.print("\u001B[31mWarning at line \u001B[0m");
+                                    System.out.print(Instruct_counter + 1);
+                                    System.out.println("\u001B[31m: adress too big, needs to be <= 7\u001B[0m");
+                                }
+                            }
+
                             break;
 
                         case "Add":
@@ -138,7 +156,13 @@ public class File_reader {
                             }
                             break;
                     }
-                    writer.write(hex(dec_Instruction));
+                    if(!Error_flag) {
+                        writer.write(hex(dec_Instruction));
+
+                    } else {
+                        writer.write("XX");
+                    }
+                    Error_flag = false;
                     Instruct_counter++;
                     writer.write(" ");
                     if(Instruct_counter % 16 == 0) {
@@ -197,7 +221,7 @@ public class File_reader {
 
         int j = 2;
 
-        while(adress_dec > 0) {
+        while(adress_dec > 0 && j >= 0) {
             bin_arr[j] = adress_dec % 2;
             adress_dec /= 2;
             j--;
