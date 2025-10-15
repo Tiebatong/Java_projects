@@ -7,8 +7,18 @@ import java.util.Scanner;
 public class File_reader {
     public static void main(String[] args) throws IOException {
 
-        String read_file_path = "C:\\Users\\Anwender\\Desktop\\alle_c_projekte\\Java_projekte\\github-intellij-test\\src\\read_file";
-        String write_file_path = "C:\\Users\\Anwender\\Desktop\\alle_c_projekte\\Java_projekte\\github-intellij-test\\src\\write_file";
+        boolean Windows = false;
+        String read_file_path;
+        String write_file_path;
+
+        if(Windows) {
+             read_file_path = "C:\\Users\\Anwender\\Desktop\\alle_c_projekte\\Java_projekte\\github-intellij-test\\src\\read_file";
+             write_file_path = "C:\\Users\\Anwender\\Desktop\\alle_c_projekte\\Java_projekte\\github-intellij-test\\src\\write_file";
+        } else {
+            read_file_path = "/home/philip/Desktop/Java_projects/src/read_file";
+            write_file_path = "/home/philip/Desktop/Java_projects/src/write_file";
+        }
+
 
         File file = new File(read_file_path);
         Scanner scan = new Scanner(file);
@@ -37,7 +47,7 @@ public class File_reader {
 
                 if (line.charAt(i) == ';') { // end of line
                     line_end = true;
-                    writer.write("\n");
+
 
                 }
                 if(line.charAt(i) != ' ') {
@@ -46,7 +56,9 @@ public class File_reader {
 
                 i++;
 
+
                 if(line_end) {
+
                     String mode = Instruction_arr.get(0);
 
                     switch (mode) {
@@ -69,9 +81,52 @@ public class File_reader {
                         case "Sub":
                             dec_Instruction += -96; // -128 + 32 | 1010,0000
                             dec_Instruction += adress_decoder(Instruction_arr.get(2), false);
-                            break; //
+                            break;
+
+                        case "Comp>":
+                            dec_Instruction += -64;
+                            if (Instruction_arr.get(1).equals("stc")) {
+                                dec_Instruction++;
+                            }
+                            break;
+
+                        case "Comp<":
+                            dec_Instruction += -56;
+                            if (Instruction_arr.get(1).equals("stc")) {
+                                dec_Instruction++;
+                            }
+                            break;
+
+                        case "Comp>=":
+                            dec_Instruction += -48;
+                            if (Instruction_arr.get(1).equals("stc")) {
+                                dec_Instruction++;
+                            }
+                            break;
+
+                        case "Comp<=": ;
+                            dec_Instruction += -40;
+                            if (Instruction_arr.get(1).equals("stc")) {
+                                dec_Instruction++;
+                            }
+                            break;
+
+                        case "Comp=": ;
+                            dec_Instruction += -32;
+                            if (Instruction_arr.get(1).equals("stc")) {
+                                dec_Instruction++;
+                            }
+                            break;
+
+                        case "Comp!=": ;
+                            dec_Instruction += -24;
+                            if (Instruction_arr.get(1).equals("stc")) {
+                                dec_Instruction++;
+                            }
+                            break;
                     }
                     writer.write(hex(dec_Instruction));
+                    writer.write("\n");
 
                     break;
 
