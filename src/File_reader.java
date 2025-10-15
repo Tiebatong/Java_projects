@@ -1,22 +1,24 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class File_reader {
     public static void main(String[] args) throws IOException {
 
-        boolean Windows = false;
+
         String read_file_path;
         String write_file_path;
 
-        if(Windows) {
-             read_file_path = "C:\\Users\\Anwender\\Desktop\\alle_c_projekte\\Java_projekte\\github-intellij-test\\src\\read_file";
-             write_file_path = "C:\\Users\\Anwender\\Desktop\\alle_c_projekte\\Java_projekte\\github-intellij-test\\src\\write_file";
+        if(System.getProperty("os.name").equals("Windows 11")) {
+             read_file_path = "C:\\Users\\Anwender\\Desktop\\alle_c_projekte\\Java_projekte\\github-intellij-test\\src\\read_file.txt";
+             write_file_path = "C:\\Users\\Anwender\\Desktop\\alle_c_projekte\\Java_projekte\\github-intellij-test\\src\\write_file.txt";
         } else {
-            read_file_path = "/home/philip/Desktop/Java_projects/src/read_file";
-            write_file_path = "/home/philip/Desktop/Java_projects/src/write_file";
+            read_file_path = "/home/philip/Desktop/Java_projects/src/read_file.txt";
+            write_file_path = "/home/philip/Desktop/Java_projects/src/write_file.txt";
         }
 
 
@@ -24,7 +26,11 @@ public class File_reader {
         Scanner scan = new Scanner(file);
         FileWriter writer = new FileWriter(write_file_path);
 
-        int[] Bit_arr = {-128, 64, 32, 16, 8, 4, 2, 1};
+
+        int Instruct_counter = 0;
+
+
+        writer.write("v3.0 hex words plain\n");
 
 
         while (scan.hasNextLine()) {
@@ -64,7 +70,14 @@ public class File_reader {
                     switch (mode) {
 
                         case "Save":
-                            dec_Instruction += Integer.parseInt(Instruction_arr.get(1));
+                            if(Integer.parseInt(Instruction_arr.get(1)) > 63) {
+                                //warning for too big save value
+                                System.out.print("\u001B[31mWarning at line \u001B[0m");
+                                System.out.print(Instruct_counter + 1);
+                                System.out.println("\u001B[31m: save value too big, needs to be <= 63\u001B[0m");
+                            } else {
+                                dec_Instruction += Integer.parseInt(Instruction_arr.get(1));
+                            }
                             break;
 
                         case "Move":
@@ -126,13 +139,26 @@ public class File_reader {
                             break;
                     }
                     writer.write(hex(dec_Instruction));
-                    writer.write("\n");
+                    Instruct_counter++;
+                    writer.write(" ");
+                    if(Instruct_counter % 16 == 0) {
+                        writer.write("\n");
+                    }
 
                     break;
 
                 }
 
             }
+
+
+        }
+        for (int j = Instruct_counter; j < 256; j++) {
+            if(j % 16 == 0) {
+                writer.write("\n");
+
+            }
+            writer.write("00 ");
 
         }
 

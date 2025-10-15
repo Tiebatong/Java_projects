@@ -1,0 +1,7 @@
+Save 23;
+Move Reg0 to Reg1;
+Save 17;
+Move Reg0 to Reg2;
+Add to Reg2;
+Move Reg2 to Reg0;
+Comp< stc;
