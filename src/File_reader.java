@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -36,7 +35,24 @@ public class File_reader {
             String line = scan.nextLine();
             StringBuilder substring = new StringBuilder();
             ArrayList<String> Instruction_arr = new ArrayList<>();
+            boolean white_space_flag = false;
 
+
+            // checks for empty lines or leading white space
+            if (line.isEmpty()) {
+                white_space_flag = true;
+
+            } else if (line.charAt(0) == ' ') {
+                white_space_flag = true;
+            }
+            // warning for white space
+            if (white_space_flag) {
+                System.out.print("\u001B[31mWarning at line \u001B[0m");
+                System.out.print(Instruct_counter + 1);
+                System.out.println("\u001B[31m: leading white space not allowed, assambler will skip line\u001B[0m");
+                Instruct_counter++;
+                continue;
+            }
 
 
             int i = 0;
@@ -82,8 +98,8 @@ public class File_reader {
                             break;
 
                         case "Move":
-                            dec_Instruction += adress_decoder(Instruction_arr.get(1), true);
-                            dec_Instruction += adress_decoder(Instruction_arr.get(3), false);
+                            dec_Instruction += address_decoder(Instruction_arr.get(1), true);
+                            dec_Instruction += address_decoder(Instruction_arr.get(3), false);
                             dec_Instruction += 64;
 
                             // Warning for too large Reg Index
@@ -92,13 +108,13 @@ public class File_reader {
                                 if(x == 1) {
                                     Index = 3;
                                 }
-                                String adress = Instruction_arr.get(Index).charAt(3) + "";
-                                int adr = Integer.parseInt(adress);
+                                String address = Instruction_arr.get(Index).charAt(3) + "";
+                                int adr = Integer.parseInt(address);
                                 if(adr > 7) {
                                     Error_flag = true;
                                     System.out.print("\u001B[31mWarning at line \u001B[0m");
                                     System.out.print(Instruct_counter + 1);
-                                    System.out.println("\u001B[31m: adress too big, needs to be <= 7\u001B[0m");
+                                    System.out.println("\u001B[31m: address too big, needs to be <= 7\u001B[0m");
                                 }
                             }
 
@@ -106,12 +122,12 @@ public class File_reader {
 
                         case "Add":
                             dec_Instruction += -128;
-                            dec_Instruction += adress_decoder(Instruction_arr.get(2), false);
+                            dec_Instruction += address_decoder(Instruction_arr.get(2), false);
                             break;
 
                         case "Sub":
                             dec_Instruction += -96; // -128 + 32 | 1010,0000
-                            dec_Instruction += adress_decoder(Instruction_arr.get(2), false);
+                            dec_Instruction += address_decoder(Instruction_arr.get(2), false);
                             break;
 
                         case "Comp>":
@@ -135,21 +151,21 @@ public class File_reader {
                             }
                             break;
 
-                        case "Comp<=": ;
+                        case "Comp<=":
                             dec_Instruction += -40;
                             if (Instruction_arr.get(1).equals("stc")) {
                                 dec_Instruction++;
                             }
                             break;
 
-                        case "Comp=": ;
+                        case "Comp=":
                             dec_Instruction += -32;
                             if (Instruction_arr.get(1).equals("stc")) {
                                 dec_Instruction++;
                             }
                             break;
 
-                        case "Comp!=": ;
+                        case "Comp!=":
                             dec_Instruction += -24;
                             if (Instruction_arr.get(1).equals("stc")) {
                                 dec_Instruction++;
@@ -205,42 +221,45 @@ public class File_reader {
             x /= 16;
             i--;
         }
+        if(i == 0) {
+            hex[0] = '0';
+        }
 
 
         return hex;
     }
 
-    public static int adress_decoder(String adress_str, boolean read) {
+    public static int address_decoder(String address_str, boolean read) {
 
-        int adress = 0;
+        int address = 0;
         int[] bin_arr = {0, 0, 0};
         int[] read_val = {32, 16, 8};
         int[] write_val = {4, 2, 1};
-        String tmp = adress_str.charAt(3) + "";
-        int adress_dec = Integer.parseInt(tmp);
+        String tmp = address_str.charAt(3) + "";
+        int address_dec = Integer.parseInt(tmp);
 
         int j = 2;
 
-        while(adress_dec > 0 && j >= 0) {
-            bin_arr[j] = adress_dec % 2;
-            adress_dec /= 2;
+        while(address_dec > 0 && j >= 0) {
+            bin_arr[j] = address_dec % 2;
+            address_dec /= 2;
             j--;
         }
         if (read) {
             for(int i = 0; i < 3; i++) {
                 if(bin_arr[i] == 1) {
-                    adress += read_val[i];
+                    address += read_val[i];
                 }
             }
         } else {
             for(int i = 0; i < 3; i++) {
                 if(bin_arr[i] == 1) {
-                    adress += write_val[i];
+                    address += write_val[i];
                 }
             }
         }
 
-        return adress;
+        return address;
     }
 
 
