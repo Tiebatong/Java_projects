@@ -30,7 +30,6 @@ public class File_reader {
 
         writer.write("v3.0 hex words plain\n");
 
-
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             StringBuilder substring = new StringBuilder();

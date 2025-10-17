@@ -1,10 +1,22 @@
-Save 6; //jumps to line
+Save 9; //jumps to line + 1
 Move Reg0 to Reg7;
-Save 3; // number of iterations
-Move Reg3 to Reg1;
+Save 1;
+Move Reg0 to Reg5;
+Move Reg0 to Reg6;
+Save 9; // number of iterations
+Move Reg0 to Reg1;
 Save 1;
 Move Reg0 to Reg2;
-Sub to Reg3; // Reg1 - Reg2
+Sub to Reg3;  Reg1 - Reg2 Begin loop body
 Move Reg3 to Reg1;
-Move Reg1 to Reg2;
+Move Reg2 to Reg4;
+Move Reg5 to Reg0;
+Move Reg5 to Reg1;
+Move Reg6 to Reg2;
+Add to Reg5;
+Move reg0 to Reg6;
+Move Reg3 to Reg1;
+Move Reg4 to Reg2;
 Comp> con;
+Move Reg5 to Reg0;
+Comp= stc;

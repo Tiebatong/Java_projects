@@ -1,7 +1,7 @@
 public class Fibonaci {
     public static void main(String[] args) {
 
-        int Iterationen = 50;
+        int Iterationen = 10;
         long fib1 = 1;
         long fib2 = 1;
         long temp = 0;
@@ -12,7 +12,7 @@ public class Fibonaci {
             fib1 = temp;
             System.out.println(fib1);
         }
-        System.out.println(fib1);
+        System.out.println("fib(" + Iterationen + ") = " + fib1);
 
     }
 }
