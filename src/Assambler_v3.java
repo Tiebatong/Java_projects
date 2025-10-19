@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class File_reader {
+public class Assambler_v3 {
     public static void main(String[] args) throws IOException {
 
 
@@ -26,6 +26,7 @@ public class File_reader {
 
 
         int Instruct_counter = 0;
+        boolean Flag_found = false;
 
 
         writer.write("v3.0 hex words plain\n");
@@ -46,6 +47,7 @@ public class File_reader {
             }
             // warning for white space
             if (white_space_flag) {
+                Flag_found = true;
                 System.out.print("\u001B[31mWarning at line \u001B[0m");
                 System.out.print(Instruct_counter + 1);
                 System.out.println("\u001B[31m: leading white space not allowed, assambler will skip line\u001B[0m");
@@ -88,6 +90,7 @@ public class File_reader {
                             if(Integer.parseInt(Instruction_arr.get(1)) > 63) {
                                 //warning for too large save value
                                 Error_flag = true;
+                                Flag_found = true;
                                 System.out.print("\u001B[31mWarning at line \u001B[0m");
                                 System.out.print(Instruct_counter + 1);
                                 System.out.println("\u001B[31m: save value too big, needs to be <= 63\u001B[0m");
@@ -111,6 +114,7 @@ public class File_reader {
                                 int adr = Integer.parseInt(address);
                                 if(adr > 7) {
                                     Error_flag = true;
+                                    Flag_found = true;
                                     System.out.print("\u001B[31mWarning at line \u001B[0m");
                                     System.out.print(Instruct_counter + 1);
                                     System.out.println("\u001B[31m: address too big, needs to be <= 7\u001B[0m");
@@ -125,7 +129,7 @@ public class File_reader {
                             break;
 
                         case "Sub":
-                            dec_Instruction += -96; // -128 + 32 | 1010,0000
+                            dec_Instruction += -96; // -128 + 32 | 1010_0000
                             dec_Instruction += address_decoder(Instruction_arr.get(2), false);
                             break;
 
@@ -170,6 +174,17 @@ public class File_reader {
                                 dec_Instruction++;
                             }
                             break;
+
+                        case ">>":
+                            dec_Instruction += -120;
+                            dec_Instruction += address_decoder(Instruction_arr.get(2), false);
+                            break;
+
+                        case "<<":
+                            dec_Instruction += -112;
+                            dec_Instruction += address_decoder(Instruction_arr.get(2), false);
+                            break;
+
                     }
                     if(!Error_flag) {
                         writer.write(hex(dec_Instruction));
@@ -203,6 +218,10 @@ public class File_reader {
 
 
         writer.close();
+
+        if (!Flag_found) {
+            System.out.println("\nAssambly finished with 0 Flags");
+        }
 
     }
     public static char[] hex(int x) {
