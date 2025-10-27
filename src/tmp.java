@@ -1,15 +1,16 @@
 public class tmp {
     public static void main(String[] args) {
 
-
-
-        for (int x = -10; x <= 10; x++) {
-            System.out.println("f(" + x + ") = " + f(x));
-        }
+        System.out.println(fib(5));
 
     }
-
-    public static double f(int x) {
-        return 5 + Math.sin(x);
+    static int fib(int n) {
+        if (n == 0) {
+            return 0;
+        }
+        if (n == 1) {
+            return 1;
+        }
+        return fib(n - 1) + fib(n - 2);
     }
 }
