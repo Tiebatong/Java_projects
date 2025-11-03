@@ -1,8 +1,12 @@
 public class Progra_Übung {
     public static void main(String[] args) {
 
-        Wahrheitstabelle();
+        //Wahrheitstabelle();
     }
+
+//    public static double Cosinis(double x) {
+//
+//    }
 
     public static void Wahrheitstabelle() {
         for (int x1 = 0; x1 < 2; x1++) {
