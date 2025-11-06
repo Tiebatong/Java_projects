@@ -2,11 +2,13 @@ public class Progra_Übung {
     public static void main(String[] args) {
 
         //Wahrheitstabelle();
+        int[] tmp = ziehung(6, 49);
+        for (int z: tmp) {
+            System.out.println(z);
+        }
     }
 
-//    public static double Cosinis(double x) {
-//
-//    }
+
 
     public static void Wahrheitstabelle() {
         for (int x1 = 0; x1 < 2; x1++) {
@@ -21,5 +23,13 @@ public class Progra_Übung {
                 }
             }
         }
+    }
+
+    public static int[] ziehung(int n, int m) {
+        int[] Lotto_zahlen = new int[n];
+        for (int i = 0; i < n; i++) {
+            Lotto_zahlen[i] = (int) (Math.random() * m);
+        }
+        return Lotto_zahlen;
     }
 }

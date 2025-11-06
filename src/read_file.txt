@@ -1,13 +1,13 @@
-Save 9;             jumps to line + 1
+Save 9; 
 Move Reg0 to Reg7;
 Save 1;
 Move Reg0 to Reg5;
 Move Reg0 to Reg6;
-Save 9;             number of iterations
+Save 9;
 Move Reg0 to Reg1;
 Save 1;
 Move Reg0 to Reg2;
-Sub to Reg3;        Begin loop body
+Sub to Reg3;
 Move Reg3 to Reg1;
 Move Reg2 to Reg4;
 Move Reg5 to Reg0;
