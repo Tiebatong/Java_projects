@@ -144,10 +144,10 @@ public class CPU_translator implements ActionListener {
 
         // switching Bits
         for (int i = 0; i < 8; i++) {
-            if (e.getSource() == Bits[i] && Bits[i].getText() == "0") {
+            if (e.getSource() == Bits[i] && Bits[i].getText().equals("0")) {
                 Bits[i].setText("1");
                 value = value + values[i];
-            } else if (e.getSource() == Bits[i] && Bits[i].getText() == "1") {
+            } else if (e.getSource() == Bits[i] && Bits[i].getText().equals("1")) {
                 Bits[i].setText("0");
                 value = value - values[i];
             }
@@ -173,14 +173,14 @@ public class CPU_translator implements ActionListener {
                 textField_mode.setText("Mode: " + modes[1]);
                 read_address = 0;
                 for (int i = 5; i < 8; i++) {
-                    if (Bits[i].getText() == "1") {
+                    if (Bits[i].getText().equals("1")) {
                         read_address += values[i];
                     }
         }
                 write_address = 0;
                 int j = 5;
                 for (int i = 2; i < 5; i++) {
-                    if (Bits[i].getText() == "1") {
+                    if (Bits[i].getText().equals("1")) {
                         write_address += values[j];
                     }
                     j++;
@@ -190,7 +190,7 @@ public class CPU_translator implements ActionListener {
             case -128: // ALU
                 String sub_mode;
                 boolean add = false;
-                if (Bits[2].getText() == "1") {
+                if (Bits[2].getText().equals("1")) {
                     sub_mode = "SUB";
                 } else {
                     sub_mode = "ADD";
@@ -200,7 +200,7 @@ public class CPU_translator implements ActionListener {
                 write_address = 0;
 
                 for (int i = 5; i < 8; i++) {
-                    if (Bits[i].getText() == "1") {
+                    if (Bits[i].getText().equals("1")) {
                         write_address += values[i];
                     }
                 }
@@ -217,7 +217,7 @@ public class CPU_translator implements ActionListener {
                 read_address = 0;
                 j = 5;
                 for (int i = 2; i < 5; i++) {
-                    if (Bits[i].getText() == "1") {
+                    if (Bits[i].getText().equals("1")) {
                         read_address += values[j];
                         if (read_address > 5) {
                             System.out.println("OutOfBounds"); // !!!!!!OUT_OF_BOUNDS!!!!!!
@@ -227,7 +227,7 @@ public class CPU_translator implements ActionListener {
                 }
 
                 String stop_timer = "";
-                if (Bits[7].getText() == "1") {
+                if (Bits[7].getText().equals("1")) {
                     stop_timer = " if true stop_timer";
                 }
 
