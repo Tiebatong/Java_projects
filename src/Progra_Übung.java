@@ -29,6 +29,12 @@ public class Progra_Übung {
         int[] Lotto_zahlen = new int[n];
         for (int i = 0; i < n; i++) {
             Lotto_zahlen[i] = (int) (Math.random() * m);
+
+            for (int j = 0; j < i; j++) {
+                if (Lotto_zahlen[i] == Lotto_zahlen[j]) {
+
+                }
+            }
         }
         return Lotto_zahlen;
     }
