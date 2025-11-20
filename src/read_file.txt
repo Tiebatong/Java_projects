@@ -1,9 +1,9 @@
-Save 9; 		//jumps to line + 1
+Save 9; 		    //jumps to line + 1
 Move Reg0 to Reg7;
 Save 1;
 Move Reg0 to Reg5;
 Move Reg0 to Reg6;
-Save 9; 		// number of iterations
+Save 9; 		    // number of iterations
 Move Reg0 to Reg1;
 Save 1;
 Move Reg0 to Reg2;
