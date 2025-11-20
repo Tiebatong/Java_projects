@@ -26,6 +26,7 @@ public class Calculator implements ActionListener{
 
         textField = new JTextField();
         textField.setBounds(50, 25, 300, 50);
+        textField.setFont(new Font("Arial", Font.BOLD,25));
         textField.setEditable(false);
 
         addButton = new JButton("+");
@@ -51,12 +52,14 @@ public class Calculator implements ActionListener{
         for(int i = 0; i < 9; i++) {
             functionButtons[i].addActionListener(this);
             functionButtons[i].setFocusable(false);
+            functionButtons[i].setFont(new Font("Arial", Font.BOLD,25));
         }
 
         for(int i = 0; i < 10; i++) {
             numberButtons[i] = new JButton(String.valueOf(i));
             numberButtons[i].addActionListener(this);
             numberButtons[i].setFocusable(false);
+            numberButtons[i].setFont(new Font("Arial", Font.BOLD,25));
 
         }
 
