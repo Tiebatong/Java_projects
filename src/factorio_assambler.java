@@ -189,6 +189,17 @@ public class factorio_assambler {
 
                     String dec_instruct_str = String.valueOf(dec_Instruction);
                     if(!Error_flag) {
+                        if (Instruct_counter < 10) {
+                            writer.write(" " + Instruct_counter + ": ");
+                        } else {
+                            writer.write(Instruct_counter + ": ");
+                        }
+
+                        if (dec_instruct_str.length() == 1) {
+                            writer.write("  ");
+                        } else if (dec_instruct_str.length() == 2) {
+                            writer.write(" ");
+                        }
                         writer.write(dec_instruct_str);
 
                     } else {
@@ -197,7 +208,7 @@ public class factorio_assambler {
                     Error_flag = false;
                     Instruct_counter++;
                     writer.write(" ");
-                    if(Instruct_counter % 16 == 0) {
+                    if(Instruct_counter % 4 == 0) {
                         writer.write("\n");
                     }
 
@@ -209,14 +220,7 @@ public class factorio_assambler {
 
 
         }
-        for (int j = Instruct_counter; j < 256; j++) {
-            if(j % 16 == 0) {
-                writer.write("\n");
 
-            }
-            writer.write("00 ");
-
-        }
 
 
         writer.close();
