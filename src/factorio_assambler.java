@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class factorio_assambler {
     public static void main(String[] args) throws IOException {
+        long start = System.currentTimeMillis();
 
 
         String read_file_path;
@@ -228,6 +229,11 @@ public class factorio_assambler {
         if (!Flag_found) {
             System.out.println("\nAssambly finished with 0 Flags");
         }
+
+        long end = System.currentTimeMillis();
+
+        long run_time = end - start;
+        System.out.println("run_time = " + run_time + " ms");
 
     }
     public static char[] hex(int x) {
