@@ -30,8 +30,6 @@ public class factorio_assambler {
         boolean Flag_found = false;
 
 
-        writer.write("v3.0 hex words plain\n");
-
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             StringBuilder substring = new StringBuilder();
