@@ -1,13 +1,143 @@
-public class Leetcode_tmp {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
+class Leetcode_tmp {
 
     static void main() {
 
-        String s = "rat";
-        String t = "car";
-        System.out.println(isAnagram(s, t));
+        String s = "abaababaab";
+        System.out.println(repeatedSubstringPattern(s));
+
+    }
+
+    // 459. Repeated Substring Pattern
+    // Given a string s, check if it can be constructed by taking a substring of it
+    // and appending multiple copies of the substring together.
+    // Example 1:
+    //Input: s = "abab"
+    //Output: true
+    //Explanation: It is the substring "ab" twice.
+
+    static boolean repeatedSubstringPattern(String s) {
+        boolean constructable = false;
+        int length = s.length();
+
+        for ( int i = 1; i <= length / 2; i++) {
+            String substring = s.substring(0, i);
+
+            if (length % i != 0) {
+                continue;
+            }
+
+            int rightIndex = i;
+            int leftIndex = i;
+            constructable = true;
+            while (rightIndex <= length - i) {
+                rightIndex += i;
+                String compSubstring = s.substring(leftIndex, rightIndex);
+                leftIndex += i;
+                if (substring.equals(compSubstring) == false) {
+                    constructable = false;
+                    break;
+                }
+            }
+
+            if (constructable) {
+                return true;
+            }
 
 
+        }
+        return constructable;
+    }
 
+    // Q3. Self Dividing Numbers
+    // A self-dividing number is a number that is divisible by every digit it contains.
+    //
+    // For example, 128 is a self-dividing number because 128 % 1 == 0, 128 % 2 == 0, and 128 % 8 == 0.
+    // A self-dividing number is not allowed to contain the digit zero.
+    //
+    // Given two integers left and right, return a list of all the self-dividing numbers in the range [left, right] (both inclusive).
+
+    static List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = left; i <= right; i++) {
+            int d = i;
+            int y = 0;
+            boolean divisable = true;
+            for (int j = 0; j < String.valueOf(i).length(); j++) {
+
+
+                y = d % 10;
+                d /= 10;
+
+               // System.out.println(" j: " + i);
+               // System.out.println(" y: " + y);
+
+                if (y == 0) {
+                    divisable = false;
+                    continue;
+                }
+                if (i % y != 0) {
+                    divisable = false;
+                }
+            }
+            if (divisable) {
+                result.add(i);
+            }
+
+        }
+
+        return result;
+    }
+
+    // Q2. Find the Pivot Integer
+    // Given a positive integer n, find the pivot integer x such that:
+    //The sum of all elements between 1 and x inclusively equals the sum
+    // of all elements between x and n inclusively.
+    //Return the pivot integer x. If no such integer exists, return -1. It is
+    // guaranteed that there will be at most one pivot index for the given input.
+
+    static int pivotInteger(int n) {
+
+
+        for (int i = 1; i <= n; i++) {
+            int sumLeft = 0;
+            int sumRight = 0;
+
+            for (int j = 1; j <= i; j++) {
+                sumLeft += j;
+            }
+
+            for (int k = i; k <= n; k++) {
+                sumRight += k;
+            }
+
+            if (sumLeft == sumRight) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    // Q1. Can Make Arithmetic Progression From Sequence
+    // A sequence of numbers is called an arithmetic progression if the difference
+    // between any two consecutive elements is the same.
+    // Given an array of numbers arr, return true if the array can be rearranged to
+    // form an arithmetic progression. Otherwise, return false.
+
+    static boolean canMakeArithmeticProgression(int[] arr) {
+        Arrays.sort(arr);
+
+        for (int i = arr.length - 1; i > 1 ; i--) {
+            if (arr[i] - arr[i - 1] != arr[i - 1] - arr[i - 2]) {
+                return false;
+            }
+        }
+        return true;
 
     }
 
