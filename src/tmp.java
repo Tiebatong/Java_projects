@@ -1,13 +1,18 @@
 public class tmp {
     public static void main(String[] args) {
 
-        int exp = 1;
-        for( int i = 0; i < 10; i++) {
 
-            double result = Math.pow(2, -exp);
-            System.out.println(result);
-            exp++;
+        int start = 65;
+        int[] intArr = new int[26];
+        for (int i = 0; i < 26; i++) {
+            intArr[i] = start + i;
+            System.out.println((char) intArr[i] );
         }
+
+        System.out.println((int) 'H');
+
+
+
     }
 
 }

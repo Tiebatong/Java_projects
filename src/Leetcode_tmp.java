@@ -7,9 +7,28 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {1};
-        System.out.println(isMonotonic(nums));
+        String s = "LOVELY";
+        System.out.println(toLowerCase(s));
 
+    }
+
+    // 709. To Lower Case
+    // Given a string s, return the string after replacing every
+    // uppercase letter with the same lowercase letter.
+
+    static String toLowerCase(String s) {
+        String lowerCase = "";
+        for (int i = 0; i < s.length(); i++) {
+
+            if (s.charAt(i) >= 65 && s.charAt(i) <= 90) {
+                char replaced = (char) ((int)s.charAt(i) + 32);
+                lowerCase += replaced;
+            } else {
+                lowerCase += s.charAt(i);
+            }
+        }
+
+        return lowerCase;
     }
 
     // 896. Monotonic Array
