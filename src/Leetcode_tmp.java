@@ -27,11 +27,12 @@ class Leetcode_tmp {
             } else if (nums[i] > nums[i + 1]) {
                 decreasing = false;
             }
+            if (!increasing && !decreasing) {
+                return false;
+            }
         }
-        if (increasing || decreasing) {
-            return true;
-        }
-        return false;
+
+        return true;
     }
 
     // 1822. Sign of the Product of an Array
