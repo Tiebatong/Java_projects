@@ -7,8 +7,77 @@ class Leetcode_tmp {
 
     static void main() {
 
-        String s = "abaababaab";
-        System.out.println(repeatedSubstringPattern(s));
+        int[] nums = {1};
+        System.out.println(arraySign(nums));
+
+    }
+
+    // 1822. Sign of the Product of an Array
+    // Implement a function signFunc(x) that returns:
+    //
+    // 1 if x is positive.
+    // -1 if x is negative.
+    // 0 if x is equal to 0.
+    // You are given an integer array nums. Let product be the product of all values in the array nums.
+    //
+    // Return signFunc(product).
+
+    static int arraySign(int[] nums) {
+        int negativeCounter = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                return 0;
+            } else if (nums[i] < 0) {
+                negativeCounter++;
+            }
+        }
+
+        if (negativeCounter % 2 == 0) {
+            return 1;
+        } else {
+            return -1;
+        }
+
+    }
+
+    // 283. Move Zeroes
+    // Given an integer array nums, move all 0's to the end of it while maintaining
+    // the relative order of the non-zero elements.
+    //Note that you must do this in-place without making a copy of the array.
+
+    static void moveZeroes(int[] nums) {
+        boolean sorted = false;
+        int length = nums.length;
+
+
+        int i = 0;
+
+        while (!sorted) {
+            if (nums[i] == 0) {
+                for (int j = i; j < length - 1; j++) {
+                    int tmp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = tmp;
+                }
+
+            } else {
+                i++;
+            }
+            sorted = true;
+            for (int n = 0; n < length - 1; n++) {
+                if (nums[n] == 0 && nums[n + 1] != 0) {
+                    sorted = false;
+                }
+            }
+        }
+
+
+
+
+        for (int n: nums) {
+            System.out.print(n + ", ");
+        }
 
     }
 
