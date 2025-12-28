@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -7,12 +8,81 @@ class Leetcode_tmp {
 
     static void main() {
 
-        String s = "LOVELY";
-        System.out.println(toLowerCase(s));
+        int[] nums = {8,1,2,2,3}; // 28.12.1025
+        int[] tmp = smallerNumbersThanCurrent(nums);
+
+        for (int i: tmp) {
+            System.out.print(i + ", ");
+        }
 
     }
 
+    /*
+    Q2. How Many Numbers Are Smaller Than the Current Number
+    Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
+    That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
+    Return the answer in an array.
+
+     */
+
+    static int[] smallerNumbersThanCurrent(int[] nums) {
+
+        int length = nums.length;
+        int[] ocorrenceArr = new int[length];
+
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < length; j++) {
+                if (nums[j] < nums[i]) {
+                    ocorrenceArr[i]++;
+                }
+            }
+        }
+        return ocorrenceArr;
+
+    }
+
+    /*
+    Q1. Set Mismatch
+
+    You have a set of integers s, which originally contains all the numbers from 1 to n.
+    Unfortunately, due to some error, one of the numbers in s got duplicated to another number
+    in the set, which results in repetition of one number and loss of another number.
+    You are given an integer array nums representing the data status of this set after the error.
+    Find the number that occurs twice and the number that is missing and return them in the form of an array.
+     */
+
+    static int[] findErrorNums(int[] nums) {
+
+        int[] numArr = new int[2];
+        int n = nums.length;
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            int occurence = 1;
+            if(map.containsKey(nums[i])) {
+                occurence++;
+                numArr[0] = nums[i];
+            }
+            map.put(nums[i], occurence);
+
+
+        }
+
+        for ( int j = 1; j <= n; j++) {
+            if (!map.containsKey(j)) {
+                numArr[1] = j;
+            }
+        }
+        System.out.println(map);
+
+
+
+        return numArr;
+    }
+
     // 709. To Lower Case
+
     // Given a string s, return the string after replacing every
     // uppercase letter with the same lowercase letter.
 
@@ -170,7 +240,8 @@ class Leetcode_tmp {
     // For example, 128 is a self-dividing number because 128 % 1 == 0, 128 % 2 == 0, and 128 % 8 == 0.
     // A self-dividing number is not allowed to contain the digit zero.
     //
-    // Given two integers left and right, return a list of all the self-dividing numbers in the range [left, right] (both inclusive).
+    // Given two integers left and right, return a list of all the self-dividing numbers in the range [left, right]
+    // (both inclusive).
 
     static List<Integer> selfDividingNumbers(int left, int right) {
         List<Integer> result = new ArrayList<>();
