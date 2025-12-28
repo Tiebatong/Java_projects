@@ -2,14 +2,23 @@ public class tmp {
     public static void main(String[] args) {
 
 
-        int start = 65;
-        int[] intArr = new int[26];
-        for (int i = 0; i < 26; i++) {
-            intArr[i] = start + i;
-            System.out.println((char) intArr[i] );
-        }
 
-        System.out.println((int) 'H');
+
+
+
+        LinkedList l = new LinkedList();
+        l.prepend(3);
+        l.prepend(4);
+        l.prepend(5);
+        LinkedList emptyList = new LinkedList();
+
+        System.out.println(emptyList.indexOf(3));
+
+        System.out.println(l);
+
+        l.delete(5);
+        l.delete(9);
+        System.out.println(l);
 
 
 
