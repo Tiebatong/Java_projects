@@ -1,29 +1,38 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {8,1,2,2,3}; // 28.12.1025
-        int[] tmp = smallerNumbersThanCurrent(nums);
+        int[] nums = {1,1}; // 28.12.1025
+        System.out.println(findDisappearedNumbers(nums));
 
-        for (int i: tmp) {
-            System.out.print(i + ", ");
-        }
 
     }
 
     /*
     Q2. How Many Numbers Are Smaller Than the Current Number
+
     Given the array nums, for each nums[i] find out how many numbers in the array are smaller than it.
     That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
     Return the answer in an array.
-
      */
+
+    static List<Integer> findDisappearedNumbers(int[] nums) {
+        int n = nums.length;
+        List<Integer> list = new ArrayList<>();
+        HashSet<Integer> set = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            set.add(nums[i]);
+        }
+        for (int j = 1; j <= n; j++) {
+            if (!set.contains(j)) {
+                list.add(j);
+            }
+        }
+        return list;
+    }
 
     static int[] smallerNumbersThanCurrent(int[] nums) {
 
