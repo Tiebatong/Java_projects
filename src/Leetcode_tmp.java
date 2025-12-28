@@ -6,7 +6,8 @@ class Leetcode_tmp {
     static void main() {
 
         int[] nums = {1,1}; // 28.12.1025
-        System.out.println(findDisappearedNumbers(nums));
+        int[][] grid = {{3,2},{1,0}};
+        System.out.println(countNegatives(grid));
 
 
     }
@@ -18,6 +19,34 @@ class Leetcode_tmp {
     That is, for each nums[i] you have to count the number of valid j's such that j != i and nums[j] < nums[i].
     Return the answer in an array.
      */
+
+
+    /*
+    1351. Count Negative Numbers in a Sorted Matrix
+    Given a m x n matrix grid which is sorted in non-increasing order both row-wise and column-wise,
+    return the number of negative numbers in grid.
+     */
+
+    static int countNegatives(int[][] grid) {
+        int negativeCount = 0;
+        int m = grid.length;
+        int n = grid[0].length;
+
+        for (int i = 0; i < m; i++) {
+            if (grid[i][0] < 0) {
+                negativeCount += n * (m - i);
+                break;
+            }
+            for (int j = 1; j < n; j++) {
+                if (grid[i][j] < 0) {
+                    negativeCount += n - j;
+                    break;
+                }
+            }
+        }
+
+        return negativeCount;
+    }
 
     static List<Integer> findDisappearedNumbers(int[] nums) {
         int n = nums.length;
