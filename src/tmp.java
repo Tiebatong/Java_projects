@@ -1,25 +1,13 @@
+import java.util.List;
+
 public class tmp {
     public static void main(String[] args) {
 
 
+        Liste l0 = new Liste();
+        l0.add(12);
 
-
-
-
-        LinkedList l = new LinkedList();
-        l.prepend(3);
-        l.prepend(4);
-        l.prepend(5);
-        LinkedList emptyList = new LinkedList();
-
-        System.out.println(emptyList.indexOf(3));
-
-        System.out.println(l);
-
-        l.delete(5);
-        l.delete(9);
-        System.out.println(l);
-
+        System.out.println(l0.get(0));
 
 
     }

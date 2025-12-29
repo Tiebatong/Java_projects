@@ -6,12 +6,65 @@ class Leetcode_tmp {
     static void main() {
 
         int[] nums = {1,1}; // 28.12.1025
-        int[][] grid = {{3,2},{1,0}};
-        System.out.println(countNegatives(grid));
 
+        String bottom = "ABCD";
+        List<String> allowed = new ArrayList<>();
+
+        String [] strArr = {"ABC","BCA","CDA","ABD","BCE","CDF","DEA","EFF","AFF"};
+
+        for (String s: strArr) {
+            allowed.add(s);
+        }
+
+       // System.out.println(pyramidTransition(bottom, allowed));
 
     }
 
+
+    // 756. Pyramid Transition Matrix
+    //https://leetcode.com/problems/pyramid-transition-matrix/description/?envType=daily-question&envId=2025-12-29
+
+    static boolean pyramidTransition(String bottom, List<String> allowed) {
+        boolean constructable = false;
+        int bottomLength = bottom.length();
+        String bottomRow = bottom;
+
+        char L = ' ';
+        char R = ' ';
+
+        for (int i = bottomLength; i > 1; i--) {
+            int currentRowLength = i - 1;
+
+            String newBottomRow = "";
+            for (int j = 0; j < currentRowLength; j++) {
+                L = bottomRow.charAt(j);
+                R = bottomRow.charAt(j + 1);
+
+
+                for (int k = 0; k < allowed.size(); k++) {
+
+                    if (allowed.get(k).charAt(0) == L && allowed.get(k).charAt(1) == R) {
+                        newBottomRow +=  allowed.get(k).charAt(2);
+                        constructable = true;
+                        break;
+                    } else {
+                        constructable = false;
+                    }
+                }
+
+
+            }
+            if (!constructable) {
+
+            }
+
+            bottomRow = newBottomRow;
+
+        }
+
+
+        return constructable;
+    }
 
 
 
