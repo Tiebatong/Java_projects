@@ -17,11 +17,42 @@ class Leetcode_tmp {
                 {4,3,8,2,5}
         };  // 30.12.2025
 
+        int[][] mat = {
+                {7,3,1,9},
+                {3,4,6,9},
+                {6,9,6,6},
+                {9,5,8,5}
+        };
 
-        System.out.println(numMagicSquaresInside(grid));
+        System.out.println(diagonalSum(mat));
+
+
+
     }
 
+    /*
+    1572. Matrix Diagonal Sum
 
+    Given a square matrix mat, return the sum of the matrix diagonals.
+    Only include the sum of all the elements on the primary diagonal and all the
+    elements on the secondary diagonal that are not part of the primary diagonal.
+     */
+
+    static int diagonalSum(int[][] mat) {
+
+        int sum = 0;
+        int length = mat.length;
+
+        for (int i = 0; i < length; i++) {
+            sum += mat[i][i];
+            if (length % 2 != 0 && i == (length / 2) ) {
+                continue;
+            }
+            sum += mat[i][length - (i + 1)];
+        }
+
+        return sum;
+    }
 
     /*
     840. Magic Squares In Grid
@@ -69,7 +100,6 @@ class Leetcode_tmp {
 
                 int diagonal1 = grid[j][i] + grid[j+1][i+1] + grid[j+2][i+2];
                 int diagonal2 = grid[j][i+2] + grid[j+1][i+1] + grid[j+2][i];
-                int x = 0;
 
                 if (row1 == row2 && row2 == row3 && row3 == column1 && column1 == column2 && column2 == column3 && column3 == diagonal1 && diagonal1 == diagonal2) {
                     perfectSquareCount++;

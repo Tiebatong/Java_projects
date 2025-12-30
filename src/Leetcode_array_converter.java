@@ -1,6 +1,6 @@
 public class Leetcode_array_converter {
     public static void main(String[] args) {
-        String to_convert = "[[3,2,9,2,7],[6,1,8,4,2],[7,5,3,2,7],[2,9,4,9,6],[4,3,8,2,5]]";
+        String to_convert = "[[7,3,1,9],[3,4,6,9],[6,9,6,6],[9,5,8,5]]";
 
 
         String converted = to_convert.replace('[', '{').replace(']', '}');
