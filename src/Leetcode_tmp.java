@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.*;
 
 
@@ -5,19 +7,77 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {1,1}; // 28.12.1025
+        int[] nums = {1,1}; // 28.12.2025
 
-        String bottom = "ABCD";
-        List<String> allowed = new ArrayList<>();
+        int[][] grid = {
+                {3,2,9,2,7},
+                {6,1,8,4,2},
+                {7,5,3,2,7},
+                {2,9,4,9,6},
+                {4,3,8,2,5}
+        };  // 30.12.2025
 
-        String [] strArr = {"ABC","BCA","CDA","ABD","BCE","CDF","DEA","EFF","AFF"};
 
-        for (String s: strArr) {
-            allowed.add(s);
+        System.out.println(numMagicSquaresInside(grid));
+    }
+
+
+
+    /*
+    840. Magic Squares In Grid
+
+    A 3 x 3 magic square is a 3 x 3 grid filled with distinct numbers from 1 to 9 such that each row, column, and both diagonals all have the same sum.
+    Given a row x col grid of integers, how many 3 x 3 magic square subgrids are there?
+    Note: while a magic square can only contain numbers from 1 to 9, grid may contain numbers up to 15.
+     */
+
+    static int numMagicSquaresInside(int[][] grid) {
+
+        int perfectSquareCount = 0;
+
+
+        int n = grid.length;
+        int m = grid[0].length;
+
+        if (n < 3 || m < 3) {
+            return 0;
         }
 
-        System.out.println(pyramidTransition(bottom, allowed));
+        for (int i = 0; i <= m - 3; i++) {
+            for (int j = 0; j <= n - 3; j++) {
+                HashSet<Integer> ocurence = new HashSet<>();
+                boolean skip = false;
 
+                for (int k = i; k < i+3; k++) {
+                    for (int l = j; l < j+3; l++) {
+                        if (ocurence.contains(grid[l][k]) || grid[l][k] > 9 || grid[l][k] <= 0) {
+                            skip = true;
+                        }
+                        ocurence.add(grid[j][i]);
+                    }
+                }
+                if (skip) {
+                    continue;
+                }
+                int row1 = grid[j][i] + grid[j][i+1] + grid[j][i+2];
+                int row2 = grid[j+1][i] + grid[j+1][i+1] + grid[j+1][i+2];
+                int row3 = grid[j+2][i] + grid[j+2][i+1] + grid[j+2][i+2];
+
+                int column1 = grid[j][i] + grid[j+1][i] + grid[j+2][i];
+                int column2 = grid[j][i+1] + grid[j+1][i+1] + grid[j+2][i+1];
+                int column3 = grid[j][i+2] + grid[j+1][i+2] + grid[j+2][i+2];
+
+                int diagonal1 = grid[j][i] + grid[j+1][i+1] + grid[j+2][i+2];
+                int diagonal2 = grid[j][i+2] + grid[j+1][i+1] + grid[j+2][i];
+                int x = 0;
+
+                if (row1 == row2 && row2 == row3 && row3 == column1 && column1 == column2 && column2 == column3 && column3 == diagonal1 && diagonal1 == diagonal2) {
+                    perfectSquareCount++;
+                }
+            }
+        }
+
+        return perfectSquareCount;
     }
 
 
