@@ -16,7 +16,7 @@ class Leetcode_tmp {
             allowed.add(s);
         }
 
-       // System.out.println(pyramidTransition(bottom, allowed));
+        System.out.println(pyramidTransition(bottom, allowed));
 
     }
 
@@ -554,4 +554,5 @@ class Leetcode_tmp {
         }
         return n;
     }
+
 }
