@@ -7,7 +7,7 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {1,1}; // 28.12.2025
+        int[] nums = {1,2,3,4}; // 28.12.2025
 
         int[][] grid = {
                 {3,2,9,2,7},
@@ -15,19 +15,57 @@ class Leetcode_tmp {
                 {7,5,3,2,7},
                 {2,9,4,9,6},
                 {4,3,8,2,5}
-        };  // 30.12.2025
-
-        int[][] mat = {
-                {7,3,1,9},
-                {3,4,6,9},
-                {6,9,6,6},
-                {9,5,8,5}
         };
 
-        System.out.println(diagonalSum(mat));
+        String s = "a good   example";
 
 
 
+        int[] tmp = productExceptSelf(nums);
+
+        for (int i: tmp) {
+            System.out.println(i);
+        }
+
+
+
+
+    }
+
+    // 238. Product of Array Except Self
+
+    static int[] productExceptSelf(int[] nums) {
+
+        int n = nums.length;
+        int[] solution = new int[n];
+        int[] left = new int[n];
+        int[] right = new int[n];
+
+        int j = n;
+
+        for (int i = 0; i < n; i++) {
+
+        }
+        return solution;
+
+    }
+
+    // 151. Reverse Words in a String
+
+    static String reverseWords(String s) {
+        String reversed = "";
+
+        String[] arr = s.trim().split(" ");
+
+        for (int i = arr.length - 1; i > 0; i--) {
+
+            if (!arr[i].equals("")) {
+                reversed += arr[i] += " ";
+            }
+        }
+        reversed += arr[0];
+
+        return reversed;
     }
 
     /*
