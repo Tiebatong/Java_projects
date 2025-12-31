@@ -1,5 +1,3 @@
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.*;
 
 
@@ -8,6 +6,8 @@ class Leetcode_tmp {
     static void main() {
 
         int[] nums = {1,2,3,4}; // 28.12.2025
+        int[] nums1 = {1,2,3,3};
+        int[] nums2 = {1,1,2,2};
 
         int[][] grid = {
                 {3,2,9,2,7},
@@ -19,17 +19,46 @@ class Leetcode_tmp {
 
         String s = "a good   example";
 
-
-
         int[] tmp = productExceptSelf(nums);
 
-        for (int i: tmp) {
-            System.out.println(i);
+
+        System.out.println(findDifference(nums1, nums2));
+
+    }
+
+    // 2215. Find the Difference of Two Arrays
+
+    static List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
+
+        List<List<Integer>> answer = new ArrayList<>();
+
+        HashSet<Integer> hash1 = new HashSet<>();
+        for (int n: nums1) {
+            hash1.add(n);
         }
 
+        HashSet<Integer> hash2 = new HashSet<>();
+        for (int n: nums2) {
+            hash2.add(n);
+        }
 
+        List<Integer> list1 = new ArrayList<>();
+        for (int n: nums1) {
+            if (!hash2.contains(n) && !list1.contains(n)) {
+                list1.add(n);
+            }
+        }
+        List<Integer> list2 = new ArrayList<>();
+        for (int n: nums2) {
+            if (!hash1.contains(n) && !list2.contains(n)) {
+                list2.add(n);
+            }
+        }
 
+        answer.add(list1);
+        answer.add(list2);
 
+        return answer;
     }
 
     // 238. Product of Array Except Self
