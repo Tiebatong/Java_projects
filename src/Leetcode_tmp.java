@@ -21,12 +21,44 @@ class Leetcode_tmp {
         char[] chars = {'a'};
 
         String s = "a good   example";
+        String str1 = "ABCABC";
+        String str2 = "ABC";
 
         int n = 1;
 
 
-        System.out.println("\n" + compress(chars));
+        System.out.println("\n" +gcdOfStrings(str1, str2));
 
+    }
+
+    // 1071. Greatest Common Divisor of Strings
+
+    static String gcdOfStrings(String str1, String str2) {
+
+        String gcd = ""; // greatest common divisor
+        String smallestString;
+        String biggestString;
+
+        if (str1.length() < str2.length()) {
+            smallestString = str1;
+            biggestString = str2;
+        } else {
+            smallestString = str2;
+            biggestString = str1;
+        }
+
+        for (int i = 0; i < smallestString.length(); i++) {
+            String subString = smallestString.substring(0, i+1);
+            System.out.println(subString); // temporär
+            for (int j = 0; j < biggestString.length() / (i+1);j++) {
+                if (biggestString.substring()) {
+                    break;
+                }
+            }
+
+        }
+
+        return gcd;
     }
 
     // 443. String Compression
