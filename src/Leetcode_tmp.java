@@ -1,3 +1,4 @@
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.*;
 
 
@@ -5,7 +6,7 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {1,2,3,4}; // 28.12.2025
+        int[] nums = {0,0,1,0,0}; // 28.12.2025
         int[] nums1 = {1,2,3,3};
         int[] nums2 = {1,1,2,2};
 
@@ -17,13 +18,102 @@ class Leetcode_tmp {
                 {4,3,8,2,5}
         };
 
+        char[] chars = {'a'};
+
         String s = "a good   example";
 
-        int[] tmp = productExceptSelf(nums);
+        int n = 1;
 
 
-        System.out.println(findDifference(nums1, nums2));
+        System.out.println("\n" + compress(chars));
 
+    }
+
+    // 443. String Compression
+
+    static int compress(char[] chars) {
+
+        int currentCount = 1;
+        String s = "";
+        for (int i = 0; i < chars.length-1; i++) {
+
+            if (chars[i] == chars[i+1]) {
+                currentCount++;
+            } else {
+                s += chars[i];
+                if (currentCount > 1) {
+                    s += currentCount;
+                }
+                currentCount = 1;
+            }
+
+        }
+        s += chars[chars.length-1];
+        if (currentCount > 1) {
+            s += currentCount;
+        }
+//        System.out.println("s: " + s);
+
+        int i = 0;
+        while (i < s.length() && i < chars.length) {
+            chars[i] = s.charAt(i);
+            i++;
+        }
+
+
+//        for(char c: chars) {
+//            System.out.print(c + ", ");
+//        }
+        return s.length();
+    }
+
+    // 605. Can Place Flowers
+
+    static boolean canPlaceFlowers(int[] flowerbed, int n) {
+
+        int flowersPlaced = 0;
+        int legth = flowerbed.length;
+
+        if (n == 0) {
+            return true;
+        }
+
+        if (legth < 3) {
+            int ones = 0;
+            for (int i = 0; i < legth; i++) {
+                if (flowerbed[i] == 1) {
+                    ones++;
+                }
+            }
+            if (ones == 0 && n == 1) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            if (flowerbed[0] == 0 && flowerbed[1] == 0) {
+                flowersPlaced++;
+                flowerbed[0] = 1;
+            }
+
+            if (flowerbed[legth-1] == 0 && flowerbed[legth-2] == 0) {
+                flowersPlaced++;
+                flowerbed[legth-1] = 1;
+            }
+
+            for (int i = 1; i < legth - 1; i++) {
+                if (flowerbed[i-1] == 0 && flowerbed[i] == 0 && flowerbed[i+1] == 0) {
+                    flowersPlaced++;
+                    flowerbed[i] = 1;
+                }
+            }
+
+        }
+
+
+
+        return (n <= flowersPlaced);
     }
 
     // 2215. Find the Difference of Two Arrays
