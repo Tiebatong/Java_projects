@@ -6,7 +6,7 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {0,0,1,0,0}; // 28.12.2025
+        int[] nums = {5,1,5,2,5,3,5,4}; // 28.12.2025
         int[] nums1 = {1,2,3,3};
         int[] nums2 = {1,1,2,2};
 
@@ -27,7 +27,23 @@ class Leetcode_tmp {
         int n = 1;
 
 
-        System.out.println("\n" +gcdOfStrings(str1, str2));
+        System.out.println("\n" +repeatedNTimes(nums));
+
+    }
+
+    // 961. N-Repeated Element in Size 2N Array
+
+    static int repeatedNTimes(int[] nums) {
+
+        HashSet<Integer> hashset = new HashSet<>();
+
+        for (int i: nums) {
+            if (hashset.contains(i)) {
+                return i;
+            }
+            hashset.add(i);
+        }
+        return 1;
 
     }
 
@@ -50,11 +66,19 @@ class Leetcode_tmp {
         for (int i = 0; i < smallestString.length(); i++) {
             String subString = smallestString.substring(0, i+1);
             System.out.println(subString); // temporär
+            int sn = subString.length();
+            int lowerLimit = 0;
+            int upperLimit = sn - 1;
             for (int j = 0; j < biggestString.length() / (i+1);j++) {
-                if (biggestString.substring()) {
+                if (!biggestString.substring(lowerLimit, upperLimit).equals(subString)) {
                     break;
                 }
+                lowerLimit += sn;
+                upperLimit += sn;
             }
+
+            gcd += subString;
+            break;
 
         }
 
