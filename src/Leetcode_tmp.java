@@ -27,7 +27,7 @@ class Leetcode_tmp {
         int n = 1;
 
 
-        System.out.println("\n" +repeatedNTimes(nums));
+        System.out.println("\n" + gcdOfStrings(str1, str2));
 
     }
 
@@ -64,21 +64,25 @@ class Leetcode_tmp {
         }
 
         for (int i = 0; i < smallestString.length(); i++) {
-            String subString = smallestString.substring(0, i+1);
-            System.out.println(subString); // temporär
-            int sn = subString.length();
-            int lowerLimit = 0;
-            int upperLimit = sn - 1;
-            for (int j = 0; j < biggestString.length() / (i+1);j++) {
-                if (!biggestString.substring(lowerLimit, upperLimit).equals(subString)) {
-                    break;
-                }
-                lowerLimit += sn;
-                upperLimit += sn;
-            }
 
-            gcd += subString;
-            break;
+            String substringDivisor = smallestString.substring(0, i+1);
+            System.out.println("divisor: " + substringDivisor);
+
+            int leftLimit = 0;
+            int rightLimit = i+1;
+            for (int j = 0; j < smallestString.length() / i; j++) {
+
+                String subbigger = biggestString.substring(leftLimit, rightLimit);
+                String subsmaller = smallestString.substring(leftLimit,rightLimit);
+                System.out.println(subbigger);
+                System.out.println(subsmaller);
+
+
+                System.out.println(leftLimit + ", " + rightLimit);
+
+                leftLimit += i+1;
+                rightLimit += i+1;
+            }
 
         }
 
