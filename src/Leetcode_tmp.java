@@ -6,7 +6,7 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {5,1,5,2,5,3,5,4}; // 28.12.2025
+        int[] nums = {1,2,3,4,5,6,7,8,9,10}; // 28.12.2025
         int[] nums1 = {1,2,3,3};
         int[] nums2 = {1,1,2,2};
 
@@ -27,8 +27,46 @@ class Leetcode_tmp {
         int n = 1;
 
 
-        System.out.println("\n" + gcdOfStrings(str1, str2));
+        System.out.println("\n" + sumFourDivisors(nums));
 
+    }
+
+    // 1390. Four Divisors
+    // Given an integer array nums, return the sum of divisors of the integers in that array
+    // that have exactly four divisors. If there is no such integer in the array, return 0.
+
+    static int sumFourDivisors(int[] nums) {
+
+        int sum = 0;
+        for(int n: nums) {
+
+            int increment = 0;
+
+            if (n % 2 == 0) {
+                increment = 1;
+            } else {
+                increment = 2;
+            }
+
+            int currentSum = 0;
+            int divisorCount = 0;
+
+            for (int i = 1; i < n+1; i += increment) {
+                if (n % i == 0) {
+                    currentSum += i;
+                    divisorCount++;
+                }
+
+                if (divisorCount > 4) {
+                    break;
+                }
+            }
+
+            if (divisorCount == 4) {
+                sum += currentSum;
+            }
+        }
+        return sum;
     }
 
     // 961. N-Repeated Element in Size 2N Array
