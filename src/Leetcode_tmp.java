@@ -7,27 +7,38 @@ class Leetcode_tmp {
     static void main() {
 
         int[] nums = {1,2,3,4,5,6,7,8,9,10}; // 28.12.2025
-        int[] nums1 = {1,2,3,3};
-        int[] nums2 = {1,1,2,2};
 
-        int[][] grid = {
-                {3,2,9,2,7},
-                {6,1,8,4,2},
-                {7,5,3,2,7},
-                {2,9,4,9,6},
-                {4,3,8,2,5}
-        };
-
-        char[] chars = {'a'};
-
-        String s = "a good   example";
-        String str1 = "ABCABC";
-        String str2 = "ABC";
-
-        int n = 1;
+        String s = "abc";
+        String t = "ahcgdb";
 
 
-        System.out.println("\n" + sumFourDivisors(nums));
+        System.out.println("\n" + isSubsequence(s, t));
+
+    }
+
+    // 392. Is Subsequence
+
+    static boolean isSubsequence(String s, String t) {
+  String needelString = "";
+        int j = 0;
+        for (int i = 0; i <s.length(); i++) {
+            char needle = s.charAt(i);
+
+            while (j < t.length()){
+                if (needle == t.charAt(j)) {
+                    needelString += t.charAt(j);
+                    j++;
+                    break;
+                }
+                j++;
+            }
+
+        }
+        if (needelString.equals(s)) {
+            return true;
+        }
+
+        return false;
 
     }
 
