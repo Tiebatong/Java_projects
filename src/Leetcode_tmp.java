@@ -1,4 +1,3 @@
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.*;
 
 
@@ -6,20 +5,69 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {1,2,3,4,5,6,7,8,9,10}; // 28.12.2025
-
-        String s = "abc";
+        String s = "IceCreAm";
         String t = "ahcgdb";
 
 
-        System.out.println("\n" + isSubsequence(s, t));
+        System.out.println("\n" + reverseVowels(s));
 
+
+    }
+
+    // 345. Reverse Vowels of a String
+
+    public static  String reverseVowels(String s) {
+
+        char[] charArr = s.toCharArray();
+
+        int leftIndex = 0;
+        int rightIndex = s.length()-1;
+
+        boolean leftVowel = false;
+        boolean rightVowel = false;
+
+        while (leftIndex <= rightIndex) {
+
+            char left = charArr[leftIndex];
+            char right = charArr[rightIndex];
+
+            if ("AEIOUaeiou".indexOf(left) != -1) {
+                leftVowel = true;
+            } else {
+                leftIndex++;
+            }
+
+            if ("AEIOUaeiou".indexOf(right) != -1) {
+                rightVowel = true;
+            } else {
+                rightIndex--;
+            }
+
+            if (rightVowel && leftVowel) {
+                char tmp = charArr[leftIndex];
+                charArr[leftIndex] = charArr[rightIndex];
+                charArr[rightIndex] = tmp;
+                leftIndex++;
+                rightIndex--;
+                leftVowel = false;
+                rightVowel = false;
+            }
+
+        }
+
+        String reversed = "";
+
+        for (char c: charArr) {
+            reversed += c;
+        }
+
+        return reversed;
     }
 
     // 392. Is Subsequence
 
     static boolean isSubsequence(String s, String t) {
-  String needelString = "";
+    String needelString = "";
         int j = 0;
         for (int i = 0; i <s.length(); i++) {
             char needle = s.charAt(i);
@@ -32,7 +80,7 @@ class Leetcode_tmp {
                 }
                 j++;
             }
-
+    
         }
         if (needelString.equals(s)) {
             return true;
