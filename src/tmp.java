@@ -1,17 +1,12 @@
 public class tmp {
     public static void main(String[] args) {
 
-    int upperLimit = 1_000_000_0;
-    double start = System.currentTimeMillis();
+        int x = 0;
 
-    for (int i = 0; i <= upperLimit; i++) {
-        System.out.println(i);
-    }
-
-    double end = System.currentTimeMillis();
-        System.out.println("runtime: " + (end - start / 1000));
-
+        for (int i = 1; i <= 347; i++) {
+            x += i;
+        }
+        System.out.println(x);
 
     }
-
 }
