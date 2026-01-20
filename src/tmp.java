@@ -1,12 +1,18 @@
+
 public class tmp {
     public static void main(String[] args) {
 
-        int x = 0;
-
-        for (int i = 1; i <= 347; i++) {
-            x += i;
-        }
-        System.out.println(x);
+        Hash_Set set = new Hash_Set();
+        System.out.println(set);
+        Person p0 = new Person("David", "Mustermann");
+        set.insert(p0);
+        System.out.println(set);
+        set.insert(new Person("David", "Knecht"));
+        System.out.println(set);
+        System.out.println(set.size());
+        set.delete(p0);
+        System.out.println(set.contains(p0));
+        System.out.println(set.size());
 
     }
 }

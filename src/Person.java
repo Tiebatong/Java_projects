@@ -1,17 +1,19 @@
-class Person {
+class Person implements Comparable<Person> {
+    private String vorname;
+    private String nachname;
 
-    private final String lastname;
-    
-    Person(String lastname) {
-        this.lastname = lastname;
+    Person(String vorname, String nachname) {
+        this.vorname = java.util.Objects.requireNonNull(vorname);
+        this.nachname = java.util.Objects.requireNonNull(nachname);
     }
     
-    int hashwert() {
-        int hash = 0;
-        for(char character: lastname.toCharArray()) {
-            hash += character - 'A';
-        }
-        return hash;
+    void setNachname(String nachname) {
+        this.nachname = java.util.Objects.requireNonNull(nachname);
+    }
+    
+    @Override
+    public String toString() {
+        return "Person: %s %s".formatted(vorname, nachname);
     }
     
     @Override
@@ -19,12 +21,15 @@ class Person {
         if(!(other instanceof Person otherPerson)) {
             return false;
         }
-        return this.lastname.equals(otherPerson.lastname);
-    }
-    
-    @Override
-    public String toString() {
-        return lastname;
+        return this.vorname.equals(otherPerson.vorname) && this.nachname.equals(otherPerson.nachname);
     }
 
+    @Override
+    public int compareTo(Person other) {
+        return this.nachname.compareTo(other.nachname);
+    }
+
+    int h() {
+        return nachname.charAt(0) - 'A';
+    }
 }
