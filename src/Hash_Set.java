@@ -1,22 +1,22 @@
 class Hash_Set {
 
-    private final int SIZE = 50;
+    private final int SIZE = 10;
     Person[] persons = new Person[SIZE];
 
 
     void insert(Person person) {
-        int index = person.h();
+        int index = person.h() % SIZE;
 
         persons[index] = person;
     }
 
     void delete(Person person) {
-        int index = person.h();
+        int index = person.h() % SIZE;
         persons[index] = null;
     }
 
     boolean contains(Person person) {
-        int index = person.h();
+        int index = person.h() % SIZE;
         return persons[index] != null;
     }
 

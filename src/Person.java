@@ -30,6 +30,10 @@ class Person implements Comparable<Person> {
     }
 
     int h() {
-        return nachname.charAt(0) - 'A';
+        int hash = 0;
+        for (char c: nachname.toCharArray()) {
+            hash += c - 'A';
+        }
+        return hash;
     }
 }

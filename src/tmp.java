@@ -7,7 +7,7 @@ public class tmp {
         Person p0 = new Person("David", "Mustermann");
         set.insert(p0);
         System.out.println(set);
-        set.insert(new Person("David", "Knecht"));
+        set.insert(new Person("David", "Magnusen"));
         System.out.println(set);
         System.out.println(set.size());
         set.delete(p0);
