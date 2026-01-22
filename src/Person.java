@@ -31,9 +31,9 @@ class Person implements Comparable<Person> {
 
     int h() {
         int hash = 0;
-        for (char c: nachname.toCharArray()) {
-            hash += c - 'A';
-        }
+
+        hash += this.nachname.charAt(0) - 'A';
+
         return hash;
     }
 }

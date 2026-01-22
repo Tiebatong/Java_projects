@@ -6,8 +6,13 @@ class Hash_Set {
 
     void insert(Person person) {
         int index = person.h() % SIZE;
-
+        //lineares sondieren
+        while (persons[index] != null) {
+            index++;
+            index %= SIZE;
+        }
         persons[index] = person;
+
     }
 
     void delete(Person person) {
@@ -17,7 +22,15 @@ class Hash_Set {
 
     boolean contains(Person person) {
         int index = person.h() % SIZE;
-        return persons[index] != null;
+        while (persons[index] != null && persons[index].equals(person)) {
+            index++;
+            index %= SIZE;
+        }
+
+        if (persons[index] == null) {
+            return false;
+        }
+        return true;
     }
 
     int size() {
@@ -36,7 +49,7 @@ class Hash_Set {
 
         for (Person p: this.persons) {
             if (p != null) {
-                ausgabe += p.toString() + ", ";
+                ausgabe += p + ", ";
             }
         }
         return ausgabe + "}";
