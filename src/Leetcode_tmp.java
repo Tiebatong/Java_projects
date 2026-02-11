@@ -5,13 +5,36 @@ class Leetcode_tmp {
 
     static void main() {
 
-        String s = "IceCreAm";
-        String t = "ahcgdb";
+        int[] candies = {12,1,12};
+        int extraCandies = 10;
 
 
-        System.out.println("\n" + reverseVowels(s));
+        System.out.println("\n" + kidsWithCandies(candies, extraCandies));
 
 
+    }
+
+    //1431. Kids With the Greatest Number of Candies
+
+    public static List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+
+        List<Boolean> out = new ArrayList<>();
+        int max = 0;
+        for (int i = 0; i < candies.length; i++) {
+            if (candies[i] > max) {
+                max = candies[i];
+            }
+        }
+
+        for (int i = 0; i < candies.length; i++) {
+            if (candies[i] + extraCandies >= max) {
+                out.add(true);
+            } else {
+                out.add(false);
+            }
+        }
+
+        return out;
     }
 
     // 345. Reverse Vowels of a String

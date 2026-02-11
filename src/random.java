@@ -1,25 +1,20 @@
 public class random {
-    public static void main(String[] args) {
+    public static void main() {
 
 
-        System.out.println(binary_search(17));
+        int untere_grenze = 1;
+        int obere_grenze = 6;
+
+        System.out.println(dice_roll(untere_grenze, obere_grenze));
+
+
+
+
     }
-    private static int binary_search(int x) {
-        if (x < 2) {
-            return x;
-        }
 
-        int left = 1;
-        int right = x / 2;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (mid <= x / mid) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return right;
+    static int dice_roll(int untere_grenze, int obere_grenze) {
+        return (int) (Math.random() * (obere_grenze + 1));
     }
+
 }
 
