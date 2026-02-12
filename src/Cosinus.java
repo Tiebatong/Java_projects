@@ -1,20 +1,14 @@
 public class Cosinus {
     static void main() {
-        System.out.println(cos(3));
+        System.out.println(cos(3.5));
     }
 
     static double cos(double x) {
-        double cos = 1;
+        double cos = 0;
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < 10; i++) {
 
-            int exponent = 2;
-            if (i % 2 == 0) {
-                cos -= pow(exponent, x) / fac(exponent);
-            } else {
-                cos += pow(exponent, x) / fac(exponent);
-            }
-            exponent += 2;
+        cos += (pow(i, -1) / fac(2 * i)) * pow(2 * i, x);
         }
         return cos;
     }

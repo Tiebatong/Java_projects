@@ -2,11 +2,14 @@
 public class tmp {
     public static void main() {
 
+        System.out.println(fac(5));
+    }
 
-        int x = 123;
-        int y = 56;
-        while (x != y) {
-            x += 3;
+    public static int fac(int x) {
+        if (x > 1) {
+            return x * fac(x - 1);
+        } else {
+            return 1;
         }
 
     }
