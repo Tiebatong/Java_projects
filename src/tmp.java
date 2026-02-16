@@ -2,14 +2,25 @@
 public class tmp {
     public static void main() {
 
-        Rectangle rectangle = new Rectangle(5, 3);
-        Rectangle square = new Rectangle(2, 2);
-        System.out.println(rectangle.isSquare());
-        System.out.println(rectangle.perimeter());
-        System.out.println(rectangle.area());
-        System.out.println(rectangle.toString());
-        System.out.println(square.isSquare());
-        System.out.println(square);
+        Matrix matrix = new Matrix(new int[][]{
+                {1, 2, 7, 8},
+                {2, 6, 5, 3}
+        });
+
+         Matrix matrix_B = new Matrix(new int[][] {
+                 {2, 8, 9},
+                 {1, 12, 15},
+                 {42, 3, 6},
+                 {50, 21, 4}
+         });
+
+        //Matrix m = new Matrix(new int[0][0]);
+//        int[][] test = new int[0][0];
+//        System.out.println(test.length);
+//        System.out.println(test[0].length);
+
+        System.out.println(matrix.multiply(matrix_B));
+
     }
 
     public static int fac(int x) {

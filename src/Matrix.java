@@ -2,74 +2,87 @@ public class Matrix {
 
     private int[][] matrix;
 
-
-
     Matrix(int[][] matrix) {
-
-        if (!isMatrix(matrix)) {
-            throw new IllegalArgumentException();
+        if (matrix == null) {
+            throw new IllegalArgumentException("matrix is null");
         }
-        this.matrix = new int[matrix.length][matrix[0].length];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                this.matrix[i][j] = matrix[i][j];
+
+        if (matrix.length == 0) {
+            throw new IllegalArgumentException("empty matrix");
+        }
+        for (int i = 0; i < matrix.length - 1; i++) {
+            if (matrix[i] == null || matrix[i + 1] == null) {
+                throw new IllegalArgumentException("row is null");
+            }
+            if (matrix[i].length != matrix[i + 1].length) {
+                throw new IllegalArgumentException("matrix is not a rectangle");
+
             }
         }
+
+        int [][] temp = new int[matrix.length][matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                temp[i][j] = matrix[i][j];
+            }
+        }
+
+        this.matrix = temp;
     }
 
     int get(int row, int column) {
 
-        if (this.matrix.length < row || this.matrix[0].length < column) {
-            throw new IndexOutOfBoundsException();
+
+        try {
+            return this.matrix[row][column];
+        }
+        catch (ArrayIndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("index not valid");
         }
 
-        return this.matrix[row][column];
     }
 
-    Matrix multiply(Matrix m) {
+    Matrix multiply(Matrix matrix) {
 
-        if (this.matrix[0].length != m.matrix.length || m == null) {
-            throw new IllegalArgumentException("test");
+        if (this.matrix == null || matrix == null) {
+            throw new IllegalArgumentException("cant multiply matrices");
+        }
+        if (this.matrix[0].length != matrix.matrix.length) {
+            throw new IllegalArgumentException("cant multiply matrices");
         }
 
-        int[][] returnMatrix = new int[this.matrix.length][m.matrix[0].length];
+        int [][] product = new int[this.matrix.length][matrix.matrix[0].length];
 
-        for (int i = 0; i < returnMatrix.length; i++) {
-            for (int j = 0; j < returnMatrix[0].length; j++) {
+        for (int i = 0; i < product[0].length; i++) {
+            for (int j = 0; j < product.length; j++) {
+                int sum = 0;
+
                 for (int k = 0; k < this.matrix[0].length; k++) {
-                    returnMatrix[i][j] += this.matrix[i][k] * m.matrix[k][j];
+                    sum += this.matrix[j][k] * matrix.matrix[k][i];
                 }
+                product[j][i] = sum;
             }
+
         }
-
-
-        Matrix M = new Matrix(returnMatrix);
-        return M;
+        Matrix temp = new Matrix(product);
+        return temp;
     }
 
     @Override
-
     public String toString() {
-        String toString = "";
 
-        for (int i = 0; i < this.matrix.length; i++) {
-            for (int j = 0; j < this.matrix[0].length; j++) {
-                toString += this.matrix[i][j] + " ";
-            }
-            toString += "\n";
-        }
-        return toString;
-    }
-
-    boolean isMatrix(int[][] matrix) {
-
-        for (int[] row: matrix) {
-            if (row == null || matrix[0].length != row.length) {
-                return false;
-            }
+        if (this.matrix == null) {
+            throw new IllegalArgumentException("matrix is null");
         }
 
+        String string_representation = "";
 
-        return true;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                string_representation += matrix[i][j] + " ";
+            }
+            string_representation += "\n";
+        }
+        return string_representation;
     }
 }
