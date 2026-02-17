@@ -17,7 +17,7 @@ public class sort {
 
         int[] merged = new int[A.length + B.length];
 
-        // test
+        // test hallo rotfront
         while (Index_A < A.length || Index_B < B.length) {
 
             if (Index_A >= A.length) {
