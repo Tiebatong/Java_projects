@@ -5,13 +5,20 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] candies = {12,1,12};
+        int[] nums = {1,12,-5,-6,50,3};
+        int k = 4;
         int extraCandies = 10;
 
         int[][] mat = {{0,0,0,0,0,1,0,0},{0,0,0,0,1,0,0,1},{0,0,0,0,1,0,0,0},{1,0,0,0,1,0,0,0},{0,0,1,1,0,0,0,0}};
 
-        System.out.println("\n" + numSpecial(mat));
+        System.out.println("\n" + findMaxAverage(nums, k));
 
+
+    }
+
+    // 643. Maximum Average Subarray I
+
+    public static double findMaxAverage(int[] nums, int k) {
 
     }
 
