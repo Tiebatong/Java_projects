@@ -2,59 +2,84 @@ record Cylinder(double r, double h) {
 
 
     double volume() {
-        return Math.PI * r * r * h;
+        return Math.PI * (this.r * this.r) * this.h;
     }
 
-    static Cylinder[] sorted (Cylinder[] CylinderArr) {
-        if (CylinderArr == null) {
-            throw new NullPointerException("Array is null");
+    static Cylinder[] sorted(Cylinder[] array) {
+        java.util.Objects.requireNonNull(array);
+        return sort(array);
+    }
+
+    static Cylinder[] sort(Cylinder[] cylinders) {
+
+
+
+
+        for (Cylinder c: cylinders) {
+            java.util.Objects.requireNonNull(c);
         }
+        if (cylinders.length == 1) {
+            return cylinders;
+        }
+        Cylinder[] A = first_half(cylinders);
+        Cylinder[] B = secend_half(cylinders);
 
-        int legnth = CylinderArr.length;
-        Cylinder[] sortedArray = CylinderArr.clone();
+        Cylinder[] arrA = sort(A);
+        Cylinder[] arrB = sort(B);
 
-        for (int i = 1; i < legnth; i++) {
+        return merge(arrA, arrB);
+    }
 
-            int currentIndex = i;
+    static Cylinder[] first_half(Cylinder[] array) {
+        int length = array.length / 2;
 
-            while (sortedArray[currentIndex].volume() < sortedArray[currentIndex-1].volume() && currentIndex >= 1) {
-                Cylinder tmp = sortedArray[currentIndex];
-                sortedArray[currentIndex] = sortedArray[currentIndex-1];
-                sortedArray[currentIndex-1] = tmp;
-                if (currentIndex > 1) {
-                    currentIndex--;
-                }
+        Cylinder[] halfed = new Cylinder[length];
+        for (int i = 0; i < length; i++) {
+            halfed[i] = array[i];
+        }
+        return halfed;
+    }
 
+    static Cylinder[] secend_half(Cylinder[] array) {
+        int length = array.length - array.length / 2;
+
+        Cylinder[] halfed = new Cylinder[length];
+        for (int i = 0; i < length; i++) {
+            halfed[i] = array[i + array.length / 2];
+        }
+        return halfed;
+    }
+
+    static Cylinder[] merge(Cylinder[] A, Cylinder[] B) {
+
+        int index_A = 0;
+        int index_B = 0;
+        int index_merged = 0;
+
+        Cylinder[] merged = new Cylinder[A.length + B.length];
+
+        while ( index_A < A.length || index_B < B.length) {
+
+            if (index_A >= A.length) {
+                merged[index_merged] = B[index_B];
+                index_merged++;
+                index_B++;
+            } else if (index_B >= B.length) {
+                merged[index_merged] = A[index_A];
+                index_merged++;
+                index_A++;
+            } else if (A[index_A].volume() < B[index_B].volume()) {
+                merged[index_merged] = A[index_A];
+                index_merged++;
+                index_A++;
+            } else {
+                merged[index_merged] = B[index_B];
+                index_merged++;
+                index_B++;
             }
         }
 
-        return  sortedArray;
+        return merged;
     }
 
-    public static void main(String[] args) {
-
-
-        Cylinder c0 = new Cylinder(13, 1);
-        Cylinder c1 = new Cylinder(29, 7.5);
-        Cylinder c2 = new Cylinder(5.2, 7);
-        Cylinder c3 = new Cylinder(12.6, 9);
-        Cylinder c4 = new Cylinder(4, 1);
-        Cylinder c5 = new Cylinder(23.9, 1);
-        Cylinder c6 = new Cylinder(7, 1.6);
-
-        Cylinder[] CylinderArray = {c0,c1,c2,c3,c4,c5,c6};
-
-        for(Cylinder c: CylinderArray) {
-            System.out.println(c.volume());
-        }
-
-        Cylinder[] sortedArray = sorted(CylinderArray);
-
-        System.out.println("===================");
-
-        for(Cylinder c: sortedArray) {
-            System.out.println(c.volume());
-        }
-
-    }
 }
