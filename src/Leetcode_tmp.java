@@ -5,11 +5,17 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {1,12,-5,-6,50,3};
-        int k = 4;
+        int[] nums = {5};
+        int k = 1;
         int extraCandies = 10;
 
-        int[][] mat = {{0,0,0,0,0,1,0,0},{0,0,0,0,1,0,0,1},{0,0,0,0,1,0,0,0},{1,0,0,0,1,0,0,0},{0,0,1,1,0,0,0,0}};
+        int[][] mat = {
+                {0,0,0,0,0,1,0,0},
+                {0,0,0,0,1,0,0,1},
+                {0,0,0,0,1,0,0,0},
+                {1,0,0,0,1,0,0,0},
+                {0,0,1,1,0,0,0,0}
+        };
 
         System.out.println("\n" + findMaxAverage(nums, k));
 
@@ -19,6 +25,24 @@ class Leetcode_tmp {
     // 643. Maximum Average Subarray I
 
     public static double findMaxAverage(int[] nums, int k) {
+
+
+        int current_avarage = 0;
+
+        for (int j = 0; j < k; j++) {
+            current_avarage += nums[j];
+        }
+        int n = nums.length;
+        double maximum_avarage = current_avarage;
+        for (int i = k; i < n; i++) {
+            current_avarage -= nums[i - k];
+            current_avarage += nums[i];
+            if (current_avarage > maximum_avarage) {
+                maximum_avarage = current_avarage;
+            }
+        }
+
+        return maximum_avarage / k;
 
     }
 
