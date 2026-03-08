@@ -5,20 +5,98 @@ class Leetcode_tmp {
 
     static void main() {
 
-        int[] nums = {5};
-        int k = 1;
-        int extraCandies = 10;
+        String str1 = "ABABAB";
+        String str2 = "ABAB";
+        String s = "ABC";
+        int numRows = 2;
+        String[] nums = {"111","011","001"};
 
-        int[][] mat = {
-                {0,0,0,0,0,1,0,0},
-                {0,0,0,0,1,0,0,1},
-                {0,0,0,0,1,0,0,0},
-                {1,0,0,0,1,0,0,0},
-                {0,0,1,1,0,0,0,0}
-        };
+        System.out.println(findDifferentBinaryString(nums));
 
-        System.out.println("\n" + findMaxAverage(nums, k));
 
+    }
+
+    // 1980. Find Unique Binary String
+
+    public static String findDifferentBinaryString(String[] nums) {
+
+
+    }
+
+    // 6. Zigzag Conversion
+
+    public static String convert(String s, int numRows) {
+        String converted = "";
+
+        int len = s.length();
+
+        if (numRows == 1) {
+            return s;
+        }
+
+        if (len <= numRows) {
+            return s;
+        }
+        String [][] mat = new String[numRows][len/2 + 1];
+
+        int counter = 0;
+        int i = 0;
+        int j = 0;
+        boolean down = true;
+        while (counter < len) {
+            mat[i][j] = s.charAt(counter) + "";
+
+
+            if (down) {
+                i++;
+            } else {
+                j++;
+                i--;
+            }
+
+            if (i == 0) {
+                down = true;
+            } else if (i >= numRows - 1) {
+                down = false;
+            }
+            counter++;
+        }
+
+        while (converted.length() < len) {
+            for (i = 0; i < mat.length; i++) {
+                for (j = 0; j < mat[0].length; j++) {
+                    if (mat[i][j] != null) {
+                        converted += mat[i][j];
+                    }
+                }
+            }
+        }
+
+        return converted;
+    }
+
+    // 1784. Check if Binary String Has at Most One Segment of Ones
+
+    public static boolean checkOnesSegment(String s) {
+
+        for (int i = 1; i < s.length() - 1; i++) { // i = 1, weil die erste Stelle immer = 1, muss nicht geprüft werden
+            if (s.charAt(i) == '0' && s.charAt(i + 1) == '1') {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 1071. Greatest Common Divisor of Strings
+
+    static String gcdOfStrings(String str1, String str2) {
+
+        String gcd = ""; // greatest common divisor
+
+//        for (int i = 0; i < )
+
+
+        return gcd;
 
     }
 
@@ -226,47 +304,7 @@ class Leetcode_tmp {
 
     }
 
-    // 1071. Greatest Common Divisor of Strings
 
-    static String gcdOfStrings(String str1, String str2) {
-
-        String gcd = ""; // greatest common divisor
-        String smallestString;
-        String biggestString;
-
-        if (str1.length() < str2.length()) {
-            smallestString = str1;
-            biggestString = str2;
-        } else {
-            smallestString = str2;
-            biggestString = str1;
-        }
-
-        for (int i = 0; i < smallestString.length(); i++) {
-
-            String substringDivisor = smallestString.substring(0, i+1);
-            System.out.println("divisor: " + substringDivisor);
-
-            int leftLimit = 0;
-            int rightLimit = i+1;
-            for (int j = 0; j < smallestString.length() / i; j++) {
-
-                String subbigger = biggestString.substring(leftLimit, rightLimit);
-                String subsmaller = smallestString.substring(leftLimit,rightLimit);
-                System.out.println(subbigger);
-                System.out.println(subsmaller);
-
-
-                System.out.println(leftLimit + ", " + rightLimit);
-
-                leftLimit += i+1;
-                rightLimit += i+1;
-            }
-
-        }
-
-        return gcd;
-    }
 
     // 443. String Compression
 
