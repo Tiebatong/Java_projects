@@ -9,17 +9,54 @@ class Leetcode_tmp {
         String str2 = "ABAB";
         String s = "ABC";
         int numRows = 2;
-        String[] nums = {"111","011","001"};
+        String[] nums = {"00","10"};
+        int[] gain = {-5,1,5,0,-7};
 
-        System.out.println(findDifferentBinaryString(nums));
+        System.out.println(largestAltitude(gain));
 
 
+    }
+
+    // 1732. Find the Highest Altitude
+
+    public static int largestAltitude(int[] gain) {
+
+        int altitude = 0;
+        int highest_altitude = 0;
+
+        for (int i = 0; i < gain.length; i++) {
+            altitude += gain[i];
+            if (altitude > highest_altitude) {
+                highest_altitude = altitude;
+            }
+        }
+        return highest_altitude;
     }
 
     // 1980. Find Unique Binary String
 
     public static String findDifferentBinaryString(String[] nums) {
 
+        int length = nums.length;
+        HashSet<Integer> set = new HashSet<>();
+
+
+        for (int i = 0; i < length; i++) {
+            set.add(Integer.parseInt(nums[i], 2));
+        }
+
+        int current = 0;
+        while (set.contains(current)) {
+            current++;
+        }
+        String solution =  Integer.toBinaryString(current);
+
+        String tmp = "";
+        for (int i = solution.length(); i < length; i++) {
+            tmp += "0";
+        }
+
+        return tmp + solution;
 
     }
 
