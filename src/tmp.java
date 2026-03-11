@@ -2,8 +2,9 @@
 public class tmp {
     public static void main() {
 
+
         String bin = "111";
-        System.out.println(Integer.parseInt(bin, 2));
+        System.out.println(Integer.parseInt(bin));
     }
 
     public static int fac(int x) {
