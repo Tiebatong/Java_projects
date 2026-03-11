@@ -11,12 +11,28 @@ class Leetcode_tmp {
         int numRows = 2;
         String[] nums = {"00","10"};
         int[] gain = {-5,1,5,0,-7};
+        int n = 5;
 
-        System.out.println(largestAltitude(gain));
+        System.out.println(bitwiseComplement(n));
 
 
     }
-        //hallaahao halloIIji
+
+    // 1009. Complement of Base 10 Integer
+
+    public static int bitwiseComplement(int n) {
+        String s = Integer.toBinaryString(n);
+        String newS = "";
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '1') {
+                newS += "0";
+            } else {
+                newS += "1";
+            }
+        }
+        return Integer.parseInt(newS, 2);
+    }
+
     // 1732. Find the highest Altitude
 
     public static int largestAltitude(int[] gain) {
