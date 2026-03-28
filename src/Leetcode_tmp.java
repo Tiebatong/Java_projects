@@ -1,9 +1,9 @@
 import java.util.*;
 
 
-class Leetcode_tmp {
+public class Leetcode_tmp {
 
-    static void main() {
+    public static void main(String[] args) {
 
         String str1 = "ABABAB";
         String str2 = "ABAB";
@@ -12,10 +12,34 @@ class Leetcode_tmp {
         String[] nums = {"00","10"};
         int[] gain = {-5,1,5,0,-7};
         int n = 5;
+        int[] arr = {1,1,2,2};
 
-        System.out.println(bitwiseComplement(n));
+        System.out.println(uniqueOccurrences(arr));
 
 
+    }
+
+    // 1207. Unique Number of Occurrences
+
+    public static boolean uniqueOccurrences(int[] arr) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        HashSet<Integer> set = new HashSet<>();
+        for (int i: arr) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+
+        for (Integer i: map.values()) {
+            if (!set.add(i)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     // 1009. Complement of Base 10 Integer
