@@ -1,7 +1,7 @@
 import java.util.*;
 
 
-public class Leetcode_tmp {
+public class Leetcode_all {
 
     public static void main(String[] args) {
 
@@ -13,10 +13,73 @@ public class Leetcode_tmp {
         int[] gain = {-5,1,5,0,-7};
         int n = 5;
         int[] arr = {1,1,2,2};
+        String s1 = "abcd";
+        String s2 = "cdab";
+        String encodedText = " b  ac";
+        int rows = 2;
 
-        System.out.println(uniqueOccurrences(arr));
+
+        System.out.println(decodeCiphertext(encodedText, rows));
 
 
+    }
+
+    // DQ: 2075. Decode the Slanted Ciphertext
+    // TIME LIMIT EXCEEDED
+
+    public static String decodeCiphertext(String encodedText, int rows) {
+
+        if (rows == 1) {
+            return encodedText;
+        }
+
+        String decodedText = "";
+        int columns = encodedText.length() / rows;
+        int index = 0;
+        String[][] mat = new String[rows][columns];
+
+        // write to matrix
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                mat[i][j] = encodedText.charAt(index) + "";
+                index++;
+            }
+        }
+        // read from matrix
+
+
+        int j = 0;
+        for (int k = 0; k < columns; k++) {
+            int i = 0;
+            j = k;
+
+            while (i < rows && j < columns) {
+                decodedText += mat[i][j];
+                i++;
+                j++;
+            }
+        }
+
+
+
+        String rightRemoved = decodedText.replaceAll("\\s+$", "");
+        return rightRemoved;
+
+
+    }
+
+    // 2839. Check if Strings Can be Made Equal With Operations I
+    // Constraints: s1.length == s2.length == 4
+    public static boolean canBeEqual(String s1, String s2) {
+
+
+        if (!s1.equals(s2)) {
+            String news2 = "";
+
+        }
+
+
+        return false;
     }
 
     // 1207. Unique Number of Occurrences
