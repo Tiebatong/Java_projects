@@ -17,10 +17,39 @@ public class Leetcode_all {
         String s2 = "cdab";
         String encodedText = " b  ac";
         int rows = 2;
+        String moves = "UD";
 
 
-        System.out.println(decodeCiphertext(encodedText, rows));
+        System.out.println(judgeCircle(moves));
 
+
+    }
+
+    // DQ: 657. Robot Return to Origin
+
+    public static boolean judgeCircle(String moves) {
+
+        int right = 0;
+        int up = 0;
+
+        for (char c: moves.toCharArray()) {
+            switch (c) {
+                case 'U':
+                    up++;
+                    break;
+                case 'D':
+                    up--;
+                    break;
+                case 'L':
+                    right--;
+                    break;
+                case 'R':
+                    right++;
+                    break;
+            }
+        }
+
+        return right == 0 && up == 0;
 
     }
 
