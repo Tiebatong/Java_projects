@@ -11,18 +11,74 @@ public class Leetcode_all {
         int numRows = 2;
         String[] nums = {"00","10"};
         int[] gain = {-5,1,5,0,-7};
-        int n = 5;
         int[] arr = {1,1,2,2};
         String s1 = "abcd";
         String s2 = "cdab";
-        String encodedText = " b  ac";
-        int rows = 2;
-        String moves = "UD";
+        String[] tokens = {"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
 
 
-        System.out.println(judgeCircle(moves));
 
+        System.out.println(evalRPN(tokens));
+    }
 
+    // Data structures Stack Q2. Evaluate Reverse Polish Notation
+
+    public static int evalRPN(String[] tokens) {
+
+        Stack<String> stack = new Stack<>();
+
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].equals("+") || tokens[i].equals("-") || tokens[i].equals("*") || tokens[i].equals("/")) {
+                int operand_1 = Integer.parseInt(stack.pop());
+                int operand_2 = Integer.parseInt(stack.pop());
+
+                int value = 0;
+                switch (tokens[i]) {
+                    case "+":
+                        value = operand_2 + operand_1;
+                        break;
+                    case "-":
+                        value = operand_2 - operand_1;
+                        break;
+                    case "*":
+                        value = operand_2 * operand_1;
+                        break;
+                    case "/":
+                        value = operand_2 / operand_1;
+                        break;
+                }
+
+                String to_push = value +"";
+                stack.push(to_push);
+            } else {
+                stack.push(tokens[i]);
+            }
+
+        }
+
+        return Integer.parseInt(stack.pop());
+
+    }
+
+    // Data structures Stack Q1. Build an Array With Stack Operations
+
+    public static List<String> buildArray(int[] target, int n) {
+
+        List<String> list = new ArrayList<>();
+
+        int i = 1;
+        int j = 0;
+        while (i < n + 1 && j < target.length) {
+            if (target[j] == i) {
+                list.add("Push");
+                j++;
+            } else {
+                list.add("Push");
+                list.add("Pop");
+            }
+            i++;
+        }
+        return list;
     }
 
     // DQ: 657. Robot Return to Origin
