@@ -5,20 +5,50 @@ public class Leetcode_all {
 
     public static void main(String[] args) {
 
-        String str1 = "ABABAB";
-        String str2 = "ABAB";
-        String s = "ABC";
-        int numRows = 2;
-        String[] nums = {"00","10"};
-        int[] gain = {-5,1,5,0,-7};
-        int[] arr = {1,1,2,2};
-        String s1 = "abcd";
-        String s2 = "cdab";
-        String[] tokens = {"10","6","9","3","+","-11","*","/","*","17","+","5","+"};
+
+        String s = "anagram";
+        String t = "nagaram";
 
 
+        System.out.println(isAnagram(s, t));
 
-        System.out.println(evalRPN(tokens));
+    }
+
+    // 242. Valid Anagram
+
+    public static boolean isAnagram(String s, String t) {
+
+
+        char[] s_arr = s.toCharArray();
+        char[] t_arr = t.toCharArray();
+        Arrays.sort(s_arr);
+        Arrays.sort(t_arr);
+
+        return Arrays.equals(s_arr, t_arr);
+    }
+
+    // 217. Contains Duplicate
+
+    public static boolean containsDuplicate(int[] nums) {
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i: nums) {
+            if (set.contains(i)) {
+                return true;
+            } else {
+                set.add(i);
+            }
+
+        }
+
+        return false;
+    }
+
+    // 88. Merge Sorted Array
+
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+
     }
 
     // Data structures Stack Q2. Evaluate Reverse Polish Notation
@@ -1165,32 +1195,7 @@ public class Leetcode_all {
 
     }
 
-    // 242. Valid Anagram
-    // Given two strings s and t, return true if t is an anagram of s,
-    // and false otherwise.
 
-    static boolean isAnagram(String s, String t) {
-
-        if (s.length() != t.length()) {
-            return false;
-        }
-
-        int[] letterOccurenceS = new int[26];
-        int[] letterOccurenceT = new int[26];
-
-        for ( int i = 0; i < s.length(); i++) {
-            letterOccurenceS[(int) s.charAt(i) - 97] ++;
-            letterOccurenceT[(int) t.charAt(i) - 97] ++;
-        }
-
-        for (int j = 0; j < 26; j++) {
-            if (letterOccurenceS[j] != letterOccurenceT[j]) {
-                return false;
-            }
-        }
-
-        return true;
-    }
 
 
     // 389. Find the Difference
