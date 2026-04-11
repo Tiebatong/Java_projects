@@ -6,12 +6,796 @@ public class Leetcode_all {
     public static void main(String[] args) {
 
 
-        String s = "anagram";
-        String t = "nagaram";
+        int[] nums = {2,7,11,15};
+        int target = 9;
 
 
-        System.out.println(isAnagram(s, t));
+        System.out.println(twoSum(nums, target));
 
+    }
+
+    // 3516. Find Closest Person
+
+    public static int findClosest(int x, int y, int z) {
+        int x_distance = z - x;
+        int y_distance = z - y;
+
+        if (x_distance < 0) {
+            x_distance *= -1;
+        }
+        if (y_distance < 0) {
+            y_distance *= -1;
+        }
+
+        if (x_distance > y_distance) {
+            return 2;
+        } else if (x_distance < y_distance){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    // 3195. Find the Minimum Area to Cover All Ones I
+
+    public static int minimumArea(int[][] grid) {
+
+        int left = 0;
+        int right = 0;
+        int top = 0;
+        int bottom = 0;
+        boolean bool = true;
+
+        for (int i = 0; i < grid.length; i++) {
+            if (!bool){
+                break;
+            }
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    top = i;
+                    bool = false;
+                    break;
+
+                }
+            }
+        }
+        bool = true;
+
+
+        for (int i = grid.length - 1; i >= 0; i--) {
+            if (!bool){
+                break;
+            }
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    bottom = i + 1;
+                    bool = false;
+                    break;
+
+                }
+            }
+        }
+        bool = true;
+
+        for (int j = 0; j < grid[0].length; j++) {
+            if (!bool){
+                break;
+            }
+            for (int i = 0; i < grid.length; i++) {
+                if (grid[i][j] == 1) {
+                    left = j;
+                    bool = false;
+                    break;
+
+                }
+            }
+        }
+        bool = true;
+
+        for (int j = grid[0].length - 1; j >= 0; j--) {
+            if (!bool){
+                break;
+            }
+            for (int i = 0; i < grid.length; i++) {
+                if (grid[i][j] == 1) {
+                    right = j + 1;
+                    bool = false;
+                    break;
+
+                }
+            }
+        }
+        bool = true;
+
+
+
+        return (right - left) * (bottom - top);
+
+    }
+
+    // 3025. Find the Number of Ways to Place People I
+
+    public static int numberOfPairs(int[][] points) {
+
+
+        int rectangle_count = 0;
+
+        boolean blocked = false;
+        for (int i = 0; i < points.length; i++) {
+            for (int j = 0; j < points.length; j++) {
+
+                if (i == j) continue;
+
+                if (points[i][0] <= points[j][0] && points[i][1] >= points[j][1]) {
+                    blocked = false;
+                    for (int k = 0; k < points.length; k++) {
+                        if (k == i || k == j) continue;
+                        if (points[k][0] <= points[j][0] && points[k][1] >= points[j][1] && points[k][0] >= points[i][0] && points[k][1] <= points[i][1]) {
+                            blocked = true;
+                        }
+                    }
+                    if (!blocked) {
+                        rectangle_count++;
+                    }
+                }
+
+
+
+            }
+
+        }
+        return rectangle_count;
+    }
+
+    // 3000. Maximum Area of Longest Diagonal Rectangle
+
+    public static int areaOfMaxDiagonal(int[][] dimensions) {
+        int diagonal = 0;
+        int tmp = 0;
+        int area = 0;
+        int x = 0;
+        for (int i = 0; i < dimensions.length; i++) {
+            tmp = (dimensions[i][0] * dimensions[i][0]) + (dimensions[i][1] * dimensions[i][1]);
+            if (tmp > diagonal) {
+                diagonal = tmp;
+                area =  dimensions[i][0] * dimensions[i][1];
+            } else if (tmp == diagonal && dimensions[i][0] * dimensions[i][1] > area) {
+                area = dimensions[i][0] * dimensions[i][1];
+            }
+        }
+
+        return area;
+    }
+
+    // 2348. Number of Zero-Filled Subarrays
+
+    public static long zeroFilledSubarray(int[] nums) {
+        long zeros = 0;
+        long result = 0;
+        for (int i = 0; i < nums.length; i++) {
+
+            if (nums[i] == 0) {
+                zeros++;
+                result += zeros;
+            } else {
+                zeros = 0;
+            }
+        }
+
+        return result;
+    }
+
+    // 2264. Largest 3-Same-Digit Number in String
+
+    public static String largestGoodInteger(String num) {
+
+        String solution = "";
+        String substring = num.substring(0, 3);
+        int i = 0;
+        do {
+            substring = num.substring(i, i + 3);
+            if (substring.charAt(0) == substring.charAt(1) && substring.charAt(1) == substring.charAt(2)) {
+
+                if (solution == "") {
+                    solution = substring;
+                } else if (Integer.valueOf(solution) < Integer.valueOf(substring)) {
+                    solution = substring;
+                }
+
+            }
+            i++;
+        } while (i < num.length() - 2);
+
+        return solution;
+    }
+
+    // 1792. Maximum Average Pass Ratio
+
+    public static double maxAverageRatio(int[][] classes, int extraStudents) {
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> {
+            double gainA = gain(a[0], a[1]);
+            double gainB = gain(b[0], b[1]);
+            return Double.compare(gainB, gainA);
+        });
+
+        for (int[] c : classes) {
+            pq.add(c);
+        }
+
+        while (extraStudents > 0) {
+            int[] best = pq.poll();
+            best[0]++;
+            best[1]++;
+            pq.add(best);
+            extraStudents--;
+        }
+
+        double pass = 0;
+        for (int[] c : pq) {
+            pass += (double) c[0] / c[1];
+        }
+
+        pass /= classes.length;
+        return pass;
+    }
+    private static double gain(int pass, int total) {
+        return (double)(pass + 1) / (total + 1) - (double) pass / total;
+    }
+
+    // 1716. Calculate Money in Leetcode Bank
+
+    public static int totalMoney(int n) {
+        int start_value = 0;
+        int balance = 0;
+        int counter = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (i % 7 == 0 && i != 0) {
+                counter++;
+                start_value = counter;
+            }
+            start_value ++;
+            balance += start_value;
+        }
+        return balance;
+    }
+
+    // 1518. Water Bottles
+
+    public static int numWaterBottles(int numBottles, int numExchange) {
+        int empty_bottles = 0;
+        int max_drinks = 0;
+
+        while(numBottles > 0) {
+            max_drinks += numBottles;
+            empty_bottles += numBottles;
+            numBottles = 0;
+            numBottles += empty_bottles / numExchange;
+            empty_bottles -= numBottles * numExchange;
+        }
+        return max_drinks;
+    }
+
+    // 1493. Longest Subarray of 1's After Deleting One Element
+
+    public static int longestSubarray(int[] nums) {
+
+        int[] sub_arr = new int[nums.length + 1];
+
+        boolean bool_ones = false;
+
+        int j = 0;
+        int counter = 0;
+        int ones = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 0) {
+                bool_ones = true;
+                if (ones > 0) {
+                    sub_arr[j] = ones;
+                    ones = 0;
+                    j++;
+                }
+                sub_arr[j] = 0;
+                j++;
+            } else {
+                ones ++;
+
+            }
+            if ( i == nums.length - 1) {
+                sub_arr[j] = ones;
+                j++;
+            }
+        }
+        if (!bool_ones) {
+            return nums.length - 1;
+        }
+        int summe = 0;
+        int zwischen = 0;
+
+        for (int y = 0; y < sub_arr.length; y++) {
+            if (sub_arr[y] > 0) {
+                counter++;
+            }
+        }
+
+        for (int x = 1; x < j - 1; x++) {
+            if (sub_arr[x - 1] > 0 && sub_arr[x] == 0 && sub_arr[x + 1] > 0) {
+                zwischen = sub_arr[x - 1] + sub_arr[x + 1];
+                if (zwischen > summe) {
+                    summe = zwischen;
+                }
+
+            }
+        }
+        int biggest = 0;
+
+        for (int i = 0; i < j; i++) {
+            if (sub_arr[i] > biggest) {
+                biggest = sub_arr[i];
+            }
+        }
+        if (biggest > summe) {
+            summe = biggest;
+        }
+
+        return summe;
+    }
+
+    // 1323. Maximum 69 Number
+
+    public static int maximum69Number (int num) {
+        int zwischen = num;
+        int tmp;
+        int i = 0;
+        int j = 999;
+        while (num > 0) {
+            tmp = num % 10;
+            num /= 10;
+            if (tmp == 6) {
+                j = i;
+            }
+            i++;
+        }
+        if (j == 999) {
+            return zwischen;
+        }
+        int factor = 3;
+        for (int x = 0; x < j; x++) {
+            factor = factor * 10;
+        }
+
+        zwischen += factor;
+        return zwischen;
+    }
+
+    // 498. Diagonal Traverse
+
+    public static int[] findDiagonalOrder(int[][] mat) {
+        // Lukas is schlau & groß
+
+        int[] output = new int[mat.length * mat[0].length];
+        int i = 0;
+        int j = 0;
+        boolean up = true;
+        int counter = 0;
+
+        while (counter < output.length) {
+
+            while (up && counter < output.length) {
+                output[counter] = mat[i][j];
+                counter++;
+
+                if (j == mat[0].length - 1) { // rechts, ecke
+                    i++;
+                    up = false;
+                }
+                else if (i == 0) { // oben, nicht ecke
+                    j++;
+                    up = false;
+                }
+                else {
+                    i = i - 1;
+                    j = j + 1;
+                }
+
+
+            }
+
+            while (!up && counter < output.length) {
+                output[counter] = mat[i][j];
+                counter++;
+
+                if (i == mat.length - 1) { // unten, ecke
+                    j++;
+                    up = true;
+                }
+                else if (j == 0) { // links, nicht unten
+                    i++;
+                    up = true;
+                } else
+                {
+                    i = i + 1;
+                    j = j - 1;
+                }
+
+            }
+        }
+        return output;
+
+    }
+
+    // 344. Reverse String
+
+    public static void reverseString(char[] s) {
+        char tmp = ' ';
+        int j = s.length - 1;
+        for (int i = 0; i < (s.length / 2); i++) {
+            tmp = s[i];
+            s[i] = s[j];
+            s[j] = tmp;
+            j--;
+        }
+    }
+
+    // 342. Power of Four
+
+    public static boolean isPowerOfFour(int n) {
+
+        if (n > 0) {
+            for (int i = 0; i < 32; i++) {
+                if (Math.pow(4, i) == n) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    // 326. Power of Three
+
+    public static boolean isPowerOfThree(int n) {
+
+        return n > 0 && 1162261467 % n == 0;
+
+    }
+
+    // 231. Power of Two
+
+    public static boolean isPowerOfTwo(int n) {
+        for (int i = 0; i < 32; i ++) {
+            if (n == (Math.pow(2, i))) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    // 125. Valid Palindrome
+
+    public static boolean isPalindrome(String s) {
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) >= 'a' && s.charAt(i) <= 'z' || s.charAt(i) >= 'A' && s.charAt(i) <= 'Z' || s.charAt(i) - '0' >= 0 &&  s.charAt(i) - '0' <= 9) {
+                sb.append(s.charAt(i));
+            }
+        }
+        int j = sb.length() - 1;
+        boolean palindrom = true;
+        for (int i = 0; i < (sb.length() / 2); i++) {
+            if (Character.toLowerCase(sb.charAt(i)) != Character.toLowerCase(sb.charAt(j))) {
+                palindrom = false;
+            }
+            j--;
+        }
+        return palindrom;
+    }
+
+    // 118. Pascal's Triangle
+
+    public static List<List<Integer>> generate(int numRows) {
+
+        ArrayList<List<Integer>> list = new ArrayList<>();
+
+
+        for (int i = 0; i < numRows; i++) {
+            ArrayList<Integer> name = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    name.add(1);
+                } else {
+                    int c = (list.get(i - 1).get(j - 1)) + (list.get(i - 1).get(j));
+                    name.add(j, c);
+                }
+            }
+            list.add(name);
+        }
+        return list;
+
+    }
+
+    // 67. Add Binary
+
+    public int mySqrt(int x) {
+
+
+        if (x < 1) {
+            return x;
+        }
+
+
+        double approximation;
+        int base = binary_search(x);
+        return base;
+        //double n = Math.pow(base + 1, 2) - x;
+        //double m = Math.pow(base, 2) - x;
+        //approximation =  base + (x - Math.pow(base, 2)) / (base * 2);
+        //int rounded = (int) Math.floor(approximation);
+        //return rounded;
+
+    }
+    private static int binary_search(int x) {
+        if (x < 2) {
+            return x;
+        }
+
+        int left = 1;
+        int right = x / 2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (mid <= x / mid) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right;
+    }
+
+    public static String addBinary(String a, String b) {
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        StringBuilder sb = new StringBuilder();
+        int carry = 0;
+
+        while (i >= 0 || j >= 0) {
+            int sum = carry;
+            if (i >= 0) {
+                sum += a.charAt(i) - '0';
+            }
+            if (j >= 0) {
+                sum += b.charAt(j) - '0';
+            }
+            sb.append(sum % 2);
+            carry = sum / 2;
+            i--;
+            j--;
+        }
+        if ( carry != 0) {
+            sb.append(carry);
+        }
+        return sb.reverse().toString();
+    }
+
+    // 66. Plus One
+
+    public static int[] plusOne(int[] digits) {
+
+
+        for ( int i = digits.length - 1; i >= 0; i--) {
+            if (digits[i] < 9) {
+                digits[i]++;
+                return digits;
+            }
+            digits[i] = 0;
+        }
+
+        int[] result = new int[digits.length + 1];
+        result[0] = 1;
+        return result;
+    }
+
+    // 58. Length of Last Word
+
+    public static int lengthOfLastWord(String s) {
+
+        int end = s.length() - 1;
+        while (end >= 0 && s.charAt(end) == ' ') {
+            end--;
+        }
+        int start = end;
+        while (start >= 0 && s.charAt(start) != ' ') {
+            start --;
+        }
+        return (end - start);
+
+    }
+
+    // 35. Search Insert Position
+
+    public int searchInsert(int[] nums, int target) {
+        boolean found = false;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (target == nums[i]) {
+                return i;
+            }
+        }
+
+        if (target <= nums[0]) {
+            return 0;
+        } else if (target >= nums[nums.length - 1]) {
+            return nums.length;
+        }
+
+        if (!found) {
+            for (int j = 0; j < nums.length; j++) {
+                if (nums[j] <= target && target <= nums[j + 1]) {
+                    return j + 1;
+                }
+            }
+        }
+        return 0;
+
+    }
+
+    // 28. Find the Index of the First Occurrence in a String
+
+    public static int strStr(String haystack, String needle) {
+
+        String substring;
+        if (needle.equals(haystack)) {
+            return 0;
+        }
+
+        for ( int i = 0; i <= haystack.length() - needle.length(); i++) {
+            substring = haystack.substring(i, i + needle.length());
+            if ( substring.equals(needle)) {
+                return i;
+            }
+        }
+
+        return -1;
+
+
+    }
+
+    // 27. Remove Element
+
+    public static int removeElement(int[] nums, int val) {
+        int counter = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == val) {
+                nums[i] = 0;
+            } else {
+                nums[counter] = nums[i];
+                counter++;
+            }
+        }
+
+        for (int x = 0; x < (nums.length - counter); x++) {
+            nums[counter + x] = 0;
+        }
+        int k = counter;
+
+        return k;
+
+    }
+
+    // 26. Remove Duplicates from Sorted Array
+
+    public int removeDuplicates(int[] nums) {
+
+        int k = 1;
+
+        if (nums.length == 0) {
+            k = 0;
+        }
+
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[k - 1]) {
+                nums[k] = nums[i];
+                k++;
+            }
+        }
+
+        return k;
+
+    }
+
+    // 14. Longest Common Prefix
+
+    public static String longestCommonPrefix(String[] strs) {
+
+        String output;
+
+        if (strs.length == 0) {
+            output = "";
+        } else {
+            output = strs[0];
+        }
+
+
+        for (int i = 0; i < strs.length; i++) {
+
+            while (!strs[i].startsWith(output)) {
+                output = output.substring(0, output.length() -1);
+            }
+
+
+        }
+
+        return output;
+    }
+
+    // 9. Palindrome Number
+
+    public static boolean isPalindrome(int x) {
+
+        if (x < 0) {
+            return false;
+        }
+
+        int counter = 0;
+        char[] char_array = String.valueOf(x).toCharArray();
+        int j = char_array.length - 1;
+        for ( int i = 0; i < char_array.length; i++) {
+            if ( char_array[i] == char_array[j]) {
+                counter++;
+            }
+            j--;
+        }
+        if (counter == char_array.length) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    // 7. Reverse Integer
+
+    public static int reverse(int x) {
+
+        int max_32_bit = 2147483647;
+        int min_32_bit = -2147483648;
+        if (x == min_32_bit || x == min_32_bit) {
+            return 0;
+        }
+
+        int result = 0;
+        while (x != 0) {
+            int digit = x % 10;
+            x /= 10;
+
+            if (result > max_32_bit / 10 || result < min_32_bit / 10) {
+                return 0;
+            }
+
+            result = result * 10 + digit;
+        }
+
+        return result;
+    }
+
+    // 1. Two Sum
+
+    public static int[] twoSum(int[] nums, int target) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (map.containsKey(target - nums[i])) {
+                return new int[] {i, map.get(target - nums[i])};
+            }
+            map.put(nums[i], i);
+        }
+
+        return new int[] {};
     }
 
     // 242. Valid Anagram
