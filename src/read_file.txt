@@ -14,7 +14,7 @@ Move Reg5 to Reg0;
 Move Reg5 to Reg1;
 Move Reg6 to Reg2;
 Add to Reg5;
-Move reg0 to Reg6;w
+Move reg0 to Reg6;
 Move Reg3 to Reg1;
 Move Reg4 to Reg2;
 Comp> con;
