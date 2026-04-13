@@ -6,12 +6,42 @@ public class Leetcode_all {
     public static void main(String[] args) {
 
 
-        int[] nums = {2,7,11,15};
-        int target = 9;
+        String[] strs = {"eat","tea","tan","ate","nat","bat"};
 
 
-        System.out.println(twoSum(nums, target));
+        System.out.println(groupAnagrams(strs));
 
+    }
+
+    // 347. Top K Frequent Elements
+
+    public int[] topKFrequent(int[] nums, int k) {
+
+    }
+
+    // 49. Group Anagrams
+
+    public static List<List<String>> groupAnagrams(String[] strs) {
+
+        HashMap<String, List<String>> map = new HashMap<>();
+
+
+        for (String s: strs) {
+            char[] s_array = s.toCharArray();
+            Arrays.sort(s_array);
+            String str = String.valueOf(s_array);
+
+            if (!map.containsKey(str)) {
+                ArrayList<String> list = new ArrayList<String>();
+                list.add(s);
+                map.put(str, list);
+            } else {
+                map.get(str).add(s);
+            }
+
+        }
+
+        return new ArrayList<>(map.values());
     }
 
     // 3516. Find Closest Person
