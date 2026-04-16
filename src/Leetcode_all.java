@@ -10,7 +10,7 @@ public class Leetcode_all {
         int[] queries = {0,3,5};
 
 
-        System.out.println(solveQueries());
+        System.out.println(solveQueries(nums, queries));
 
     }
 
@@ -18,10 +18,59 @@ public class Leetcode_all {
 
     public static List<Integer> solveQueries(int[] nums, int[] queries) {
 
-        List<Integer> list = new ArrayList<>();
+        List<Integer> answer_list = new ArrayList<>(queries.length);
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
 
 
-        return list;
+        // weist jeder einzigartigen Zahl ihre Indices zu
+        for (int i = 0; i < nums.length; i++) {
+
+            int element = nums[i];
+            if (!map.containsKey(element)) {
+                List<Integer> list = new ArrayList<>();
+                list.add(i);
+                map.put(element, list);
+            } else {
+                map.get(element).add(i);
+            }
+        }
+
+        for (int i = 0; i < queries.length; i++) {
+
+            int current_querie = nums[queries[i]];
+
+            int distances_index = 0;
+            int[] distances = new int[(map.get(current_querie).size() * 2) - 2];
+            for (int j = 0; j < map.get(current_querie).size(); j++) {
+
+
+
+                int element = map.get(current_querie).get(j);
+                int compare = queries[i];
+
+                if (element == compare) {
+                    continue;
+                }
+                int distance_in = Math.abs(element - compare);
+                distances[distances_index] = distance_in;
+                distances_index++;
+                distances[distances_index] = nums.length - distance_in;
+                distances_index++;
+
+
+
+            }
+
+            int min = -1;
+            try {
+                min = Arrays.stream(distances).min().getAsInt();
+            } catch (Exception e) {
+
+            }
+            answer_list.add(min);
+        }
+
+        return answer_list;
 
     }
 
