@@ -6,17 +6,96 @@ public class Leetcode_all {
     public static void main(String[] args) {
 
 
-        String[] strs = {"eat","tea","tan","ate","nat","bat"};
+        int[] nums = {1,3,1,4,1,3,2};
+        int[] queries = {0,3,5};
 
 
-        System.out.println(groupAnagrams(strs));
+        System.out.println(solveQueries());
 
+    }
+
+    // 3488. Closest Equal Element Queries
+
+    public static List<Integer> solveQueries(int[] nums, int[] queries) {
+
+        List<Integer> list = new ArrayList<>();
+
+
+        return list;
+
+    }
+
+    // 2515. Shortest Distance to Target String in a Circular Array
+
+    public static int closestTarget(String[] words, String target, int startIndex) {
+
+        int left = startIndex;
+        int right = startIndex;
+        for (int i = 0; i < words.length; i++) {
+
+            if (words[left].equals(target)) {
+                return i;
+            }
+
+            if (words[right].equals(target)) {
+                return i;
+            }
+
+            if (i == words.length - 1) {
+                return -1;
+            }
+
+            if (right == words.length - 1) {
+                right = -1;
+            }
+            if (left == 0) {
+                left = words.length;
+            }
+
+
+            right++;
+            left--;
+        }
+        return -1;
     }
 
     // 347. Top K Frequent Elements
 
-    public int[] topKFrequent(int[] nums, int k) {
+    public static int[] topKFrequent(int[] nums, int k) {
 
+        int[] top_elements = new int[k];
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i: nums) {
+
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            } else {
+                map.put(i, 1);
+            }
+        }
+
+        int max_value = -9999999;
+        int max_value_key = -1;
+        int index = 0;
+
+        for (int i = 0; i < k; i++) {
+            for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+
+                if (entry.getValue() >= max_value) {
+                    max_value = entry.getValue();
+                    max_value_key = entry.getKey();
+                }
+            }
+            map.remove(max_value_key);
+            top_elements[index] = max_value_key;
+            index++;
+            max_value = -9999999;
+        }
+
+
+        return top_elements;
     }
 
     // 49. Group Anagrams
