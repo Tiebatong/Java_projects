@@ -6,12 +6,65 @@ public class Leetcode_all {
     public static void main(String[] args) {
 
 
-        int[] nums = {1,3,1,4,1,3,2};
-        int[] queries = {0,3,5};
+        int[] nums = {12,21,45,33,54};
+
+        System.out.println(minMirrorPairDistance(nums));
 
 
-        System.out.println(solveQueries(nums, queries));
+    }
 
+    // 3761. Minimum Absolute Distance Between Mirror Pairs
+
+    public static int minMirrorPairDistance(int[] nums) {
+
+        int length = nums.length;
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+
+        int distance = 1000000; // beliebig hoch zum vergleichen
+
+        for (int i = 0; i < length; i++) {
+
+            int element = nums[i];
+            if (!map.containsKey(element)) {
+                List<Integer> list = new ArrayList<>();
+                list.add(i);
+                map.put(element, list);
+            } else {
+                map.get(element).add(i);
+            }
+        }
+
+        for (int i = 0; i < length - 1; i++) {
+            int element = reverseInt(nums[i]);
+            List<Integer> list = map.get(element);
+            if (list != null) {
+                for (int j = 0; j < list.size(); j++) {
+
+                    if (list.get(j) > i) {
+                        int tmp = Math.abs(i - list.get(j));
+                        if (tmp < distance) {
+                            distance = tmp;
+                            if (distance == 1) {
+                                return 1;
+                            }
+                        }
+                        continue;
+                    }
+                }
+            }
+        }
+
+        if (distance == 1000000) {
+            return -1;
+        }
+
+        return distance; //tmp
+    }
+
+    // Hilfsmethode für 3761 ^
+    public static int reverseInt(int i) {
+        StringBuilder sb = new StringBuilder(String.valueOf(i));
+        return Integer.parseInt(sb.reverse().toString());
     }
 
     // 3488. Closest Equal Element Queries
