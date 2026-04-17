@@ -35,39 +35,21 @@ public class Leetcode_all {
             }
         }
 
-        for (int i = 0; i < queries.length; i++) {
-
-            int current_querie = nums[queries[i]];
-
-            int distances_index = 0;
-            int[] distances = new int[(map.get(current_querie).size() * 2) - 2];
-            for (int j = 0; j < map.get(current_querie).size(); j++) {
-
-
-
-                int element = map.get(current_querie).get(j);
-                int compare = queries[i];
-
-                if (element == compare) {
-                    continue;
-                }
-                int distance_in = Math.abs(element - compare);
-                distances[distances_index] = distance_in;
-                distances_index++;
-                distances[distances_index] = nums.length - distance_in;
-                distances_index++;
-
-
-
+        for (int q: queries) {
+            int value = nums[q];
+            List<Integer> list = map.get(value);
+            if (list.size() == 1) {
+                answer_list.add(-1);
+                continue;
             }
+            int index = Collections.binarySearch(list, q);
+            int size = list.size();
 
-            int min = -1;
-            try {
-                min = Arrays.stream(distances).min().getAsInt();
-            } catch (Exception e) {
-
-            }
-            answer_list.add(min);
+            int left = list.get((index - 1 + size) % size);
+            int right = list.get((index + 1) % size);
+            int left_distance = Math.min(Math.abs(q - left), nums.length - Math.abs(q - left));
+            int right_distance = Math.min(Math.abs(q - right), nums.length - Math.abs(q - right));
+            answer_list.add(Math.min(left_distance, right_distance));
         }
 
         return answer_list;
