@@ -6,11 +6,53 @@ public class Leetcode_all {
     public static void main(String[] args) {
 
 
-        int[] nums = {12,21,45,33,54};
+        int[] nums = {1,2,3,4};
 
-        System.out.println(minMirrorPairDistance(nums));
+        System.out.println(productExceptSelf(nums));
 
 
+    }
+
+    // 238. Product of Array Except Self
+
+    static int[] productExceptSelf(int[] nums) {
+
+        int n = nums.length;
+        int[] solution = new int[n];
+        int[] prefix = new int[n];
+        int[] postfix = new int[n];
+
+        int prefix_sum = 1;
+        int postfix_sum = 1;
+
+        for (int i = 0; i < n; i++) {
+
+            prefix_sum = prefix_sum * nums[i];
+            prefix[i] = prefix_sum;
+
+            postfix_sum = postfix_sum * nums[n - 1 - i];
+            postfix[n - 1 - i] = postfix_sum;
+
+        }
+
+        for (int i = 1; i < n - 1; i++) {
+            solution[i] = prefix[i - 1] * postfix[i + 1];
+        }
+
+        solution[0] = postfix[1];
+        solution[n - 1] = prefix[n - 2];
+
+
+        return solution;
+
+    }
+
+    // 3783. Mirror Distance of an Integer
+
+    public static int mirrorDistance(int n) {
+        StringBuilder sb = new StringBuilder(String.valueOf(n));
+        int reversed = Integer.parseInt(sb.reverse().toString());
+        return Math.abs(n - reversed);
     }
 
     // 3761. Minimum Absolute Distance Between Mirror Pairs
@@ -1660,23 +1702,7 @@ public class Leetcode_all {
         return answer;
     }
 
-    // 238. Product of Array Except Self
 
-    static int[] productExceptSelf(int[] nums) {
-
-        int n = nums.length;
-        int[] solution = new int[n];
-        int[] left = new int[n];
-        int[] right = new int[n];
-
-        int j = n;
-
-        for (int i = 0; i < n; i++) {
-
-        }
-        return solution;
-
-    }
 
     // 151. Reverse Words in a String
 
