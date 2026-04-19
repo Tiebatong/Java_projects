@@ -6,12 +6,31 @@ public class Leetcode_all {
     public static void main(String[] args) {
 
 
-        int[] nums1 = {2,2,2};
-        int[] nums2 = {10,10,1};
+        char[][] board = {
+                {'5','3','.','.','7','.','.','.','.'}
+                ,{'6','.','.','1','9','5','.','.','.'}
+                ,{'.','9','8','.','.','.','.','6','.'}
+                ,{'8','.','.','.','6','.','.','.','3'}
+                ,{'4','.','.','8','.','3','.','.','1'}
+                ,{'7','.','.','.','2','.','.','.','6'}
+                ,{'.','6','.','.','.','.','2','8','.'}
+                ,{'.','.','.','4','1','9','.','.','5'}
+                ,{'.','.','.','.','8','.','.','7','9'}
+        };
 
-        System.out.println(maxDistance(nums1, nums2));
+        System.out.println();
 
 
+    }
+
+    // 36. Valid Sudoku
+
+    public static boolean isValidSudoku(char[][] board) {
+
+
+        HashMap<>
+
+        return true;
     }
 
     // 1855. Maximum Distance Between a Pair of Values
