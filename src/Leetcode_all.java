@@ -18,17 +18,42 @@ public class Leetcode_all {
                 ,{'.','.','.','.','8','.','.','7','9'}
         };
 
-        System.out.println();
+        int[] colors = {6,6,6,6,6,6,6,6,6,19,19,6,6};
+
+        System.out.println(maxDistance(colors));
 
 
+    }
+
+    // 2078. Two Furthest Houses With Different Colors
+
+    public static int maxDistance(int[] colors) {
+
+        int left_pointer = 0;
+        int right_pointer = colors.length - 1;
+
+        int left_color = colors[0];
+        int right_color = colors[colors.length - 1];
+
+        while (true) {
+
+            if (colors[left_pointer] != right_color) {
+                return right_pointer;
+            }
+            if (colors[right_pointer] != left_color) {
+                return right_pointer;
+            }
+
+            left_pointer++;
+            right_pointer--;
+
+        }
     }
 
     // 36. Valid Sudoku
 
     public static boolean isValidSudoku(char[][] board) {
 
-
-        HashMap<>
 
         return true;
     }
