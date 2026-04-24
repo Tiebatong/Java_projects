@@ -18,9 +18,40 @@ public class Leetcode_all {
                 ,{'.','.','.','.','8','.','.','7','9'}
         };
 
-        int[] colors = {6,6,6,6,6,6,6,6,6,19,19,6,6};
+        String moves = "_______";
 
-        System.out.println(maxDistance(colors));
+        System.out.println(furthestDistanceFromOrigin(moves));
+
+
+
+    }
+
+    // 2833. Furthest Point From Origin
+
+    public static int furthestDistanceFromOrigin(String moves) {
+
+        int right = 0;
+        int left = 0;
+
+
+
+        for (char move: moves.toCharArray()) {
+
+            if (move == 'L') {
+                left++;
+            } else if (move == 'R'){
+                right++;
+            }
+        }
+
+        int free = moves.length() - (left + right);
+
+        if (left >= right) {
+            return Math.abs((left + free) - right);
+        }
+
+        return Math.abs((right + free) - left);
+
 
 
     }
