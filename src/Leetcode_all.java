@@ -5,7 +5,6 @@ public class Leetcode_all {
 
     public static void main(String[] args) {
 
-
         char[][] board = {
                 {'5','3','.','.','7','.','.','.','.'}
                 ,{'6','.','.','1','9','5','.','.','.'}
@@ -18,12 +17,45 @@ public class Leetcode_all {
                 ,{'.','.','.','.','8','.','.','7','9'}
         };
 
-        String moves = "_______";
+        int[] arr = {10,5,10,10};
+        long[] array = getDistances(arr);
+        for (long l: array) {
+            System.out.print(l + ",");
+        }
 
-        System.out.println(furthestDistanceFromOrigin(moves));
 
 
+    }
 
+    // 2121. Intervals Between Identical Elements
+
+    public static long[] getDistances(int[] arr) {
+
+        long[] distances = new long[arr.length];
+
+        HashMap<Integer, List<Integer>> map = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (!map.containsKey(arr[i])) {
+                List<Integer> list = new ArrayList<>();
+                list.add(i);
+                map.put(arr[i], list);
+            } else {
+                map.get(arr[i]).add(i);
+            }
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            int distance = 0;
+            List<Integer> current_list = map.get(arr[i]);
+            for (int e: current_list) {
+                distance += Math.abs(i - e);
+            }
+            distances[i] = distance;
+        }
+
+        return distances;
     }
 
     // 2833. Furthest Point From Origin
