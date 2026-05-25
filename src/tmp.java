@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 record Lebensmittel(String name, boolean abgelaufen) {}
@@ -32,6 +34,16 @@ class tmp {
         liste.add(l4);
         liste.add(l5);
         System.out.println(inventur(liste));
+
+        System.out.println("sum: " + evenSum(10));
+    }
+
+    static int evenSum(int n) {
+        return IntStream.rangeClosed(1, n)
+                .filter(x -> x % 2 == 0)
+                .sum();
+
+
     }
 
     static List<Lebensmittel> inventur(List<Lebensmittel> list) {

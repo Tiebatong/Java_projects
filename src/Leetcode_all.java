@@ -17,13 +17,50 @@ public class Leetcode_all {
                 ,{'.','.','.','.','8','.','.','7','9'}
         };
 
-        int[] arr = {10,5,10,10};
-        long[] array = getDistances(arr);
-        for (long l: array) {
-            System.out.print(l + ",");
+        String s = "]";
+        System.out.println(isValid(s));
+
+
+
+    }
+
+    // 20. Valid Parentheses
+
+    public static boolean isValid(String s) {
+
+        Character[] chars = new Character[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            chars[i] = (Character) s.charAt(i);
+        }
+        Stack<Character> stack = new Stack<>();
+
+
+        for (Character c: chars) {
+            if (c == '{' || c == '[' || c == '(') {
+                stack.push((Character) c);
+            } else {
+                Character tos = null;
+                try {
+                    tos = stack.pop();
+                } catch (Exception e) {
+                    return false;
+                }
+                if (tos.equals('{') && c.equals('}')) {
+                    continue;
+                } else if (tos.equals('[') && c.equals(']')) {
+                    continue;
+                } else if (tos.equals('(') && c.equals(')')) {
+                    continue;
+                } else {
+                    return false;
+                }
+            }
         }
 
-
+        if (!stack.isEmpty()) {
+            return false;
+        }
+        return true;
 
     }
 
