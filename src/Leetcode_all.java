@@ -17,11 +17,50 @@ public class Leetcode_all {
                 ,{'.','.','.','.','8','.','.','7','9'}
         };
 
-        String s = "]";
-        System.out.println(isValid(s));
+        String text = "balon";
+        System.out.println(maxNumberOfBalloons(text));
 
 
+    }
 
+    // 1189. Maximum Number of Balloons
+    //Easy
+
+    public static int maxNumberOfBalloons(String text) {
+
+
+        HashMap<Character, Integer> map = new HashMap<>();
+        HashSet<Character> set = new HashSet<>();
+        set.add('b');
+        set.add('a');
+        set.add('l');
+        set.add('o');
+        set.add('n');
+        map.put('b', 0);
+        map.put('a', 0);
+        map.put('l', 0);
+        map.put('o', 0);
+        map.put('n', 0);
+
+        for (int i = 0; i < text.length(); i++) {
+            if (set.contains(text.charAt(i))) {
+                int current_count = map.get(text.charAt(i));
+                current_count++;
+                map.put(text.charAt(i), current_count);
+            }
+        }
+
+        map.put('l', map.get('l')/2);
+        map.put('o', map.get('o')/2);
+
+        int min = Integer.MAX_VALUE;
+        for (int value: map.values()) {
+            if (value < min) {
+                min = value;
+            }
+        }
+
+        return min;
     }
 
     // 20. Valid Parentheses
