@@ -17,14 +17,40 @@ public class Leetcode_all {
                 ,{'.','.','.','.','8','.','.','7','9'}
         };
 
-        String text = "balon";
-        System.out.println(maxNumberOfBalloons(text));
+
+        int[] nums = {1, 2, 2, 3};
+        int target = 2;
+        System.out.println(countMajoritySubarrays(nums, target));
 
 
     }
 
+    // 3737. Count Subarrays With Majority Element I
+    // Medium
+
+    public static int countMajoritySubarrays(int[] nums, int target) {
+
+        int subarray_count = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+
+            int balance = 0;
+            for (int j = i; j < nums.length; j++) {
+                if (nums[j] == target) {
+                    balance++;
+                } else {
+                    balance--;
+                }
+                if (balance > 0) {
+                    subarray_count++;
+                }
+            }
+        }
+        return subarray_count;
+    }
+
     // 1189. Maximum Number of Balloons
-    //Easy
+    // Easy
 
     public static int maxNumberOfBalloons(String text) {
 
