@@ -5,23 +5,42 @@ public class Leetcode_all {
 
     public static void main(String[] args) {
 
-        char[][] board = {
-                {'5','3','.','.','7','.','.','.','.'}
-                ,{'3','.','.','1','9','5','.','.','.'}
-                ,{'.','9','8','.','.','.','.','6','.'}
-                ,{'8','.','.','.','6','.','.','.','3'}
-                ,{'4','.','.','8','.','3','.','.','1'}
-                ,{'7','.','.','.','2','.','.','.','6'}
-                ,{'.','6','.','.','.','.','2','8','.'}
-                ,{'.','.','.','4','1','9','.','.','5'}
-                ,{'.','.','.','.','8','.','.','7','9'}
-        };
+    int[] nums = {2,20,4,10,3,4,5};
+        System.out.println(longestConsecutive(nums));
 
+    }
 
+    // 128. Longest Consecutive Sequence
+    // Medium
 
-        System.out.println(isValidSudoku(board));
+    public static int longestConsecutive(int[] nums) {
 
+        if (nums.length == 0) {
+            return 0;
+        }
+        int maxConsecutiveSequence = 1;
+        HashSet<Integer> set = new HashSet<>();
+        Arrays.sort(nums);
 
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == nums[i+1] - 1) {
+                maxConsecutiveSequence++;
+            } else if (nums[i] == nums[i+1]) {
+                continue;
+            } else if (maxConsecutiveSequence > 1) {
+                set.add(maxConsecutiveSequence);
+                maxConsecutiveSequence = 1;
+            }
+        }
+        set.add(maxConsecutiveSequence);
+
+        int max = 0;
+        for (int val: set) {
+            if (val > max) {
+                max = val;
+            }
+        }
+        return max;
     }
 
     // 36. Valid Sudoku
