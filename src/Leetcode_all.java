@@ -7,7 +7,7 @@ public class Leetcode_all {
 
         char[][] board = {
                 {'5','3','.','.','7','.','.','.','.'}
-                ,{'6','.','.','1','9','5','.','.','.'}
+                ,{'3','.','.','1','9','5','.','.','.'}
                 ,{'.','9','8','.','.','.','.','6','.'}
                 ,{'8','.','.','.','6','.','.','.','3'}
                 ,{'4','.','.','8','.','3','.','.','1'}
@@ -18,11 +18,84 @@ public class Leetcode_all {
         };
 
 
-        int[] nums = {1, 2, 2, 3};
-        int target = 2;
-        System.out.println(countMajoritySubarrays(nums, target));
+
+        System.out.println(isValidSudoku(board));
 
 
+    }
+
+    // 36. Valid Sudoku
+
+    public static boolean isValidSudoku(char[][] board) {
+
+        int x = 0;
+        int y = 0;
+
+        for (int i = 0; i < board.length; i++) {
+            HashSet<Character> setRow = new HashSet<>();
+            HashSet<Character> setColumn = new HashSet<>();
+            HashSet<Character> setSubBox = new HashSet<>();
+
+            // chacks rows
+            for (int j = 0; j < board[0]. length; j++) {
+                if (setRow.contains(board[i][j])) { // checks doubles
+                    System.out.println(i + "," + j);
+                    return false;
+                }
+                if (board[i][j] != '.') { // excludes empty cells
+                    setRow.add(board[i][j]);
+                }
+            }
+            // checks cloumns
+            for (int j = 0; j < board[0]. length; j++) {
+                if (setColumn.contains(board[j][i])) { // checks doubles
+                    System.out.println(i + "," + j);
+                    return false;
+                }
+                if (board[j][i] != '.') { // excludes empty cells
+                    setColumn.add(board[j][i]);
+                }
+
+            }
+            // checks subBoxes
+            int startX = x;
+            int startY = y;
+
+            for (int k = 0; k < 9; k++) {
+                char currentChar = board[y][x];
+
+                if (setSubBox.contains(board[y][x])) { // checks doubles
+                    System.out.println(x + "," + y);
+                    return false;
+                }
+                if (board[y][x] != '.') { // excludes empty cells
+                    setSubBox.add(board[y][x]);
+                }
+
+
+                if (k != 8) {
+                    if (x == (startX + 2)) {
+                        x = startX;
+                        y++;
+                    } else {
+                        x++;
+                    }
+                }
+
+            }
+
+            if (x == 8) {
+                x = 0;
+                y ++;
+            } else {
+                y -= 2;
+                x ++;
+            }
+
+
+        }
+
+        return true;
     }
 
     // 3737. Count Subarrays With Majority Element I
@@ -215,13 +288,7 @@ public class Leetcode_all {
         }
     }
 
-    // 36. Valid Sudoku
 
-    public static boolean isValidSudoku(char[][] board) {
-
-
-        return true;
-    }
 
     // 1855. Maximum Distance Between a Pair of Values
 
