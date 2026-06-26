@@ -27,7 +27,7 @@ public class Leetcode_all {
                 maxConsecutiveSequence++;
             } else if (nums[i] == nums[i+1]) {
                 continue;
-            } else if (maxConsecutiveSequence > 1) {
+            } else {
                 set.add(maxConsecutiveSequence);
                 maxConsecutiveSequence = 1;
             }
